@@ -10,13 +10,12 @@ import type { ClaimStatus, Tool } from '@/data/types';
 import { goldenById, layerById } from '@/data';
 import { RING_COLOR, RISK_COLOR, STATUS_COLOR, STATUS_LABEL, STATUS_ORDER, hexOf, nf } from '@/lib/format';
 import SpotlightCard from '@/components/reactbits/SpotlightCard/SpotlightCard';
-import CountUp from '@/components/reactbits/CountUp/CountUp';
 import ShinyText from '@/components/reactbits/ShinyText/ShinyText';
 import GradientText from '@/components/reactbits/GradientText/GradientText';
 
 /* ------------------------------------------------------------------ sayfa başlığı */
 export function PageHeader({
-  eyebrow, title, description, crumbs, actions, gradient = true, children, docTitle,
+  eyebrow, title, description, crumbs, actions, gradient = false, children, docTitle,
 }: {
   eyebrow?: string;
   title: ReactNode;
@@ -34,7 +33,7 @@ export function PageHeader({
     if (pageTitle) document.title = `${pageTitle} · GenUI Atlas`;
   }, [pageTitle]);
   return (
-    <Stack gap="xs" mb="lg">
+    <Stack gap="sm" mb="xl" className="page-heading">
       {crumbs && crumbs.length > 0 && (
         <Breadcrumbs separatorMargin={6} fz="xs">
           {crumbs.map((c, i) =>
@@ -131,7 +130,6 @@ export function EvidenceBar({ counts, size = 'md', showLegend = false }: { count
 
 /* ------------------------------------------------------------------ KPI */
 export function StatCard({ label, value, hint, icon, color = 'aurora', to, suffix }: { label: string; value: number; hint?: string; icon?: ReactNode; color?: string; to?: string; suffix?: string }) {
-  const reduced = useReducedMotion();
   const body = (
     <SpotlightCard className="hover-lift" spotlightColor="rgba(112, 80, 253, 0.18)">
       <Group p="md" gap="md" wrap="nowrap" align="flex-start">
@@ -139,7 +137,7 @@ export function StatCard({ label, value, hint, icon, color = 'aurora', to, suffi
         <Stack gap={0} style={{ minWidth: 0 }}>
           <Text size="xs" c="dimmed" tt="uppercase" fw={600} style={{ letterSpacing: 0.6 }}>{label}</Text>
           <Text fz={28} fw={800} ff="heading" lh={1.2}>
-            {reduced ? nf.format(value) : <CountUp to={value} duration={1.4} separator="." />}{suffix}
+            {nf.format(value)}{suffix}
           </Text>
           {hint && <Text size="xs" c="dimmed" lineClamp={2}>{hint}</Text>}
         </Stack>

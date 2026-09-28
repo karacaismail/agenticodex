@@ -31,13 +31,13 @@ export function WorkflowCard({ w, familyName }: { w: Workflow; familyName?: stri
   return (
     <Link to={`/akislar/${w.id}`} className="link-reset" aria-label={w.title}>
       <SpotlightCard className="hover-lift" spotlightColor="rgba(32, 201, 151, 0.14)">
-        <Stack gap={8} p="md" h="100%">
+        <Stack gap={12} p="lg" h="100%">
           <Group justify="space-between" wrap="nowrap">
             <Badge size="xs" variant="light" color={DIAGRAM_COLOR[w.diagram]} leftSection={<Icon size={12} />}>{DIAGRAM_LABEL[w.diagram]}</Badge>
             <Complexity n={w.complexity} />
           </Group>
-          <Text fw={650} size="sm" lineClamp={2}>{w.title}</Text>
-          <Text size="xs" c="dimmed" lineClamp={3}>{w.summary}</Text>
+          <Text fw={650} size="md" lineClamp={2}>{w.title}</Text>
+          <Text size="sm" c="dimmed" lineClamp={3}>{w.summary}</Text>
           <Group gap={4} mt="auto">
             {familyName && <Badge size="xs" variant="outline" color="gray" style={{ textTransform: 'none' }}>{familyName}</Badge>}
             {w.tools.slice(0, 3).map((t) => (

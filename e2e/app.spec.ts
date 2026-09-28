@@ -181,7 +181,7 @@ test.describe('azaltılmış hareket', () => {
     await expect(page.getByRole('heading', { level: 1 })).toHaveText('GenUI Atlas');
     await expect(page.locator('.hero-bg canvas')).toHaveCount(0);
     await expect(page.getByRole('link', { name: 'Varlık', exact: true })).toContainText('163');
-    await expect(page.getByText('araçlar, altın kümeler, dinamik gruplar')).toBeVisible();
+    await expect(page.getByText('Araçlar, altın kümeler, dinamik gruplar ve iş akışları.', { exact: false })).toBeVisible();
     await ctx.close();
   });
 

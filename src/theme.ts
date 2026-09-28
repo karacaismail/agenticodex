@@ -44,7 +44,7 @@ export const cssResolver: CSSVariablesResolver = () => {
     const lightBg = shades[0];
     light[`--mantine-color-${c}-light`] = lightBg;
     light[`--mantine-color-${c}-light-color`] = darkenUntil(shades[9], lightBg, 4.6);
-    light[`--mantine-color-${c}-outline`] = darkenUntil(shades[7], '#ffffff', 4.6);
+    light[`--mantine-color-${c}-outline`] = darkenUntil(shades[7], '#f5f6f8', 4.8);
   }
   return { variables: {}, light, dark: { '--mantine-color-dimmed': '#a9a7c6' } };
 };

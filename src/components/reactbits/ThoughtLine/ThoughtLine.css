@@ -233,7 +233,8 @@
 }
 
 .thought-line__step[data-done] .thought-line__step-text {
-  opacity: 0.55;
+  opacity: 1;
+  color: var(--mantine-color-dimmed);
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -83,20 +83,21 @@ export function AppLayout() {
 
   return (
     <>
-      <AppShell header={{ height: 60 }} navbar={{ width: 272, breakpoint: 'md', collapsed: { mobile: !opened } }} padding={{ base: 'sm', sm: 'lg' }}>
-        <AppShell.Header className="glass" style={{ borderTop: 0, borderLeft: 0, borderRight: 0 }}>
+      <a className="skip-link" href="#main-content" onClick={(event) => { event.preventDefault(); document.getElementById('main-content')?.focus(); }}>İçeriğe geç</a>
+      <AppShell header={{ height: 64 }} navbar={{ width: 256, breakpoint: 'md', collapsed: { mobile: !opened } }} padding={{ base: 'sm', sm: 'lg' }}>
+        <AppShell.Header className="atlas-header" style={{ borderTop: 0, borderLeft: 0, borderRight: 0 }}>
           <Group h="100%" px="md" justify="space-between" wrap="nowrap">
             <Group gap="sm" wrap="nowrap">
               <Burger opened={opened} onClick={toggle} hiddenFrom="md" size="sm" aria-label="Menüyü aç/kapat" />
               <UnstyledButton component={Link} to="/" aria-label="GenUI Atlas ana sayfa">
                 <Group gap={8} wrap="nowrap">
-                  <img src="/favicon.svg" alt="" width={28} height={28} />
-                  <Text fw={800} ff="heading" size="lg" className="grad-text">GenUI Atlas</Text>
+                  <img src={`${import.meta.env.BASE_URL}favicon.svg`} alt="" width={28} height={28} />
+                  <Text fw={800} ff="heading" size="lg" className="brand-name">GenUI Atlas</Text>
                 </Group>
               </UnstyledButton>
             </Group>
             <Group gap="xs" wrap="nowrap">
-              <UnstyledButton onClick={() => spotlight.open()} aria-label="Ara" className="glass" style={{ borderRadius: 10, padding: '6px 10px' }}>
+              <UnstyledButton onClick={() => spotlight.open()} aria-label="Ara" className="shell-search" style={{ borderRadius: 10, padding: '6px 10px' }}>
                 <Group gap={8} wrap="nowrap">
                   <IconSearch size={16} />
                   <Text size="sm" c="dimmed" visibleFrom="sm">Araç, küme, akış ara…</Text>
@@ -115,9 +116,10 @@ export function AppLayout() {
           </Group>
         </AppShell.Header>
 
-        <AppShell.Navbar className="glass" style={{ borderTop: 0, borderBottom: 0, borderLeft: 0 }}>
+        <AppShell.Navbar className="atlas-sidebar" style={{ borderTop: 0, borderBottom: 0, borderLeft: 0 }}>
           <ScrollArea h="100%" type="hover" px="sm" py="md">
             <Stack gap="md">
+              <Text size="xs" fw={600} c="dimmed" px="sm" mb="xs">EKOSİSTEM REHBERİ</Text>
               {NAV.map((sec) => (
                 <Stack key={sec.title} gap={2}>
                   <Text size="xs" fw={700} c="dimmed" tt="uppercase" px="sm" style={{ letterSpacing: 1 }}>{sec.title}</Text>
@@ -145,7 +147,7 @@ export function AppLayout() {
           </ScrollArea>
         </AppShell.Navbar>
 
-        <AppShell.Main>
+        <AppShell.Main id="main-content" tabIndex={-1}>
           <Box maw={1480} mx="auto" key={location.pathname} style={{ animation: 'atlasFade 260ms ease' }}>
             <Suspense fallback={<AtlasLoader label="Sayfa hazırlanıyor" />}>
               <Outlet />

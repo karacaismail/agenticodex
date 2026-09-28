@@ -1,0 +1,32 @@
+{
+  "checkedAt": "2026-09-28T13:55:13.657Z",
+  "durationMs": 5895,
+  "total": 577,
+  "byType": {
+    "flowchart": 494,
+    "state": 39,
+    "sequence": 34,
+    "gantt": 10
+  },
+  "versions": {
+    "v10": {
+      "label": "10.9",
+      "exact": "10.9.5",
+      "ok": 577,
+      "fail": 0
+    },
+    "v11": {
+      "label": "11.17 (uygulama)",
+      "exact": "11.17.2",
+      "ok": 577,
+      "fail": 0
+    },
+    "v12": {
+      "label": "12.0",
+      "exact": "12.0.0",
+      "ok": 577,
+      "fail": 0
+    }
+  },
+  "failures": []
+}

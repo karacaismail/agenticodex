@@ -1,0 +1,1474 @@
+{
+ "json-patch": {
+  "desc": "JSON belgesindeki değişiklikleri add/remove/replace/move/copy/test işlemleriyle tarif eden IETF standardı.",
+  "summary": "GenUI akışında hem json-render SpecStream hem de AG-UI STATE_DELTA/ACTIVITY_DELTA olayları durum güncellemelerini RFC 6902 yamalarıyla taşır. Raporlar JSONL'in mesaj sınırını, JSON Patch'in ise değişiklik anlamını tanımladığını; ikisinin birbirinin alternatifi olmadığını vurgular. RFC'ye göre tek işlem başarısızsa yamanın tamamı başarılı sayılmamalıdır; ancak bu, ağ mesajlarına bölünmüş bütün akış oturumunun kendiliğinden atomik olduğu anlamına gelmez. Önerilen hat: mesajı tamamla, şemayı doğrula, referans/yetki denetle, geçerli duruma atomik uygula; bozuk güncellemede son geçerli görünüm korunur.",
+  "license": "Standart",
+  "maturity": "Kararlı",
+  "vendor": "IETF",
+  "platform": "Belirtim",
+  "effort": "Orta",
+  "stance": "Çekirdek aday",
+  "rTopics": [
+   "R08",
+   "R12",
+   "R14"
+  ],
+  "facts": [
+   {
+    "text": "RFC 6902 Nisan 2013 tarihlidir; JSONL mesaj sınırını, JSON Patch güncelleme anlamını belirler.",
+    "report": "pre_brief_chatgpt"
+   },
+   {
+    "text": "AG-UI'de STATE_DELTA/ACTIVITY_DELTA 'delta: any[]' alanında RFC 6902 işlem dizisi taşır.",
+    "report": "synthesis_claude-map-P10"
+   },
+   {
+    "text": "RFC 6902 §5: bir işlem başarısızsa değerlendirme durmalı (SHOULD) ve yamanın tamamı başarılı sayılmamalı (SHALL NOT).",
+    "report": "synthesis_claude-map-P11"
+   }
+  ],
+  "risks": [
+   "Akış oturumu bütün olarak atomik değildir; son geçerli görünümü uygulama korumalı.",
+   "Uygulamalar RFC ön koşullarını gevşetebilir (ör. json-render replace hedefi yoksa da yazar).",
+   "Geçerli yama, veri doğruluğu veya eylem yetkisi kanıtı değildir."
+  ],
+  "url": "https://www.rfc-editor.org/rfc/rfc6902",
+  "version": "RFC 6902"
+ },
+ "specstream": {
+  "desc": "json-render'ın her satırı bir RFC 6902 JSON Patch işlemi olan, JSONL tabanlı akışlı UI tarifi biçimi.",
+  "summary": "SpecStream, json-render'da modelin ürettiği arayüz tarifini satır satır yamalar hâlinde istemciye aktarır ve kontrollü prototip adayı json-render'ın akış katmanıdır. Raporlar, belgedeki RFC 6902 uyumu ifadesine karşın kodun replace için hedef varlığını akış toleransı adına zorlamadığını, move/copy'de eksik 'from'u sessizce atladığını; yani katı RFC eşdeğerliği olmadığını saptar. Açık PR #350, aynı metinli satırların tekilleştirilmesi yüzünden iki özdeş 'add /-' işleminden birinin kaybolduğunu gösterir; bu nedenle sürüm sabitlenmeli ve yama davranışı gerçek akış kayıtlarıyla sınanmalıdır.",
+  "license": "Apache-2.0",
+  "maturity": "Deneysel",
+  "vendor": "Vercel Labs",
+  "platform": "Belirtim",
+  "effort": "Orta",
+  "stance": "Prototip adayı",
+  "rTopics": [
+   "R09",
+   "R12",
+   "R14"
+  ],
+  "facts": [
+   {
+    "text": "Streaming belgesi SpecStream'i her satırı bir JSON Patch işlemi olan JSONL olarak tanımlar; changelog'da 'RFC 6902 compliance for SpecStream' kaydı var.",
+    "report": "research_claude"
+   },
+   {
+    "text": "20 Eylül 2026 tarihli PR #350: özdeş 'add /items/-' işlemleri teke düşüyor; PR 25 Eylül erişiminde açıktı.",
+    "report": "synthesis_chatgpt-map-P16"
+   },
+   {
+    "text": "applySpecPatch belgeye göre nesneyi yerinde değiştirir ('mutates in place'); otomatik geri alma yoktur.",
+    "report": "synthesis_claude-map-P10"
+   },
+   {
+    "text": "json-render Apache-2.0; katalog Zod ile tanımlanır, catalog.prompt() model istemini aynı kaynaktan üretir.",
+    "report": "pre_research_claude"
+   }
+  ],
+  "risks": [
+   "Tekrar satır hatası (PR #350) sessiz veri kaybına yol açabilir; etkilenen npm sürümleri bilinmiyor.",
+   "Katı RFC 6902 uyumu yok; replace/move/copy davranışı gevşek.",
+   "Ağ parçası tamamlanmış satır, tamamlanmış satır da uygulanabilir işlem değildir."
+  ],
+  "url": "https://json-render.dev/docs/streaming",
+  "version": ""
+ },
+ "xstate": {
+  "desc": "Olay tabanlı durum makineleri, paralel durumlar ve aktörlerle karmaşık iş akışlarını modelleyen JavaScript kütüphanesi.",
+  "summary": "Raporlar XState'i ajan işi, bağlantı, görünüm ve etkileşim gibi bağımsız boyutları paralel bölgelerle modellemek için aday görür; TanStack Query sunucu verisine, XState koordinasyon gerektiren yaşam döngülerine ayrılabilir. Gemini'nin 'Query + XState optimal mimaridir' iddiası kişisel bloglara dayandığı için doğrulanmamış sayıldı; sentez de ikilinin birlikte optimal olduğunun kanıtlanmadığını belirtir. Küçük durum alanlarında reducer yeterli olabilir; paralel bölgeler mantıksal eşzamanlılıktır ve kalıcılık, ağ teslimi ya da yarış durumlarını kendiliğinden çözmez.",
+  "license": "MIT",
+  "maturity": "Kararlı",
+  "vendor": "Stately",
+  "platform": "Framework bağımsız",
+  "effort": "Orta",
+  "stance": "Seçimli",
+  "rTopics": [
+   "R13",
+   "R16",
+   "R24",
+   "R27"
+  ],
+  "facts": [
+   {
+    "text": "Paralel durumlarda üst onDone geçişi yalnız bütün bölgeler final olduğunda gerçekleşir.",
+    "report": "synthesis_chatgpt-map-P11"
+   },
+   {
+    "text": "Stately graph: dinamik bağlamda durum uzayı sonsuzlaşabilir; yol testleri bütün yarışları kapsamaz.",
+    "report": "synthesis_chatgpt-map-P6"
+   },
+   {
+    "text": "research_gemini:C003 ('Query + XState optimal') unverified; kaynaklar kişisel bloglar.",
+    "report": "synthesis_claude-map-P2-artifact-retry-1"
+   }
+  ],
+  "risks": [
+   "Basit akışlarda gereksiz karmaşıklık; reducer veya transition actors alternatifi elenmemeli.",
+   "Paralel bölgeler sunucu kalıcılığı veya iptal garantisi vermez.",
+   "XState v5 sürüm ayrıntıları raporlarda incelenmedi."
+  ],
+  "url": "https://stately.ai/docs/xstate",
+  "version": "v5"
+ },
+ "tanstack-query": {
+  "desc": "Sunucu durumunu sorgu anahtarlarıyla önbelleğe alan, geçersizleştiren ve yeniden getiren asenkron veri kütüphanesi.",
+  "summary": "Raporlarda TanStack Query, AI analiz sonuçları ve veritabanı sorguları gibi sunucu verisinin sahibi olarak konumlanır; kullanıcı taslağı ve ajan iş yaşam döngüsü ayrı sahiplerde kalmalıdır. invalidateQueries veriyi silmez, bayat işaretleyip etkin sorguları yeniden getirir; bu yüzden kurum/kullanıcı bağlamının sorgu anahtarına yansıtılması ve şirket değişiminde önbellek temizliği ayrıca sınanmalıdır. Sentez, Query'yi 'araştırılabilecek araç' olarak anar ve XState ile birlikte optimal olduğunun kanıtlanmadığını vurgular.",
+  "license": "MIT",
+  "maturity": "Kararlı",
+  "vendor": "TanStack",
+  "platform": "Çoklu framework",
+  "effort": "Orta",
+  "stance": "Prototip adayı",
+  "rTopics": [
+   "R15",
+   "R17",
+   "R23",
+   "R27"
+  ],
+  "facts": [
+   {
+    "text": "TanStack Query sunucu durumu kütüphanesidir; istemci durumunun yerine geçmez.",
+    "report": "synthesis_claude-map-P8"
+   },
+   {
+    "text": "İyimser güncellemede geri alma onMutate bağlamıyla yapılır.",
+    "report": "synthesis_claude-map-P11"
+   },
+   {
+    "text": "invalidateQueries veriyi stale yapar ve etkin sorguları yeniden getirir; silme ve kurum izolasyonu garantisi değildir.",
+    "report": "synthesis_chatgpt-map-P7"
+   }
+  ],
+  "risks": [
+   "Önbellek yeniden getirme güvenlik sınırı değildir; kurum değişiminde veri sızıntısı riski.",
+   "Aynı veriye iki sahip (Query + ajan olayı) vermek eşitleme maliyeti yaratır.",
+   "Her ajan olayı önbelleklenebilir sunucu verisi değildir."
+  ],
+  "url": "https://tanstack.com/query/latest/docs/framework/react/overview",
+  "version": ""
+ },
+ "tanstack-router": {
+  "desc": "Tip güvenli rotalar ve URL arama parametresi durumu sunan istemci tarafı yönlendirme kütüphanesi.",
+  "summary": "TanStack Router, research_claude'un koşullu ön yüz önerisinde (Vite + React 19.3 + TanStack Router/Query) sabit kabuğun gezinmesini yöneten parça olarak geçer. Diğer raporlar bu yığının ürün için optimal olduğunun kurulmadığını; mevcut frontend ve ekip bilinmeden kesin tercih yapılamayacağını belirtir. Sentezdeki Astro kabuğu + tek etkileşimli istemci uygulaması düzeninde yönlendirme sorumluluğu paylaşılacağından seçimlidir; kayıtlı görünüm adresleri sorgu, veri ve katalog sürümüyle ilişkilendirilmeli, paylaşılan bağlantı eski yetkiyi devralmamalıdır.",
+  "license": "MIT",
+  "maturity": "Kararlı",
+  "vendor": "TanStack",
+  "platform": "Çoklu framework",
+  "effort": "Orta",
+  "stance": "Seçimli",
+  "rTopics": [
+   "R17",
+   "R16"
+  ],
+  "facts": [
+   {
+    "text": "Koşullu karar: 'Frontend: Vite + React 19.3 + TanStack Router/Query'; kabuk sabit, üretken alan analiz/yardım yüzeyinde.",
+    "report": "research_claude"
+   },
+   {
+    "text": "C0419: Vite, React, Query/Router, XState veya FastAPI'nin hedef ürün için optimal olduğu kurulmamıştır (unverified).",
+    "report": "synthesis_chatgpt-map-P18"
+   },
+   {
+    "text": "TanStack Query/Router adları kesin ürün seçimi değildir.",
+    "report": "pre_brief_chatgpt"
+   }
+  ],
+  "risks": [
+   "Astro kabuğuyla yönlendirme sorumluluğu çakışabilir.",
+   "Yığın önerisi ürün ölçümüne dayanmıyor.",
+   "Kayıtlı görünüm bağlantısı eski yetkiyi devralmamalı."
+  ],
+  "url": "https://tanstack.com/router/latest",
+  "version": ""
+ },
+ "tanstack-virtual": {
+  "desc": "Uzun liste ve tabloları yalnız görünür satırları çizerek sanallaştıran headless kütüphane (@tanstack/react-virtual).",
+  "summary": "Raporlarda TanStack Virtual, Mantine Table belgesindeki 5.000 satırlık sanallaştırma örneğinin altyapısıdır; bu, tek bileşene gömülü hazır özellik değil ayrı bir entegrasyon örneğidir. Raporlar kurumsal kit ile headless yaklaşım farkının 'sanallaştırma var/yok' olmadığını; Ant Design virtual seçeneği, React Aria Virtualizer ve TanStack Virtual'ın farklı iş yükleri getirdiğini vurgular. Yoğun tablo senaryosunda sanallaştırma; odak, satır kimliği ve erişilebilirlikle birlikte test edilmelidir.",
+  "license": "MIT",
+  "maturity": "Kararlı",
+  "vendor": "TanStack",
+  "platform": "Çoklu framework",
+  "effort": "Orta",
+  "stance": "Seçimli",
+  "rTopics": [
+   "R04",
+   "R22"
+  ],
+  "facts": [
+   {
+    "text": "Mantine örneği @tanstack/react-virtual ile 5.000 satır sanallaştırır; örnek sanallaştırma yerleşik özellik değildir.",
+    "report": "synthesis_chatgpt-map-P18"
+   },
+   {
+    "text": "Ant Design Table 6.6.5'te virtual için sayısal scroll.x/scroll.y gerekir; MUI X 9.14.0 Community MIT, ileri özellikler Pro/Premium.",
+    "report": "synthesis_chatgpt-map-P16"
+   },
+   {
+    "text": "MUI X lisans katmanları ile Mantine'in TanStack Virtual entegrasyonu aynı hazır olma düzeyi değildir.",
+    "report": "review_chatgpt"
+   }
+  ],
+  "risks": [
+   "Headless olduğu için klavye odağı, erişilebilirlik ve satır kimliği uygulamaya kalır.",
+   "5.000 satırlık örnek gerçek panel performans testi değildir."
+  ],
+  "url": "https://tanstack.com/virtual/latest",
+  "version": ""
+ },
+ "react-concurrent": {
+  "desc": "React'te güncellemelere öncelik veren useTransition/startTransition, useDeferredValue ve eşzamanlı çizimi zorlayan flushSync API'leri.",
+  "summary": "Bu API'ler akışlı GenUI'de ağ parçaları ekrana gelirken yazma ve tıklama önceliğini korumak için kullanılabilir; sentez de her parçayı yeniden çizmek yerine güncellemelerin gruplanmasını ve etkileşim önceliğinin korunmasını ister. Raporlara göre React ViewTransition yalnız Transition, Suspense veya useDeferredValue güncellemelerinde tetiklenir; düz setState geçiş başlatmaz, flushSync ise geçişi atlatabilir. INP iyileşmesi AI işinin toplam süresini ölçmez; ağır çizim INP'yi yine bozabilir.",
+  "license": "MIT",
+  "maturity": "Kararlı",
+  "vendor": "Meta (React ekibi)",
+  "platform": "React",
+  "effort": "Düşük",
+  "stance": "Seçimli",
+  "rTopics": [
+   "R22",
+   "R06",
+   "R16"
+  ],
+  "facts": [
+   {
+    "text": "ViewTransition yalnız Transition, Suspense veya useDeferredValue içindeki güncellemelerde tetiklenir; doğrudan setState tetiklemez.",
+    "report": "synthesis_claude-map-P11"
+   },
+   {
+    "text": "React A→B ardından B→D güncellemelerini birleştirebilir, dış geçişi kesebilir veya flushSync sırasında atlayabilir.",
+    "report": "synthesis_chatgpt-map-P8"
+   },
+   {
+    "text": "INP toplam işin tamamlanma süresi değildir; 200 ms eşiği yalnız bir alt zincirde eşleşmiştir.",
+    "report": "synthesis_chatgpt-map-P21"
+   }
+  ],
+  "risks": [
+   "Yanlış API seçimi geçişlerin sessizce atlanmasına yol açar (flushSync).",
+   "Öncelik yönetimi ağır grafik çizimini hızlandırmaz; cihazda ölçüm gerekir."
+  ],
+  "url": "https://react.dev/reference/react/startTransition",
+  "version": ""
+ },
+ "react-suspense": {
+  "desc": "Veri veya kod hazır olana kadar yedek (fallback) içerik gösteren React bildirimsel yükleme sınırı bileşeni.",
+  "summary": "React 19.3 rehberi Suspense fallback'inin geciktirilmeden gösterilmesini ve fallback'ten nihai içeriğe geçişin animasyonlanmasını öneriyor; raporlar bunu evrensel 300/500 ms spinner kurallarına karşı bağlama özgü güncel rehber olarak aktarır. ViewTransition ile birlikte fallback animasyonsuz görünmeli, güncelleme animasyonlu olmalıdır. Sentezin bekleme ilkesine göre fallback yalnız yükleme göstergesidir; işin gerçek aşamasını, kısmi sonucu ve hatayı ayrı bir iş durumu kartı taşımalıdır.",
+  "license": "MIT",
+  "maturity": "Kararlı",
+  "vendor": "Meta (React ekibi)",
+  "platform": "React",
+  "effort": "Düşük",
+  "stance": "Seçimli",
+  "rTopics": [
+   "R05",
+   "R06",
+   "R22"
+  ],
+  "facts": [
+   {
+    "text": "React 19.3 (9 Eylül 2026) Suspense fallback'inin hemen gösterilmesini ve fallback→final geçişinin animasyonlanmasını öneriyor.",
+    "report": "research_chatgpt"
+   },
+   {
+    "text": "ViewTransition referansı: fallback animasyonsuz, güncelleme animasyonlu (update='auto', default='none').",
+    "report": "synthesis_claude-map-P11"
+   },
+   {
+    "text": "'React <Suspense> gecikmeyi otomatik yapar' satıcı iddiası doğrulanmadı (unverified).",
+    "report": "synthesis_claude-map-P12"
+   }
+  ],
+  "risks": [
+   "Fallback gerçek iş ilerlemesini göstermez; aşama bilgisi ayrı gerekir.",
+   "Akışlı renderer düz setState kullanıyorsa Suspense/geçiş entegrasyonu ayrıca tasarlanmalı."
+  ],
+  "url": "https://react.dev/reference/react/Suspense",
+  "version": ""
+ },
+ "react-activity": {
+  "desc": "Alt ağacı gizlerken durumunu koruyan ve yeniden görünür olduğunda geri getiren React <Activity> bileşeni.",
+  "summary": "Raporlar, GenUI yenilemelerinde kullanıcının form taslağı, seçimi ve odağının kaybolmaması bağlamında Activity'yi karşı kanıt olarak anar: gizli alt ağacın durumu korunabilir ve bazı kayıplar önlenebilir. Ancak Activity bileşen türü veya konum değişimini kapsamaz; React durumu ağaç konumu, tür ve key'e bağlıdır. Claude değerlendirmesi Activity API'sinin kararlılık durumunun incelenmediğini not eder; taslak koruması bu yüzden uygulama düzeyinde de test edilmelidir.",
+  "license": "MIT",
+  "maturity": "Kararlı",
+  "vendor": "Meta (React ekibi)",
+  "platform": "React",
+  "effort": "Düşük",
+  "stance": "Seçimli",
+  "rTopics": [
+   "R16",
+   "R27"
+  ],
+  "facts": [
+   {
+    "text": "P3:F33 karşı kanıtı: <Activity> gizli alt ağacın durumunu koruyabilir; bazı kayıpları önler ama tür değişimini kapsamaz.",
+    "report": "review_claude"
+   },
+   {
+    "text": "React durumu ağaç konumu ve bileşen kimliğiyle korunur; key değişimi alt ağacı sıfırlar.",
+    "report": "synthesis_chatgpt-map-P11"
+   },
+   {
+    "text": "Activity API'sinin kararlılık durumu Claude yeniden araştırmasında incelenmedi.",
+    "report": "review_claude"
+   }
+  ],
+  "risks": [
+   "Farklı ebeveyn veya bileşen türünde durum yine sıfırlanır.",
+   "Görsel süreklilik durum korunmasının garantisi değildir.",
+   "Kararlılık bilgisi raporlarda doğrulanmadı; hedef React sürümüyle kontrol edilmeli."
+  ],
+  "url": "https://react.dev/reference/react/Activity",
+  "version": ""
+ },
+ "indexeddb": {
+  "desc": "Tarayıcıda büyük yapılandırılmış veri ve dosyaları (Blob) saklayan işlemsel, asenkron yerel veritabanı API'si.",
+  "summary": "Raporlarda IndexedDB öncelikle Uppy Golden Retriever'ın yükleme kurtarma deposu olarak geçer: sekme kapanması veya yenilemede dosya ve durum geri yüklenebilir, ancak dosya başına varsayılan 10 MiB sınırı vardır ve kurtarılamayan dosyalar 'ghost' olarak işaretlenir. 'Tarayıcı çökse bile kaldığı yerden devam' söyleminin depo türü ve boyuta bağlı, koşullu okunması gerektiği vurgulanır. Kullanıcı taslakları gibi yerel kalıcılık için kullanılabilir; fakat sentezin uyardığı kurum değişiminde önbellek karışması riskine karşı temizleme politikası sınanmalıdır.",
+  "license": "Standart",
+  "maturity": "Kararlı",
+  "vendor": "W3C",
+  "platform": "Tarayıcı yerel",
+  "effort": "Orta",
+  "stance": "Seçimli",
+  "rTopics": [
+   "R07",
+   "R16",
+   "R17"
+  ],
+  "facts": [
+   {
+    "text": "Golden Retriever IndexedDB'de dosya başına varsayılan 10 MiB sınır uygular; geri yüklenemeyenler 'ghosts' olarak işaretlenir.",
+    "report": "review_claude"
+   },
+   {
+    "text": "Eklenti depoyu kurulumda bir kez seçer; IndexedDB yoksa LocalStorage kullanır, sonradan taşımaz.",
+    "report": "review_claude"
+   },
+   {
+    "text": "MDN EventSource belgesi SSE verisinin IndexedDB gibi istemci depolarına aktarılabileceğini örnekler.",
+    "report": "review_chatgpt"
+   }
+  ],
+  "risks": [
+   "Dosya başına boyut sınırı büyük yüklemelerin kurtarılmasını engelleyebilir.",
+   "Paylaşılan tarayıcıda kurum/kullanıcı verisi karışabilir; temizleme politikası gerekir."
+  ],
+  "url": "https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API",
+  "version": ""
+ },
+ "service-worker": {
+  "desc": "Sayfadan bağımsız çalışan, ağ isteklerini yakalayıp önbellek ve arka plan işleri yürütebilen tarayıcı betiği API'si.",
+  "summary": "Raporlarda Service Worker iki bağlamda geçer: Uppy Golden Retriever'ın büyük dosya referanslarını tutabilen isteğe bağlı deposu ve test katmanında MSW (Mock Service Worker) ile ağ taklidi. Golden Retriever belgesine göre Service Worker deposu geçicidir; tarayıcı çökmesi veya yeniden başlatmada kalıcı değildir, yalnız yanlışlıkla yenileme ve kapanan sekmede işe yarar. Uzun işlerin dayanıklılığı bu nedenle sunucu tarafı iş kaydı ve sonuç sorgusuyla sağlanmalı; Service Worker yalnız tamamlayıcı bir katmandır.",
+  "license": "Standart",
+  "maturity": "Kararlı",
+  "vendor": "W3C",
+  "platform": "Tarayıcı yerel",
+  "effort": "Yüksek",
+  "stance": "Seçimli",
+  "rTopics": [
+   "R07",
+   "R14",
+   "R24"
+  ],
+  "facts": [
+   {
+    "text": "Golden Retriever: Service Worker deposu tarayıcı çökmesi veya yeniden başlatmada kalıcı değildir; yenileme/sekme kapanmasında çalışır.",
+    "report": "review_claude"
+   },
+   {
+    "text": "Service Worker, IndexedDB'nin aksine büyük dosyalara referans tutabilir.",
+    "report": "review_claude"
+   },
+   {
+    "text": "Storybook play ve MSW kontrollü deney sağlar; gerçek proxy, parçalanma ve sunucu kalıcılığı yerine geçmez.",
+    "report": "synthesis_chatgpt-map-P6"
+   }
+  ],
+  "risks": [
+   "Çökme sonrası kurtarma garantisi yoktur.",
+   "Yaşam döngüsü ve önbellek sürümlemesi ek bakım yükü getirir.",
+   "Sekme kapanınca uzak iş sürebilir; iptal ve sonuç sunucudan sorgulanmalı."
+  ],
+  "url": "https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API",
+  "version": ""
+ },
+ "react-dropzone": {
+  "desc": "Sürükle-bırak, tıklama ve yapıştırmayla dosya seçimi ile istemci tarafı kabul denetimi sağlayan React kancası.",
+  "summary": "Bütün raporların ortak bulgusu: react-dropzone kendi README'sinde dosya yükleyici olmadığını, dosya işlemediğini ve HTTP isteği yapmadığını açıkça söyler; dosya hattında yalnız seçim ve istemci doğrulaması aşamasını karşılar. accept/maxSize/minSize/validator denetimleri ve odaklı alana yapıştırılan dosyalar aynı kabul yolundan geçer; yine de tarayıcının MIME bilgisine tek başına güvenilmemeli, sunucu içerik denetimi yapılmalıdır. Aktarım ve sürdürme için Uppy/Tus veya FilePond gibi bir katmanla eşleştirilmelidir.",
+  "license": "MIT",
+  "maturity": "Kararlı",
+  "vendor": "react-dropzone topluluğu",
+  "platform": "React",
+  "effort": "Düşük",
+  "stance": "Prototip adayı",
+  "rTopics": [
+   "R07",
+   "R03",
+   "R23"
+  ],
+  "facts": [
+   {
+    "text": "README dosya yükleyici olmadığını ve HTTP isteği yapmadığını belirtir; C008 bütün aşamalarda desteklendi.",
+    "report": "review_claude"
+   },
+   {
+    "text": "Tauri'de native bırakma web olaylarını engelleyebilir; web dropzone için v2'de dragDropEnabled:false, v1'de fileDropEnabled:false.",
+    "report": "synthesis_chatgpt-map-P11"
+   },
+   {
+    "text": "Odaklı dropzone'a yapıştırılan dosyalar aynı kabul/boyut/validator denetiminden geçer.",
+    "report": "synthesis_chatgpt-map-P12"
+   }
+  ],
+  "risks": [
+   "Tek başına aktarım, sürdürme veya iptal sağlamaz.",
+   "İstemci doğrulaması güvenlik denetimi değildir; sunucu tarafı içerik kontrolü gerekir."
+  ],
+  "url": "https://github.com/react-dropzone/react-dropzone",
+  "version": ""
+ },
+ "uppy": {
+  "desc": "Transloadit'in modüler dosya yükleme kütüphanesi; Tus, S3 ve Golden Retriever gibi eklentilerle sürdürülebilir yükleme sunar.",
+  "summary": "Raporlar Uppy'yi (Tus eklentisiyle) kesintiden sonra kaldığı yerden devam eden aktarım için güçlü aday sayar; research_chatgpt 'Uppy/Tus vs FilePond' yükleme karşılaştırmasını P1 önceliğinde önerir. Tus entegrasyonu istemci ve uyumlu sunucu gerektirir; aktarımın bitmesi içerik çıkarımı veya AI analizinin bitmesi değildir. Golden Retriever kurtarması depo türü ve dosya boyutuna bağlıdır; bütün eklentileri içeren dağıtım üretim için önerilmez.",
+  "license": "MIT",
+  "maturity": "Kararlı",
+  "vendor": "Transloadit",
+  "platform": "Framework bağımsız",
+  "effort": "Orta",
+  "stance": "Prototip adayı",
+  "rTopics": [
+   "R07",
+   "R14",
+   "R26"
+  ],
+  "facts": [
+   {
+    "text": "Uppy Tus belgesi: sürdürülebilir yükleme istemci ve sunucu entegrasyonu gerektirir.",
+    "report": "review_claude"
+   },
+   {
+    "text": "Belgedeki 10 GB örneği kapasite testi değildir; depolama Tus sunucusunda veya S3 gibi hizmette olabilir.",
+    "report": "synthesis_chatgpt-map-P12"
+   },
+   {
+    "text": "Uppy MIT lisanslıdır; barındırılan tusd sunucusu Transloadit ticari planlarıyla sunulur.",
+    "report": "review_claude"
+   }
+  ],
+  "risks": [
+   "Sunucu (tusd vb.), kimlik doğrulama ve saklama politikası ayrı iştir.",
+   "Golden Retriever çökme sonrası kurtarmayı her dosya için garanti etmez.",
+   "Barındırılan hizmet kullanılırsa sağlayıcı bağımlılığı doğar."
+  ],
+  "url": "https://uppy.io/",
+  "version": ""
+ },
+ "tus": {
+  "desc": "HTTP üzerinde HEAD/PATCH ve Upload-Offset başlığıyla kesintiden sonra kaldığı yerden devam eden açık yükleme protokolü.",
+  "summary": "Tus, dosya hattındaki aktarım aşamasını sürdürülebilir kılan protokoldür; raporlar çekirdek protokolün hem istemcide hem sunucuda uygulanması gerektiğini ve yetkilendirmeyi sunucuya bıraktığını vurgular. Ofset uyuşmazlığında 409 döner; ancak 'HEAD her zaman Upload-Offset döndürür' genellemesi kaynak bulunamama istisnasını atlar. Hazır sunucu kullanılabilir, backend'i sıfırdan yazmak gerekmez; fakat aktarımın bitişi içerik çıkarımı veya AI analizinin bitişi değildir.",
+  "license": "MIT",
+  "maturity": "Kararlı",
+  "vendor": "tus.io (Transloadit)",
+  "platform": "Belirtim",
+  "effort": "Orta",
+  "stance": "Prototip adayı",
+  "rTopics": [
+   "R07",
+   "R14",
+   "R23"
+  ],
+  "facts": [
+   {
+    "text": "Ofset uyuşmazlığında 409 döner; PATCH/Upload-Offset sözleşmesi tanımlıdır.",
+    "report": "synthesis_chatgpt-map-P19"
+   },
+   {
+    "text": "Protokol örneği 100 bayt toplam, 70 bayt tamamlanmış, 30 bayt kalan aktarımdır; yetkilendirme sunucuya bırakılır.",
+    "report": "synthesis_chatgpt-map-P13"
+   },
+   {
+    "text": "Hazır sunucu kullanılabilir; bütün backend'in sıfırdan yazılması gerekmez.",
+    "report": "synthesis_chatgpt-map-P4"
+   }
+  ],
+  "risks": [
+   "Sunucu depolaması, yetki ve yarım yüklemelerin temizliği ayrıca tasarlanmalı.",
+   "Aktarımın %100'ü analiz ilerlemesi olarak gösterilmemeli."
+  ],
+  "url": "https://tus.io/protocols/resumable-upload",
+  "version": ""
+ },
+ "filepond": {
+  "desc": "Önizleme, parçalı yükleme ve geri alma uç noktaları sunan, framework bağımsız JavaScript dosya yükleme bileşeni.",
+  "summary": "FilePond raporlarda Uppy/Tus'a alternatif aktarım adayıdır ve iki yolun aynı senaryoda karşılaştırılması önerilir. Sunucu API'si process, revert, restore, load, fetch, remove uçlarını ve parçalı yüklemede POST ile transfer kimliği, PATCH ile parça, HEAD ile ofset sorgusunu tanımlar; bu uç noktaları uygulama sağlamalıdır. FilePond'daki 'processing' dosyanın yüklenip kimlik almasıdır, AI analizi değildir; geçici dosyayı geri almak da AI işini iptal etmez.",
+  "license": "MIT",
+  "maturity": "Kararlı",
+  "vendor": "PQINA",
+  "platform": "Framework bağımsız",
+  "effort": "Orta",
+  "stance": "Prototip adayı",
+  "rTopics": [
+   "R07",
+   "R03",
+   "R14"
+  ],
+  "facts": [
+   {
+    "text": "chunkUploads, chunkSize ve isteğe bağlı chunkForce; transfer kimliği için dosyasız POST, parçalar için PATCH, ofset için HEAD.",
+    "report": "synthesis_chatgpt-map-P12"
+   },
+   {
+    "text": "Başarısız parça sonrasında transfer kimliğiyle HEAD isteği atılarak kalınan yer bulunur.",
+    "report": "synthesis_chatgpt-map-P13"
+   },
+   {
+    "text": "retryDelays ve DELETE/revert alıntıları doğrulanamadı; FilePond pasajının bir kısmı eşleşmedi.",
+    "report": "review_claude"
+   }
+  ],
+  "risks": [
+   "Sunucu uç noktalarının tamamı uygulamaya kalır.",
+   "Uppy ile karşılaştırma tamamlanmadı; bazı iddialar doğrulanamadı."
+  ],
+  "url": "https://pqina.nl/filepond",
+  "version": ""
+ },
+ "motion": {
+  "desc": "Eski adı Framer Motion olan; yerleşim, giriş/çıkış ve paylaşılan öğe animasyonları sunan JavaScript/React animasyon kütüphanesi.",
+  "summary": "Raporlar Motion'ı bileşen düzeyinde, sık yeniden hedeflenen yerleşim ve giriş/çıkış animasyonları için güçlü aday sayar; sentezin kararı 'Motion / View Transitions: gereksinime göre seç, ortak ürün benchmarkı yok' şeklindedir. Motion belgelerindeki 'View Transitions'tan daha performanslı' iddiası ölçümsüz satıcı beyanı olarak ihtilaflı kaldı. Yerleşim animasyonları transform: scale ile çalışır; display:inline ve SVG yerleşimini desteklemez, kaydırılabilir kapsayıcıda layoutScroll gerekir, AnimatePresence yalnız doğrudan çocukları kararlı key ile izler; 'önce CSS, sonra tek JS motoru' ilkesiyle kullanılmalıdır.",
+  "license": "MIT",
+  "maturity": "Kararlı",
+  "vendor": "Motion (Matt Perry)",
+  "platform": "Çoklu framework",
+  "effort": "Düşük",
+  "stance": "Prototip adayı",
+  "rTopics": [
+   "R06",
+   "R03",
+   "R21",
+   "R22"
+  ],
+  "facts": [
+   {
+    "text": "MotionConfig reducedMotion='user' transform/yerleşim animasyonlarını kapatır, opaklık ve rengi korur.",
+    "report": "pre_research_claude"
+   },
+   {
+    "text": "AnimateView React/React DOM 19.3+ ister; animateView varsayılan olarak kuyruklar, interrupt: immediate ile atlar.",
+    "report": "synthesis_claude-map-P9"
+   },
+   {
+    "text": "Motion+ ücretli AnimateNumber, Carousel, Ticker, Cursor, Curtains bileşenlerini listeler.",
+    "report": "review_claude"
+   },
+   {
+    "text": "'Motion layout VT'den performanslıdır' iddiası ortak deney olmadığından disputed.",
+    "report": "research_claude"
+   }
+  ],
+  "risks": [
+   "Performans üstünlüğü satıcı iddiasıdır; hedef cihazda ölçülmeli.",
+   "Motion+ bileşenleri ek lisans maliyeti doğurabilir.",
+   "Görsel süreklilik React durum ve odak korunması değildir."
+  ],
+  "url": "https://motion.dev/docs/react-layout-animations",
+  "version": ""
+ },
+ "gsap": {
+  "desc": "Webflow'a ait, zaman çizelgesi ve eklentileriyle karmaşık koreografi sunan yüksek performanslı JavaScript animasyon kütüphanesi.",
+  "summary": "Raporlar GSAP'ı özel zaman çizelgeleri ve karmaşık koreografi gerektiğinde, ölçülmüş ihtiyaçla seçilecek bir alternatif olarak tutar; sentez, CSS'in yettiği işte Motion ve GSAP'ı aynı öğeye yığmamayı önerir. 29 Nisan 2025 tarihli 3.13 duyurusu, Webflow bünyesindeki GSAP'ın bonus eklentiler dahil ticari kullanımda da ücretsiz olduğunu açıkladı; lisans 30 Nisan 2025'te yürürlüğe girdi. Ancak GSAP Standard License MIT veya açık kaynak değildir: Webflow'un görsel animasyon oluşturma yetenekleriyle doğrudan rekabet eden araçlar önceden yazılı izin gerektiren yasak kullanımdır, lisans FAQ'ı ise AI ile GSAP kodu üretimini izinli sayar.",
+  "license": "Ticari",
+  "maturity": "Kararlı",
+  "vendor": "Webflow (GreenSock)",
+  "platform": "Framework bağımsız",
+  "effort": "Orta",
+  "stance": "Seçimli",
+  "rTopics": [
+   "R06",
+   "R26"
+  ],
+  "facts": [
+   {
+    "text": "3.13 duyurusu 29.04.2025; Standard License yürürlüğü 30.04.2025, değişiklik 30.05.2025.",
+    "report": "synthesis_chatgpt-map-P10"
+   },
+   {
+    "text": "Standard License FAQ'ı AI ile GSAP kodu üretimini izinli sayar; Webflow ile rekabet eden görsel araçlar yasak kapsamdadır.",
+    "report": "synthesis_chatgpt-map-P11"
+   },
+   {
+    "text": "'Her ürün sınıfında koşulsuz serbest/MIT eşdeğeri' genişletmesi reddedildi (rejected).",
+    "report": "synthesis_chatgpt-map-P11"
+   },
+   {
+    "text": "Hedef ürünün yasak kapsamda olduğu gösterilmedi; kısıt bütün görsel araçlara genellenmemeli.",
+    "report": "synthesis_chatgpt-map-P3"
+   }
+  ],
+  "risks": [
+   "Ücretsiz MIT demek değildir; yeniden dağıtım ve rekabet eden kullanım hukuki inceleme ister.",
+   "Panel görsel animasyon oluşturucuya dönüşürse lisans yasağına girebilir.",
+   "Tek şirket (Webflow) sahipliği ileride lisans değişikliği riski taşır."
+  ],
+  "url": "https://gsap.com/",
+  "version": "3.13"
+ },
+ "gsap-flip": {
+  "desc": "GSAP'ın yerleşim değişimlerini FLIP tekniğiyle (ölç, değiştir, canlandır) animasyonlayan eklentisi.",
+  "summary": "Raporlarda GSAP Flip, 'karmaşık FLIP koreografisi, ölçülmüş ihtiyaç varsa' satırında Motion'a alternatif olarak yer alır; Gemini liste satırlarının yer değiştirmesi gibi ince etkileşimlerde Motion veya Flip'i önerir. Flip.getState ölçüm sırasında etkin geçişi tamamlanmaya zorlayabilir; absolute kullanımı öğeyi akıştan çıkarır ve fiziksel süreklilik garantisi yoktur. Nisan 2025'ten beri diğer eklentilerle birlikte ücretsizdir ama GSAP Standard License koşullarına tabidir.",
+  "license": "Ticari",
+  "maturity": "Kararlı",
+  "vendor": "Webflow (GreenSock)",
+  "platform": "Framework bağımsız",
+  "effort": "Orta",
+  "stance": "Seçimli",
+  "rTopics": [
+   "R06",
+   "R18"
+  ],
+  "facts": [
+   {
+    "text": "Flip.getState etkin animasyonu 'force it to completion' ile tamamlatarak ölçüm alabilir.",
+    "report": "synthesis_claude-map-P6"
+   },
+   {
+    "text": "Flip kesintileri ele aldığını belgeler; absolute kullanımında kaydırma/yeniden boyutlandırma sınırlarını açıklar.",
+    "report": "pre_research_chatgpt"
+   },
+   {
+    "text": "'Flip dahil tüm eklentiler Nisan 2025'ten ücretsiz' iddiası lisans istisnasıyla birlikte okunmalı (disputed).",
+    "report": "synthesis_chatgpt-map-P19"
+   }
+  ],
+  "risks": [
+   "Absolute modunda kaydırma/resize sınırları; özgün kısıt yeniden doğrulanamadı.",
+   "React ile iki motorun aynı öğeyi yönetmesi çakışma yaratır.",
+   "GSAP Standard License koşullarına tabidir."
+  ],
+  "url": "https://gsap.com/docs/v3/Plugins/Flip/",
+  "version": "3.13"
+ },
+ "animejs": {
+  "desc": "Hafif, framework bağımsız JavaScript animasyon motoru; createLayout ile iki HTML yerleşim durumu arasında geçiş yapar.",
+  "summary": "Anime.js raporlarda DOM merkezli bir yerleşim alternatifi olarak korunur; Layout modülü (createLayout, ana paket veya animejs/layout) display, flex yönü, grid ve DOM sırası gibi canlandırması zor değişiklikler arasında geçiş yapar. Karşılaştırmalı hız, paket maliyeti veya ürün iş yükünde üstünlük kanıtı sunulmamış, güncel sürümün sabitlenmesi önerilmiştir. Elenmiş değildir; ancak CSS / View Transitions / Motion karşılaştırmasının dışında kalmıştır.",
+  "license": "MIT",
+  "maturity": "Kararlı",
+  "vendor": "Julian Garnier",
+  "platform": "Framework bağımsız",
+  "effort": "Orta",
+  "stance": "Referans",
+  "rTopics": [
+   "R06",
+   "R18"
+  ],
+  "facts": [
+   {
+    "text": "createLayout display, flex-direction, grid ve DOM sırası arasında geçiş yapar (synthesis_claude:C013 supported).",
+    "report": "synthesis_claude-map-P12"
+   },
+   {
+    "text": "Layout modülü ana paketten veya animejs/layout alt modülünden alınabilir; karşılaştırmalı performans verisi yok.",
+    "report": "synthesis_chatgpt-map-P12"
+   },
+   {
+    "text": "Belgeler WAAPI kullanımı ve donanım hızlandırma bölümleri içerir.",
+    "report": "review_claude"
+   }
+  ],
+  "risks": [
+   "Ürün iş yükünde karşılaştırmalı kanıt yok.",
+   "React durum/odak korunmasıyla entegrasyon ayrıca sınanmalı."
+  ],
+  "url": "https://animejs.com/documentation/layout/",
+  "version": ""
+ },
+ "autoanimate": {
+  "desc": "FormKit'in tek satırla bir öğenin doğrudan çocuklarının eklenme, silinme ve taşınmasını canlandıran sıfır yapılandırmalı aracı.",
+  "summary": "Raporlar AutoAnimate'ı basit listelerde düşük entegrasyon yüküyle kullanılabilecek dar kapsamlı bir seçenek olarak görür. Yalnız hedef öğenin doğrudan çocuklarındaki ekleme/silme/taşıma olaylarını izler, ebeveyne position: relative uygular ve flex-grow: 1 çocuklarda ölçüm zamanlaması sorunu bildirir. Azaltılmış hareket tercihini varsayılan olarak gözetir; ancak özellik değişimlerini, alt ağaçları veya zaman çizelgelerini çözmez.",
+  "license": "MIT",
+  "maturity": "Kararlı",
+  "vendor": "FormKit",
+  "platform": "Framework bağımsız",
+  "effort": "Düşük",
+  "stance": "Seçimli",
+  "rTopics": [
+   "R06",
+   "R03",
+   "R21"
+  ],
+  "facts": [
+   {
+    "text": "Yalnız doğrudan çocukların (immediate children) değişimlerini animasyonlar (doğrulandı).",
+    "report": "synthesis_claude-map-P6"
+   },
+   {
+    "text": "prefers-reduced-motion'da kapanma davranışı aktarılıyor; ilgili makbuz doğrulanamadı.",
+    "report": "synthesis_claude-map-P6"
+   },
+   {
+    "text": "flex-grow: 1 çocuklarda ölçüm sorunu; açık genişlik yardımcı olabilir.",
+    "report": "synthesis_chatgpt-map-P12"
+   }
+  ],
+  "risks": [
+   "Kapsamı doğrudan çocuklarla sınırlı.",
+   "Flex düzenlerinde ölçüm gecikmesi."
+  ],
+  "url": "https://auto-animate.formkit.com/",
+  "version": ""
+ },
+ "rive": {
+  "desc": "Tasarım editörü ve çok platformlu çalışma zamanlarıyla durum makineli, veri bağlamalı etkileşimli vektör animasyon platformu.",
+  "summary": "Raporlarda Rive, dotLottie ile birlikte hazırlanmış görsel varlıklar için etkileşimli durum makinesi ve veri bağlama (View Model, iç içe modeller) sunan bir araç olarak anılır; pasif video gibi sınıflandırılması eksik bulunur. Ancak Rive sayfasının teknik gövdesi araçla alınamadığından eş kapsamlı teknik karşılaştırma yapılamadı; birçok rapor bunu açık boşluk olarak listeler. Animasyon durumu sunucu işinin doğruluğunu veya ilerlemesini kanıtlamaz.",
+  "license": "Açık çekirdek/Pro",
+  "maturity": "Kararlı",
+  "vendor": "Rive Inc.",
+  "platform": "Çoklu framework",
+  "effort": "Yüksek",
+  "stance": "Referans",
+  "rTopics": [
+   "R06",
+   "R03",
+   "R05"
+  ],
+  "facts": [
+   {
+    "text": "Rive data binding: View Model, iç içe modeller ve state machine bağlantısı (tarih bilinmiyor).",
+    "report": "synthesis_chatgpt-map-P11"
+   },
+   {
+    "text": "Rive varlıkları kullanıcı girdisine bağlı verilere yanıt verebilir.",
+    "report": "synthesis_claude-map-P6"
+   },
+   {
+    "text": "Rive'ın eş kapsamlı teknik karşılaştırması bu turda bağımsız doğrulanmadı.",
+    "report": "research_chatgpt"
+   }
+  ],
+  "risks": [
+   "Tasarım aracı ve varlık hattı ek iş akışı ve olası ücretli editör bağımlılığı getirir.",
+   "Raporlarda karşılaştırmalı inceleme yok.",
+   "Animasyon durumu iş durumu değildir."
+  ],
+  "url": "https://rive.app/",
+  "version": ""
+ },
+ "dotlottie": {
+  "desc": "LottieFiles'ın .lottie/Lottie JSON animasyonlarını tema, çoklu animasyon ve durum makineleriyle oynatan çalışma zamanı.",
+  "summary": "Raporlar dotLottie'yi dar uzmanlık gerektiren animasyon varlığı oynatımı için seçimli bir araç olarak görür; güncel JS belgesi etkileşimli durum makinelerini listelediği için yalnız pasif oynatıcı sayılmamalıdır. Framework bağımsız çekirdeğin React, Vue, Svelte ve Web Components sarmalayıcıları vardır. Ancak animasyon varlığının durumu uygulamanın iş durumu değildir; gerçek ilerleme, form/tablo yaşam döngüsü ve sunucu iş sonucu ayrı sözleşmelerle yönetilmelidir.",
+  "license": "MIT",
+  "maturity": "RC/Beta",
+  "vendor": "LottieFiles",
+  "platform": "Framework bağımsız",
+  "effort": "Orta",
+  "stance": "Seçimli",
+  "rTopics": [
+   "R06",
+   "R05",
+   "R03"
+  ],
+  "facts": [
+   {
+    "text": "dotLottie JS belgesi 11 Eylül 2026 12:08 güncellemeli; v0.x belgeleri.",
+    "report": "synthesis_chatgpt-map-P12"
+   },
+   {
+    "text": ".lottie/JSON oynatma, tema, çoklu animasyon, state machine ve React/Vue/Svelte/Web Components sarmalayıcıları belgelenir.",
+    "report": "synthesis_chatgpt-map-P11"
+   },
+   {
+    "text": "dotLottie DOM form yaşam döngüsünü yönetmez (C0443).",
+    "report": "synthesis_chatgpt-map-P18"
+   }
+  ],
+  "risks": [
+   "v0.x sürüm çizgisi API değişikliği riski taşır.",
+   "Erişilebilirlik ve sürüm eşliği test edilmedi.",
+   "Dekoratif animasyon sahte ilerleme hissi yaratmamalı."
+  ],
+  "url": "https://docs.lottiefiles.com/en/runtimes/distributions/js",
+  "version": "v0.x"
+ },
+ "numberflow": {
+  "desc": "Intl biçimlendirmesiyle sayı değişimlerini basamak basamak canlandıran bileşen; React, Vue, Svelte ve düz JS hedefler.",
+  "summary": "Raporlar NumberFlow'u KPI ve ölçüm kartlarında sayı geçişi için uzmanlaşmış bir çözüm olarak, 'yerelleştirme ve erişilebilirlik testi geçerse' koşuluyla önerir. respectMotionPreference varsayılan açıktır; isolate, trend, continuous seçenekleri ve NumberFlowGroup ile konum eşgüdümü sunar. Belgelere göre RTL, Latin dışı rakamlar ve bilimsel/mühendislik gösterimi desteklenmez, arka plan ve kenarlık düzgün ölçeklenmeyebilir; sentez ayrıca doğrulanmamış değerin kesinmiş gibi canlandırılmamasını ister.",
+  "license": "MIT",
+  "maturity": "Bilinmiyor",
+  "vendor": "Maxwell Barvian",
+  "platform": "Çoklu framework",
+  "effort": "Düşük",
+  "stance": "Seçimli",
+  "rTopics": [
+   "R03",
+   "R06",
+   "R21"
+  ],
+  "facts": [
+   {
+    "text": "lite.ts varsayılanları: respectMotionPreference:true, opacityTiming 450 ms ease-out.",
+    "report": "synthesis_claude-map-P11"
+   },
+   {
+    "text": "Latin dışı rakam desteklenmez (doğrulandı), RTL kısmı doğrulanamadı; Türkçe para/negatif/kompakt biçim test edilmedi.",
+    "report": "synthesis_claude-map-P6"
+   },
+   {
+    "text": "Resmî depo React, Vue, Svelte ve düz TS/JS hedeflerini listeler.",
+    "report": "pre_research_chatgpt"
+   }
+  ],
+  "risks": [
+   "RTL ve Latin dışı rakamlı yerelleştirmelerde kullanılamayabilir.",
+   "Hareket tercihi uyumu isteğe bağlı ayarlara dayanır; her kullanımda doğrulanmalı."
+  ],
+  "url": "https://number-flow.barvian.me/",
+  "version": ""
+ },
+ "view-transitions": {
+  "desc": "DOM durumları arasında anlık görüntü tabanlı geçiş sağlayan tarayıcı API'si; aynı belge, belgeler arası ve öğe kapsamlı türleri var.",
+  "summary": "Raporlar 'View Transitions yalnız sayfa geçişi içindir' iddiasını reddetti: Chrome 147 ile öğe kapsamlı geçişler ayrı alt ağaçların eşzamanlı animasyonuna ve kapsam dışının etkileşimli kalmasına izin verir. research_chatgpt sayfa/çalışma alanı geçişlerinde önce View Transitions'ı ve desteklenmeyen tarayıcı için yedek davranışı önerir; research_claude öğe kapsamlı geçişi yalnız Chromium'da aşamalı iyileştirme sayar. Geçişler anlık görüntü tabanlıdır, kesilemez ve aynı kapsamda yeni geçiş mevcut olanı atlar; Motion'a karşı evrensel performans kazananı gösterilmedi.",
+  "license": "Standart",
+  "maturity": "Kararlı",
+  "vendor": "W3C CSS WG",
+  "platform": "Tarayıcı yerel",
+  "effort": "Orta",
+  "stance": "Prototip adayı",
+  "rTopics": [
+   "R06",
+   "R22",
+   "R16"
+  ],
+  "facts": [
+   {
+    "text": "caniuse aynı belge: Chrome/Edge 111+, Safari 18+, Firefox 144+ (143'te varsayılan kapalı); küresel %91,75.",
+    "report": "pre_research_claude"
+   },
+   {
+    "text": "Belgeler arası geçiş: Chrome 126+, Safari 18.2+; Firefox desteği eksik (ikincil kaynak).",
+    "report": "pre_research_claude"
+   },
+   {
+    "text": "Öğe kapsamlı geçiş Chrome 147'de kararlı (duyuru 27 Mart, kararlı sürüm 7 Nisan 2026).",
+    "report": "synthesis_claude-map-P6"
+   },
+   {
+    "text": "Kapsam kökü geçiş süresince contain: layout alır; eşzamanlı ve iç içe geçişler mümkündür.",
+    "report": "research_claude"
+   }
+  ],
+  "risks": [
+   "Öğe kapsamlı geçişler Firefox/Safari'de yok; yedek davranış şart.",
+   "Anlık görüntü tabanlı ve kesilemez; sık yeniden hedeflenen etkileşimde zayıf kalabilir.",
+   "Görsel süreklilik durum ve odak korunması değildir."
+  ],
+  "url": "https://developer.mozilla.org/en-US/docs/Web/API/View_Transition_API",
+  "version": ""
+ },
+ "react-viewtransition": {
+  "desc": "React 19.3'te kararlı hâle gelen, Transition/Suspense güncellemelerini View Transitions API ile canlandıran <ViewTransition> bileşeni.",
+  "summary": "React 19.3 (9 Eylül 2026) <ViewTransition> ve addTransitionType'ı kararlı ilan eder; raporlar bunu büyük veri bloklarının gelişi ve Suspense fallback geçişleri için aday sayar. Bileşen yalnız DOM'da çalışır ve yalnız Transition, Suspense veya useDeferredValue güncellemelerinde tetiklenir; düz setState kullanan akış renderer'ında bu ayrıca ele alınmalıdır. React azaltılmış hareketi otomatik kapatmaz; ayrıca kararlılık cümlesi bazı partilerde eşleşmedi ve referans sandbox'ı hâlâ canary sürüm sabitliyor.",
+  "license": "MIT",
+  "maturity": "Kararlı",
+  "vendor": "Meta (React ekibi)",
+  "platform": "React",
+  "effort": "Orta",
+  "stance": "Prototip adayı",
+  "rTopics": [
+   "R06",
+   "R16",
+   "R05"
+  ],
+  "facts": [
+   {
+    "text": "React 19.3 (2026-09-09) <ViewTransition>, addTransitionType ve Fragment Refs'i kararlı yapar.",
+    "report": "synthesis_claude-map-P11"
+   },
+   {
+    "text": "Referans sandbox örneği hâlâ 19.3.0-canary-f1f7ed2a-20260904 sürümünü sabitler (karşı kanıt).",
+    "report": "review_claude"
+   },
+   {
+    "text": "Varsayılan cross-fade; animasyon CSS sınıfları veya onEnter/onExit/onShare/onUpdate ile Web Animations API üzerinden özelleştirilir.",
+    "report": "review_chatgpt"
+   },
+   {
+    "text": "React azaltılmış hareket durumunda animasyonları otomatik kapatmaz; @media kontrolü önerilir.",
+    "report": "review_chatgpt"
+   }
+  ],
+  "risks": [
+   "Yalnız DOM; React Native desteği yok.",
+   "Tarayıcı View Transitions desteğine bağlı.",
+   "Kararlılık iddiası tek alt kayıtta eşleşti; hedef sürümle doğrulanmalı."
+  ],
+  "url": "https://react.dev/reference/react/ViewTransition",
+  "version": "React 19.3"
+ },
+ "starting-style": {
+  "desc": "Öğe ilk kez görüntülendiğinde CSS geçişinin başlangıç stilini tanımlayan, giriş animasyonlarını JS'siz sağlayan at-kuralı.",
+  "summary": "Raporların 'önce CSS' hareket ilkesinde @starting-style bileşen giriş animasyonlarının ilk seçeneğidir; Gemini opaklık ve renk geçişi gereken basit durumlarda yerel olarak yeterli olduğunu belirtir. Baseline 2024 (Ağustos 2024'ten itibaren büyük tarayıcılar) olarak aktarılır; ancak çıkış animasyonunu tek başına çözmez ve özgüllük sırası önemlidir. interpolate-size desteğiyle aynı şey değildir; kesilebilir yoğun arayüz akışlarında bir JS motoru gerekebilir.",
+  "license": "Standart",
+  "maturity": "Kararlı",
+  "vendor": "W3C CSS WG",
+  "platform": "Tarayıcı yerel",
+  "effort": "Düşük",
+  "stance": "Çekirdek aday",
+  "rTopics": [
+   "R06",
+   "R22"
+  ],
+  "facts": [
+   {
+    "text": "@starting-style Baseline 2024; Ağustos 2024'ten itibaren tüm büyük tarayıcılarda.",
+    "report": "pre_research_claude"
+   },
+   {
+    "text": "Çıkış animasyonunu tek başına çözmez; özgüllük sırası önemlidir (MDN).",
+    "report": "pre_research_claude"
+   },
+   {
+    "text": "Enter/exit için önce CSS/@starting-style; kesilebilir yoğun UI akışında Motion vb. üst araç.",
+    "report": "research_chatgpt"
+   }
+  ],
+  "risks": [
+   "Çıkış animasyonu için ek teknik gerekir.",
+   "Azaltılmış hareket kuralları ayrıca yazılmalıdır."
+  ],
+  "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/@starting-style",
+  "version": ""
+ },
+ "interpolate-size": {
+  "desc": "height: auto gibi doğal boyut anahtar sözcüklerine CSS geçişini açan özellik (allow-keywords); calc-size ile ilişkili.",
+  "summary": "Raporlar interpolate-size'ı akordeon veya açılır ayrıntı gibi doğal boyut geçişlerinde JS'siz bir seçenek olarak anar, ama sınırlarını vurgular. allow-keywords ile auto, min-content, max-content, fit-content değerlerine geçiş Chrome 130'dan itibaren desteklenir; uçlardan birinin uzunluk/yüzde olması gerekir ve iki doğal boyut anahtar sözcüğü arasında interpolasyon mümkün değildir. MDN 25 Eylül 2026 itibarıyla özelliği Experimental ve Baseline dışı gösterdiğinden aşamalı iyileştirme olarak kullanılmalıdır.",
+  "license": "Standart",
+  "maturity": "Deneysel",
+  "vendor": "W3C CSS WG (Chrome)",
+  "platform": "Tarayıcı yerel",
+  "effort": "Düşük",
+  "stance": "Seçimli",
+  "rTopics": [
+   "R06",
+   "R18"
+  ],
+  "facts": [
+   {
+    "text": "interpolate-size: allow-keywords Chrome 130'dan itibaren desteklenir.",
+    "report": "synthesis_claude-map-P11"
+   },
+   {
+    "text": "MDN 2026-09-25'te Experimental ve Baseline dışı gösterir.",
+    "report": "synthesis_claude-map-P11"
+   },
+   {
+    "text": "İki doğal boyut anahtar sözcüğü arasında interpolasyon mümkün değildir.",
+    "report": "synthesis_claude-map-P12"
+   },
+   {
+    "text": "calc-size ek interpolasyon olanakları sunar; interpolate-size sınırı bütün CSS'e genellenemez.",
+    "report": "synthesis_chatgpt-map-P16"
+   }
+  ],
+  "risks": [
+   "Sınırlı tarayıcı desteği; desteklenmeyen tarayıcıda anında geçiş olur.",
+   "İki doğal boyut arasında animasyon yok."
+  ],
+  "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/interpolate-size",
+  "version": ""
+ },
+ "waapi": {
+  "desc": "JavaScript'ten Element.animate() ile tarayıcı animasyonlarını zamanlama ve animasyon modeliyle denetleyen yerel W3C API'si.",
+  "summary": "Web Animations API raporlarda doğrudan seçilen bir motor olarak değil, diğer araçların altyapısı olarak geçer: React <ViewTransition> animasyonları olay prop'ları üzerinden bu API ile imperatif olarak özelleştirilebilir, Anime.js de WAAPI kullanımını belgeler. W3C Web Animations 1 belgesi zamanlama modeli ile animasyon modelinin büyük ölçüde bağımsız iki parça olduğunu tanımlar. W3C sayfaları bazı turlarda HTTP 403 döndürdüğünden bu belgeye dayanan iddialar birincil kaynakla tam doğrulanamadı.",
+  "license": "Standart",
+  "maturity": "Kararlı",
+  "vendor": "W3C (CSS WG / FXTF)",
+  "platform": "Tarayıcı yerel",
+  "effort": "Orta",
+  "stance": "Referans",
+  "rTopics": [
+   "R06",
+   "R22"
+  ],
+  "facts": [
+   {
+    "text": "ViewTransition olay prop'ları (onEnter, onExit, onShare, onUpdate) animasyonu Web Animations API ile tetiklemeye izin verir.",
+    "report": "review_claude"
+   },
+   {
+    "text": "Web Animations 1 modeli zamanlama modeli ve animasyon modeli olarak iki büyük ölçüde bağımsız parçadan oluşur.",
+    "report": "review_chatgpt"
+   },
+   {
+    "text": "w3.org/TR/web-animations-1 HTTP 403 (source_unavailable); erişememek yanlışlık kanıtı değildir.",
+    "report": "synthesis_claude-map-P12"
+   }
+  ],
+  "risks": [
+   "Düşük seviye API; koreografi, kesinti ve azaltılmış hareket politikası uygulamaya kalır.",
+   "Raporlarda birincil kaynak doğrulaması tamamlanamadı."
+  ],
+  "url": "https://www.w3.org/TR/web-animations-1/",
+  "version": ""
+ },
+ "reduced-motion": {
+  "desc": "Kullanıcının işletim sisteminde hareketi azaltma tercihini bildiren CSS medya özelliği (prefers-reduced-motion: reduce).",
+  "summary": "Sentez, azaltılmış hareket tercihinde geçişlerin sakinleşmesini ama bilgi ve kontrollerin eksiksiz çalışmasını kabul koşulu yapar. Raporlara göre 'reduce' değeri 'kaldır' değil 'azalt' anlamındadır; fiziksel yer değiştirme durdurulurken opaklık/renk geri bildirimi korunabilir. React bu tercihi otomatik uygulamaz; Motion (MotionConfig), AutoAnimate ve NumberFlow kendi desteklerini sunar. WCAG 2.2.2 (A) otomatik hareketli içerik için duraklat/durdur/gizle ister; 2.3.3 ise AAA düzeyindedir ve tek bir AA maddesine indirgenmemelidir.",
+  "license": "Standart",
+  "maturity": "Kararlı",
+  "vendor": "W3C (Media Queries 5)",
+  "platform": "Tarayıcı yerel",
+  "effort": "Düşük",
+  "stance": "Çekirdek aday",
+  "rTopics": [
+   "R21",
+   "R06",
+   "R05"
+  ],
+  "facts": [
+   {
+    "text": "prefers-reduced-motion: reduce 'azalt' anlamındadır; opaklık/renk geri bildirimi korunabilir (MDN).",
+    "report": "pre_research_claude"
+   },
+   {
+    "text": "WCAG 2.2.2 (A) 5 sn'den uzun otomatik hareket için duraklat/durdur/gizle; 2.3.3 (AAA) etkileşim kaynaklı hareketin kapatılabilmesi.",
+    "report": "research_gemini"
+   },
+   {
+    "text": "Kısmi ret: beş saniye eşiği otomatik güncellenen içeriğe uygulanmaz.",
+    "report": "synthesis_claude-map-P9"
+   }
+  ],
+  "risks": [
+   "Her kütüphane tercihi farklı uygular; tek hareket politikası gerekir.",
+   "Sürekli shimmer/iskelet animasyonları dikkat dağıtıcı ve erişilebilirlik sorunu olabilir."
+  ],
+  "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion",
+  "version": ""
+ },
+ "ai-elements": {
+  "desc": "Vercel'in AI SDK için shadcn/ui tabanlı, kaynak kodu projeye kopyalanan sohbet ve ajan arayüzü bileşen kayıt defteri.",
+  "summary": "Raporlar AI Elements'i onay, araç durumu, akıl yürütme ve akışlı mesaj kartları için hazır sunum katmanı olarak görür; registry'de 47 bileşen aktarılır ama sayı sonraki turlarda yeniden doğrulanamadı. Belgelenen ön koşul Next.js + AI SDK, shadcn/ui ve Tailwind CSS değişkenleridir; bunun her bileşen için çalışma zamanı zorunluluğu olduğu kanıtlanmadı, Vite + React ile derleme testi önerilir. Confirmation gibi bileşenler sunucu yetkilendirmesini veya gerçek yürütme sonucunu kanıtlamaz; kopyalanan kodun bakımı ve daisyUI ile tek görsel sistem uyumu ürün ekibine kalır.",
+  "license": "Apache-2.0",
+  "maturity": "Bilinmiyor",
+  "vendor": "Vercel",
+  "platform": "React",
+  "effort": "Orta",
+  "stance": "Prototip adayı",
+  "rTopics": [
+   "R03",
+   "R04",
+   "R05",
+   "R23"
+  ],
+  "facts": [
+   {
+    "text": "Registry'de 47 bileşen: conversation, message, prompt-input, reasoning, tool, task, plan, queue, confirmation, sources vb.",
+    "report": "pre_research_claude"
+   },
+   {
+    "text": "README ön koşulları: Next.js + AI SDK, Node.js 18+, shadcn/ui ve Tailwind CSS Variables.",
+    "report": "review_claude"
+   },
+   {
+    "text": "Hedef React 19 ve Tailwind CSS 4; bileşenler shadcn CLI ile kaynak kod olarak kopyalanır.",
+    "report": "research_claude"
+   },
+   {
+    "text": "Confirmation örneği onayı backend araç akışına bağlar; dosya silme örneği simülasyondur.",
+    "report": "synthesis_chatgpt-map-P6"
+   }
+  ],
+  "risks": [
+   "Next.js varsayımı Astro/Vite kurulumunda ek uyarlama gerektirebilir.",
+   "Onay bileşeni yetkilendirme değildir; sunucu denetimi şarttır.",
+   "shadcn tabanlı görünüm daisyUI ile ikinci görsel sistem yükü yaratabilir."
+  ],
+  "url": "https://elements.ai-sdk.dev/",
+  "version": ""
+ },
+ "assistant-ui": {
+  "desc": "Sohbet ve ajan arayüzleri için React bileşen ve çalışma zamanı kütüphanesi; AG-UI ve A2UI adaptörleri sunar.",
+  "summary": "Raporlarda assistant-ui, A2UI tariflerini AG-UI üzerinden çizen somut bir entegrasyon örneği olarak incelenir: middleware v0.9 işlemleri üretir, renderer v0.9 ve v1.0 şekillerini kabul eder. Bilinmeyen bileşen ve işlemler varsayılan olarak uyarıyla atılır, tam veri modeli eşitlemesi sağlanmaz ve input.tools'ta bildirilmeyen sentetik log_a2ui_event çağrısı araç doğrulayan backend'lerce reddedilebilir. Bu yüzden dönüşüm kayıpsız sayılmamalı ve bu adaptörün davranışı bütün A2UI yollarına genellenmemelidir.",
+  "license": "MIT",
+  "maturity": "Bilinmiyor",
+  "vendor": "assistant-ui ekibi",
+  "platform": "React",
+  "effort": "Orta",
+  "stance": "Referans",
+  "rTopics": [
+   "R08",
+   "R09",
+   "R14"
+  ],
+  "facts": [
+   {
+    "text": "A2UI, AG-UI'de ACTIVITY_SNAPSHOT (activityType 'a2ui-surface', content.a2ui_operations) ile taşınır; middleware v0.9 üretir.",
+    "report": "pre_research_claude"
+   },
+   {
+    "text": "Bilinmeyen bileşen/işlemler varsayılan olarak uyarıyla atılır; keepUnknownComponents:true düğümü koruyabilir.",
+    "report": "synthesis_chatgpt-map-P11"
+   },
+   {
+    "text": "v1.0 createSurface içinde components ve dataModel birlikte kabul edilir.",
+    "report": "synthesis_chatgpt-map-P10"
+   },
+   {
+    "text": "Microsoft Agent Framework ve assistant-ui RunFinished outcome alanını uyguluyor.",
+    "report": "research_claude"
+   }
+  ],
+  "risks": [
+   "Sentetik araç çağrısı sıkı backend doğrulamasıyla çakışabilir.",
+   "Kayıpsız dönüşüm yok; zarf ayrıntıları kesitlerde tam doğrulanamadı.",
+   "Adaptör sürümü/commit sabitlenmeden uyumluluk varsayılamaz."
+  ],
+  "url": "https://www.assistant-ui.com/",
+  "version": ""
+ },
+ "ant-design-x": {
+  "desc": "Ant Group'un Ant Design üzerine kurulu AI sohbet bileşenleri: Bubble, Sender, Attachments, ThoughtChain, Conversations, Sources.",
+  "summary": "Raporlar Ant Design X'i sohbet, dosya eki ve düşünce zinciri kartları hazır olan kapsamlı bir kit olarak tanımlar; 2.0 sürümü 22 Kasım 2025'te, 2.9.0 ise 23 Temmuz 2026'da çıktı. Paket manifestinde antd ^6.1.1 görünür, ancak bunun çalışma zamanı zorunluluğu mu geliştirme bağımlılığı mı olduğu kesitte netleşmedi. Ant Design ekosistemine kilitlenme, sentezin 'tek ana görsel sistem (daisyUI)' ilkesiyle çeliştiğinden kit daha çok desen referansı olarak değerlendirilmelidir.",
+  "license": "MIT",
+  "maturity": "Kararlı",
+  "vendor": "Ant Group",
+  "platform": "React",
+  "effort": "Yüksek",
+  "stance": "Referans",
+  "rTopics": [
+   "R03",
+   "R04",
+   "R26"
+  ],
+  "facts": [
+   {
+    "text": "2.9.0 (2026-07-23); 2.0 (2025-11-22) Bubble, Sender, Attachments, ThoughtChain, Conversations, Sources getirdi.",
+    "report": "pre_research_claude"
+   },
+   {
+    "text": "2.9.0 package.json'da antd ^6.1.1, @types/react ^19.0.2, antd-style ^4.0.0-alpha.1 görünür (devDependencies görünümü).",
+    "report": "synthesis_claude-map-P12"
+   },
+   {
+    "text": "'Ant Design X antd v6 ister' ifadesi zorunlu çalışma zamanı bağımlılığı olarak yeterince ayrıştırılmadı.",
+    "report": "pre_brief_chatgpt"
+   }
+  ],
+  "risks": [
+   "antd ekosistemine kilitlenme; daisyUI ile ikinci görsel sistem.",
+   "Hazır durum kartları gerçek araç yürütmesine bağlanmadıkça yanıltıcı olabilir."
+  ],
+  "url": "https://x.ant.design/components/overview/",
+  "version": "2.9.0"
+ },
+ "thoughtchain": {
+  "desc": "Ant Design X'in ajan adımlarını loading/success/error/abort durumlarıyla sıralı gösteren düşünce zinciri bileşeni.",
+  "summary": "Raporlar ThoughtChain'i ajanın çok adımlı çalışmasını ve araç çağrılarını görselleştiren hazır bir sunum parçası olarak anar; bileşen loading, success, error ve abort durumlarını gösterebilir. Durumların gerçek araç çalışmasına bağlanması tamamen uygulamanın sorumluluğudur; hazır durum kartı kurum/kayıt yetkisini veya gerçek yürütme sonucunu kanıtlamaz. Sentezin 'gerçek aşama + kısmi sonuç' ilkesi için iyi bir desen referansıdır, ancak doğrudan kullanımı antd bağımlılığı kararına bağlıdır.",
+  "license": "MIT",
+  "maturity": "Kararlı",
+  "vendor": "Ant Group",
+  "platform": "React",
+  "effort": "Yüksek",
+  "stance": "Referans",
+  "rTopics": [
+   "R03",
+   "R05",
+   "R13"
+  ],
+  "facts": [
+   {
+    "text": "ThoughtChain loading, success, error ve abort durumlarını sunabilir (C025).",
+    "report": "pre_research_chatgpt"
+   },
+   {
+    "text": "Hazır onay ve araç durumu bileşenleri sunucu tarafı işlem yetkilendirmesini kanıtlamaz (supported).",
+    "report": "research_gemini"
+   },
+   {
+    "text": "Ant Design X 2.0 (2025-11-22) ile kitin bileşenleri arasında yer aldı.",
+    "report": "pre_research_claude"
+   }
+  ],
+  "risks": [
+   "Modelin gizli akıl yürütmesini değil, gerçek olay/aşama kaydını göstermeli.",
+   "antd v6 bağımlılığı ikinci görsel sistem getirir."
+  ],
+  "url": "https://x.ant.design/components/thought-chain/",
+  "version": "2.9.0"
+ },
+ "streamdown": {
+  "desc": "Vercel'in akış sırasında eksik Markdown'u çizebilen, GFM ve matematik destekli React Markdown bileşeni.",
+  "summary": "Raporlarda Streamdown, AI Elements MessageResponse bileşeninin akışlı Markdown motoru olarak geçer: GFM (tablo, görev listesi, üstü çizili), matematik, eksik Markdown ayrıştırma seçeneği ve bağlantı/görsel önek ayarları belgelenir. Hazır akışlı metin sunumu bütün davranışın sıfırdan yazılmasını gereksiz kılar; ancak kaynak doğruluğu, bağlantı/görsel politikası, dal yönetimi ve ekran okuyucu duyuru sıklığı ayrı kararlardır. İlgili makbuzlar doğrulanamadığından özellikler hedef sürümle sınanmalıdır.",
+  "license": "Apache-2.0",
+  "maturity": "Bilinmiyor",
+  "vendor": "Vercel",
+  "platform": "React",
+  "effort": "Düşük",
+  "stance": "Seçimli",
+  "rTopics": [
+   "R03",
+   "R12",
+   "R21",
+   "R23"
+  ],
+  "facts": [
+   {
+    "text": "AI Elements Message: Streamdown ile GFM (tables, task lists, strikethrough), math ve akışlı çizim (erişim 24 Eylül 2026).",
+    "report": "review_chatgpt"
+   },
+   {
+    "text": "MessageResponse/Streamdown kısmi Markdown gösterir; dal yönetimi, içerik güvenliği ve doğruluk ayrıca tasarlanır.",
+    "report": "synthesis_chatgpt-map-P16"
+   },
+   {
+    "text": "AI SDK yerleşik dal yönetimi sağlamaz; Streamdown makbuzu doğrulanamadı.",
+    "report": "synthesis_claude-map-P6"
+   }
+  ],
+  "risks": [
+   "Model çıktısındaki Markdown/bağlantılar XSS ve veri sızdırma yüzeyidir (OWASP LLM05).",
+   "Sık güncelleme ekran okuyucuyu aşırı duyuruyla yorabilir."
+  ],
+  "url": "https://streamdown.ai/",
+  "version": ""
+ },
+ "animate-ui": {
+  "desc": "shadcn CLI ile projeye kopyalanan, Motion ve Tailwind tabanlı animasyonlu primitive, bileşen ve ikon koleksiyonu.",
+  "summary": "Raporlar Animate UI'ı shadcn/ui ile aynı 'kodu sahiplen' dağıtım modeli üzerinden değerlendirir: bileşenler npm paketi değil, projeye kopyalanıp değiştirilen kaynak koddur. Bu, marka kimliğine derin uyarlama sağlar ama güncelleme ve hata düzeltmelerini birleştirme işini ürün ekibine devreder; Motion, Tailwind ve Radix/Base UI/Headless UI bağımlılıkları sürer. Belgenin son güncelleme tarihi belirsiz, bakım sürekliliği doğrulanmamıştır; erişilebilirlik ve hız hedefleri ürünün bütünü için garanti değildir.",
+  "license": "MIT",
+  "maturity": "Bilinmiyor",
+  "vendor": "Topluluk (bağımsız bakımcı)",
+  "platform": "React",
+  "effort": "Orta",
+  "stance": "Seçimli",
+  "rTopics": [
+   "R03",
+   "R06",
+   "R26"
+  ],
+  "facts": [
+   {
+    "text": "Animate UI kodu doğrudan kod tabanında kopyalayıp değiştirmeyi önerir (C027 supported).",
+    "report": "synthesis_claude-map-P6"
+   },
+   {
+    "text": "Motion tabanlı primitives/components/icons; Radix, Base UI, Headless UI karışımı; belge 'son güncelleme 12/6/2025' (biçim belirsiz).",
+    "report": "pre_research_claude"
+   },
+   {
+    "text": "React, Tailwind, Motion; animasyonlu primitive ve Lucide ikonları; klasik npm kütüphanesi modeli değil.",
+    "report": "synthesis_chatgpt-map-P12"
+   }
+  ],
+  "risks": [
+   "Kopyalanan kodun upstream düzeltmeleriyle birleştirilmesi bakım yüküdür.",
+   "Bakım sürekliliği doğrulanmadı."
+  ],
+  "url": "https://animate-ui.com/docs",
+  "version": ""
+ },
+ "magic-ui": {
+  "desc": "Açılış sayfaları için 150+ animasyonlu efekt sunan, React/Tailwind/Motion tabanlı kopyalanabilir bileşen koleksiyonu.",
+  "summary": "Raporlar Magic UI'ın kendini açılış sayfaları ve pazarlama materyalleri üretmeye yönelik tanıttığını, bu nedenle yoğun yönetim paneli ihtiyacıyla örtüşmesinin düşük olduğunu belirtir. Önceki 'ilerleme bileşeni yok' gözlemi bir Animated Circular Progress Bar bulunmasıyla düzeltildi; ancak demo değeri setInterval ile artırır ve gerçek iş ilerlemesini ölçmez. Pro katmanı vardır, kapsamı raporlarda doğrulanamamıştır.",
+  "license": "Açık çekirdek/Pro",
+  "maturity": "Bilinmiyor",
+  "vendor": "Magic UI",
+  "platform": "React",
+  "effort": "Orta",
+  "stance": "Ertele/Kaçın",
+  "rTopics": [
+   "R03"
+  ],
+  "facts": [
+   {
+    "text": "150+ animasyonlu efekt; açıkça landing page odaklı; Pro katmanı var.",
+    "report": "pre_research_claude"
+   },
+   {
+    "text": "Magic UI açılış sayfaları ve pazarlama materyalleri için tasarlandığını belirtir (doğrulandı).",
+    "report": "synthesis_claude-map-P8"
+   },
+   {
+    "text": "Animated Circular Progress Bar gösterge değeri alır; demo değeri setInterval ile artırır.",
+    "report": "synthesis_claude-map-P6"
+   }
+  ],
+  "risks": [
+   "Dikkat çekici efektler panel okunabilirliğini ve bilişsel yükü bozabilir.",
+   "Pro kapsamı ve lisansı doğrulanmadı."
+  ],
+  "url": "https://magicui.design/",
+  "version": ""
+ },
+ "echarts": {
+  "desc": "Apache Vakfı'nın Canvas/SVG ile zengin, etkileşimli grafikler çizen, bildirimsel seçenek nesnesiyle yapılandırılan kütüphanesi.",
+  "summary": "Sentez, ECharts ve Vega-Lite gibi adayların görünüşe göre değil; bilinen grafik türleri, erişilebilir tablo alternatifi, veri bağlama ve yanlış temsilin engellenmesiyle birlikte seçilmesini ister ve kapsamlı motor karşılaştırması yapılmadığını not eder. Raporların somut bulgusu, ECharts belgesine göre kapsayıcı boyutu değişince pencere resize olayının tetiklenmeyebileceği ve ResizeObserver önerisidir. Dar yan panel, açılan araç alanı, gizli sekme ve dispose davranışı ayrı test durumlarıdır.",
+  "license": "Apache-2.0",
+  "maturity": "Kararlı",
+  "vendor": "Apache Software Foundation",
+  "platform": "Framework bağımsız",
+  "effort": "Orta",
+  "stance": "Prototip adayı",
+  "rTopics": [
+   "R19",
+   "R18",
+   "R22"
+  ],
+  "facts": [
+   {
+    "text": "Kapsayıcı değişimi her zaman window resize üretmez; ResizeObserver kullanımı önerilir (C028 supported).",
+    "report": "pre_research_chatgpt"
+   },
+   {
+    "text": "Kapsayıcı gözlemi, resize çağrısı, gizlenme/görünme ve dispose davranışı birlikte ele alınmalıdır.",
+    "report": "synthesis_chatgpt-map-P18"
+   },
+   {
+    "text": "Mevcut raporlar bu ürün için kapsamlı bir grafik motoru karşılaştırması yapmadı.",
+    "report": "GENUI-SENTEZ-RAPORU"
+   }
+  ],
+  "risks": [
+   "Serbest üretilen option nesnesi yanıltıcı eksen/toplulaştırma üretebilir; dar grafik sözleşmesi gerekir.",
+   "Ürün için karşılaştırmalı değerlendirme yok."
+  ],
+  "url": "https://echarts.apache.org/",
+  "version": ""
+ },
+ "vega-lite": {
+  "desc": "Grafikleri veri, kodlama ve dönüşümlerle JSON olarak tarif eden, Vega'ya derlenen yüksek seviyeli grafik dilbilgisi.",
+  "summary": "Raporlar Vega-Lite'ı GenUI grafik sözleşmesine iyi uyan bir aday olarak öne çıkarır: gömülü, URL'den ve çalışma anında bağlanan adlandırılmış (named) veri kaynaklarını destekler; böylece model kesin sayıları tarife yeniden yazmak zorunda kalmaz ve görünüm tarifi veri kaynağından ayrılır. Dış veri kaynakları denetlenmeli; birim, dönem, veri sürümü, toplulaştırma ve eksik değer politikası sözleşmede ayrıca taşınmalıdır. Named data alıntısı bazı kesitlerde eşleşmediği için aynı iddia partiler arasında farklı kayıt statüleri taşır.",
+  "license": "BSD",
+  "maturity": "Kararlı",
+  "vendor": "UW Interactive Data Lab (Vega)",
+  "platform": "Belirtim",
+  "effort": "Orta",
+  "stance": "Prototip adayı",
+  "rTopics": [
+   "R19",
+   "R15",
+   "R10"
+  ],
+  "facts": [
+   {
+    "text": "Vega-Lite çalışma anında bağlanan adlandırılmış veri kaynaklarını destekler (pre_research_chatgpt:C021 supported).",
+    "report": "research_chatgpt"
+   },
+   {
+    "text": "Name ile veri bağlama modelin veriyi yeniden üretmesini gerektirmez; kayıtlı tarif her açılışta model çağrısı istemez.",
+    "report": "synthesis_chatgpt-map-P3"
+   },
+   {
+    "text": "P13:F41 eşleşmedi, P6:F39/P8:F29'da aktarım var; aynı iddia için farklı kayıt statüleri.",
+    "report": "synthesis_claude-map-P5"
+   }
+  ],
+  "risks": [
+   "Dış URL veri kaynakları veri sızıntısı ve yetki riski taşır.",
+   "Geçerli tarif analitik doğruluk kanıtı değildir."
+  ],
+  "url": "https://vega.github.io/vega-lite/",
+  "version": ""
+ },
+ "vega": {
+  "desc": "Etkileşimli görselleştirmeleri JSON ile tarif eden düşük seviyeli grafik dilbilgisi ve kısıtlı ifade diline sahip çalışma zamanı.",
+  "summary": "Raporlarda Vega, Vega-Lite'ın altındaki çalışma zamanı ve özellikle ifade dili açısından ele alınır: Vega ifadeleri atama, artırma/azaltma, new ve çoğu kontrol akışını dışlayan kısıtlı bir JavaScript alt kümesidir. Bu, model tarafından üretilen tarifler için gerçek bir güvenlik katkısıdır; ancak yanlış toplulaştırmayı, yanıltıcı ekseni, aşırı veri işlemeyi veya dış URL güvenliğini tek başına engellemez. Ürün için dar bir grafik sözleşmesi ve kaynak denetimi yine gereklidir.",
+  "license": "BSD",
+  "maturity": "Kararlı",
+  "vendor": "UW Interactive Data Lab (Vega)",
+  "platform": "Framework bağımsız",
+  "effort": "Yüksek",
+  "stance": "Referans",
+  "rTopics": [
+   "R19",
+   "R23"
+  ],
+  "facts": [
+   {
+    "text": "Vega ifade dili JavaScript'in kısıtlı alt kümesidir; atama, ++/--, new ve çoğu kontrol akışı dışlanır (synthesis_chatgpt:C012 supported).",
+    "report": "synthesis_chatgpt-map-P10"
+   },
+   {
+    "text": "Kısıtlı ifadeler dış URL, pahalı dönüşüm, yetki veya analitik doğruluğu denetlemez.",
+    "report": "synthesis_chatgpt-map-P18"
+   }
+  ],
+  "risks": [
+   "Güvenilmeyen tarif için eksiksiz güvenlik garantisi yoktur.",
+   "Düşük seviye dil, model üretimi için geniş hata yüzeyi sunar."
+  ],
+  "url": "https://vega.github.io/vega/",
+  "version": ""
+ },
+ "recharts": {
+  "desc": "React bileşenleri ve D3 üzerine kurulu, bildirimsel SVG grafik kütüphanesi.",
+  "summary": "Recharts raporlarda ayrıca değerlendirilmemiştir; yalnız Tambo belgesinde AI'ın seçebileceği bir 'Graph' bileşeni örneğinin Recharts ile çizildiği ve Zod şemasıyla (name/value veri dizisi, line/bar/pie türü) sınırlandığı aktarılır. Bu örnek, grafik bileşeninin dar bir props şemasıyla kataloğa girebileceğini gösterir; fakat sentezin istediği birim, dönem, toplulaştırma ve eksik veri politikasını taşımaz. ECharts/Vega-Lite ile karşılaştırma yapılmadığından seçim ürün ölçütleriyle yapılmalıdır.",
+  "license": "MIT",
+  "maturity": "Kararlı",
+  "vendor": "Recharts topluluğu",
+  "platform": "React",
+  "effort": "Düşük",
+  "stance": "Referans",
+  "rTopics": [
+   "R19",
+   "R10"
+  ],
+  "facts": [
+   {
+    "text": "Tambo belgesi: 'Graph' bileşeni Recharts ile çizilir; propsSchema data dizisi ve type enum ['line','bar','pie'] içerir.",
+    "report": "review_claude"
+   },
+   {
+    "text": "Mevcut raporlar bu ürün için kapsamlı bir grafik motoru karşılaştırması yapmadı.",
+    "report": "GENUI-SENTEZ-RAPORU"
+   }
+  ],
+  "risks": [
+   "Örnek şema birim/dönem/eksik veri alanlarını içermez; yanıltıcı grafik riski.",
+   "Raporlarda bağımsız inceleme yok."
+  ],
+  "url": "https://recharts.org/",
+  "version": ""
+ },
+ "owasp-llm": {
+  "desc": "OWASP'ın LLM uygulamaları için en kritik 10 güvenlik riskini (istem enjeksiyonu, hatalı çıktı işleme vb.) tanımlayan rehberi.",
+  "summary": "Raporlar GenUI güvenlik tartışmasını büyük ölçüde OWASP LLM Top 10 (2025) üzerine kurar: LLM05 Hatalı Çıktı İşleme model çıktısının JavaScript/Markdown yoluyla XSS'e yol açabileceğini, LLM01 İstem Enjeksiyonu ise dosya ve web içeriğinden gelen dolaylı talimatları anlatır. 'JSON veya düz metin üretmek bütün güvenlik sorunlarını çözer' iddiası bu yüzden reddedildi; bildirimsel katalog yalnız keyfi kod yürütme yüzeyini daraltır. Yüksek etkili eylemler için LLM06 Aşırı Yetki kapsamında onay ve her istekte sunucu yetkilendirmesi gerekir; rehber hedef uygulamaya özgü penetrasyon testinin yerine geçmez.",
+  "license": "Uygulanmaz",
+  "maturity": "Kararlı",
+  "vendor": "OWASP GenAI Security Project",
+  "platform": "Belirtim",
+  "effort": "Orta",
+  "stance": "Çekirdek aday",
+  "rTopics": [
+   "R23",
+   "R02",
+   "R07"
+  ],
+  "facts": [
+   {
+    "text": "LLM05:2025 sıfır güven, bağlama duyarlı kodlama ve CSP önerir.",
+    "report": "pre_research_claude"
+   },
+   {
+    "text": "LLM01:2025 kusursuz önlemenin belirsiz olduğunu belirtir; çıktı biçimi tanımlama, ayrıcalık kısıtlama ve insan onayı önerir.",
+    "report": "pre_research_claude"
+   },
+   {
+    "text": "'JSON/düz metin bütün GenUI güvenlik sorunlarını çözer' iddiası (C018) rejected.",
+    "report": "research_chatgpt"
+   },
+   {
+    "text": "Yüksek etkili eylem onayı için LLM06 Excessive Agency kaynak gösterilir.",
+    "report": "synthesis_chatgpt-map-P20"
+   }
+  ],
+  "risks": [
+   "Rehber genel GenAI kapsamlıdır; ürün tehdit modeli ve testleri ayrıca yapılmalı.",
+   "Katalog/şema varlığı güvenlik yanılsaması yaratabilir."
+  ],
+  "url": "https://genai.owasp.org/llm-top-10/",
+  "version": "2025"
+ }
+}

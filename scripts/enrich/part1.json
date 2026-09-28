@@ -1,0 +1,1430 @@
+{
+ "mantine": {
+  "desc": "Form, tablo ve tema bileşenleri sunan kapsamlı React UI kiti.",
+  "summary": "Raporlarda Ant Design ve MUI X ile birlikte yoğun tablo/form işleri için 'kapsamlı kurumsal kit' adayı olarak geçiyor. Tablo sanallaştırması yerleşik özellik değil, @tanstack/react-virtual ile kurulan bir entegrasyon örneği olarak aktarılıyor. Raporlar kitler arasında karar vermeden önce aynı veri, düzenleme, sanallaştırma ve erişilebilirlik senaryosuyla karşılaştırma yapılmasını istiyor.",
+  "license": "MIT",
+  "maturity": "Kararlı",
+  "vendor": "Mantine ekibi",
+  "platform": "React",
+  "effort": "Orta",
+  "stance": "Seçimli",
+  "rTopics": [
+   "R04",
+   "R22",
+   "R26"
+  ],
+  "facts": [
+   {
+    "text": "Mantine Table sanallaştırması 5.000 satırlık @tanstack/react-virtual örneğiyle gösteriliyor; bu gerçek panel performans testi değil.",
+    "report": "synthesis_chatgpt-map-P18"
+   },
+   {
+    "text": "Belgenin v9.6.2 sürümü 25 Eylül 2026 erişiminde aktarılıyor; kesin lisans/özellik matrisi doğrulanmadı.",
+    "report": "review_claude"
+   },
+   {
+    "text": "'Belgede örnek var' ile 'tek bileşende hazır özellik var' aynı iş yükü sayılmamalı.",
+    "report": "pre_research_chatgpt"
+   }
+  ],
+  "risks": [
+   "Sanallaştırma ayrı entegrasyon gerektirir; hazır özellik varsayılmamalı.",
+   "Klavye, yoğunluk ve düzenleme davranışı gerçek veriyle sınanmadı.",
+   "Seçilen daisyUI yönüyle ikinci görsel sistem çakışması yaratabilir."
+  ],
+  "url": "https://mantine.dev/core/table/",
+  "version": "9.6.2"
+ },
+ "ant-design": {
+  "desc": "Kurumsal paneller için yoğun tablo, form ve tema sistemi sunan React UI kütüphanesi (antd).",
+  "summary": "Raporlar Ant Design'ı yoğun tablo/form ve sınırlı tasarım ekibi koşulunda öne çıkan kurumsal kit olarak konumluyor. Table bileşeninin sanal liste seçeneği sayısal scroll.x/scroll.y koşuluna bağlı; Ant Design X ise sohbet/AI parçaları için antd v6 ekosistemine bağlanıyor. Seçim, gerçek veriyle klavye, düzenleme ve yoğunluk testi yapılmadan kesinleşmemeli.",
+  "license": "MIT",
+  "maturity": "Kararlı",
+  "vendor": "Ant Group",
+  "platform": "React",
+  "effort": "Orta",
+  "stance": "Seçimli",
+  "rTopics": [
+   "R04",
+   "R03",
+   "R20",
+   "R22"
+  ],
+  "facts": [
+   {
+    "text": "Ant Design Table 6.6.5 belgesinde virtual kullanımı için sayısal scroll.x ve scroll.y birlikte gerekir; sürükleme örneği dnd-kit kullanır.",
+    "report": "synthesis_chatgpt-map-P6"
+   },
+   {
+    "text": "virtual özelliği 5.9.0 sürümünden beri belgeleniyor; virtual modda özel body bileşenleri ref iletmelidir.",
+    "report": "review_claude"
+   },
+   {
+    "text": "Ant Design X 2.9.0 (23 Temmuz 2026) antd ^6.1.1 ve React >=18 eş bağımlılığıyla aktarılıyor.",
+    "report": "synthesis_chatgpt-map-P16"
+   },
+   {
+    "text": "token.motion=false seçeneği azaltılmış hareketi ve ekran okuyucu duyurularını kendiliğinden çözmez.",
+    "report": "synthesis_chatgpt-map-P8"
+   }
+  ],
+  "risks": [
+   "Ant Design X kullanımı uygulamayı antd v6 sistemine kilitleyebilir.",
+   "Sürüm bilgileri erişim günü gözlemidir; hedef gün yayını olarak doğrulanmadı."
+  ],
+  "url": "https://ant.design/components/table/",
+  "version": "6.6.5"
+ },
+ "procomponents": {
+  "desc": "Ant Design üzerine kurulu, ProTable/ProForm gibi yüksek seviyeli kurumsal şablon bileşenleri.",
+  "summary": "Raporlar ProComponents'i UI temeli adayları arasında adıyla anıyor, ancak sürüm, lisans ve davranış incelemesi yapılmadığını açıkça belirtiyor. Bu eksiklik adayın elenmesi veya daha kötü sayılması için kanıt değil. Ant Design yığınına bağlı olduğundan antd ile aynı kilitlenme ve tema kararlarını devralır.",
+  "license": "MIT",
+  "maturity": "Kararlı",
+  "vendor": "Ant Group",
+  "platform": "React",
+  "effort": "Orta",
+  "stance": "Seçimli",
+  "rTopics": [
+   "R04",
+   "R26"
+  ],
+  "facts": [
+   {
+    "text": "HeroUI, ProComponents, Radix ve Ark UI/Zag için eş kapsamlı sürüm ve davranış incelemesi tamamlanmadı.",
+    "report": "pre_research_chatgpt"
+   },
+   {
+    "text": "Mantine, HeroUI ve ProComponents ilgili turda okunmadı; klavye, yoğunluk ve düzenleme davranışları sınanmadı.",
+    "report": "review_claude"
+   }
+  ],
+  "risks": [
+   "Korpusta doğrudan inceleme yok; olgunluk ve lisans genel bilgiye dayanıyor.",
+   "antd ekosistemine bağımlılık getirir."
+  ],
+  "url": "https://procomponents.ant.design/",
+  "version": ""
+ },
+ "mui": {
+  "desc": "Material Design tabanlı, geniş bileşen setli React UI kütüphanesi (Material UI).",
+  "summary": "Korpusta MUI çekirdeği daha çok bekleme deneyimi bağlamında, Skeleton bileşeninin animasyon seçenekleriyle anılıyor. İleri tablo ve grafik yetenekleri MUI X altında, lisans katmanlarıyla ayrı değerlendiriliyor. Raporlar hazır iskeletin gerçek iş durumu veya ARIA duyurusu sağlamadığını vurguluyor.",
+  "license": "MIT",
+  "maturity": "Kararlı",
+  "vendor": "MUI",
+  "platform": "React",
+  "effort": "Orta",
+  "stance": "Seçimli",
+  "rTopics": [
+   "R04",
+   "R05",
+   "R21"
+  ],
+  "facts": [
+   {
+    "text": "MUI Skeleton varsayılan pulsate, isteğe bağlı wave ve animation={false} seçeneklerini sunar.",
+    "report": "synthesis_chatgpt-map-P14"
+   },
+   {
+    "text": "MUI Skeleton boyutu çocuklardan çıkarabilir; kendi ARIA iş durumu davranışı yoktur.",
+    "report": "synthesis_chatgpt-map-P16"
+   }
+  ],
+  "risks": [
+   "Animasyonu kapatma seçeneği azaltılmış hareket tercihinin otomatik işlendiği anlamına gelmez.",
+   "Community'nin bütün ücretsiz yetenekleri eş kapsamda incelenmedi."
+  ],
+  "url": "https://mui.com/material-ui/",
+  "version": ""
+ },
+ "mui-x": {
+  "desc": "MUI'nin Data Grid, tarih seçici ve grafik gibi ileri bileşen paketi; Community/Pro/Premium katmanlı.",
+  "summary": "Raporlar MUI X'i yoğun veri tabloları için güçlü ama lisans katmanlı bir aday olarak ele alıyor. Community bileşenleri MIT, ileri özellikler ise Pro/Premium ticari lisans gerektiriyor; bütün ileri tablo yeteneklerini ücretsiz varsaymak hatalı bulunuyor. Özellik bazlı lisans, entegrasyon süresi ve gerçek performans ölçülmeden karar verilmemesi öneriliyor.",
+  "license": "Açık çekirdek/Pro",
+  "maturity": "Kararlı",
+  "vendor": "MUI",
+  "platform": "React",
+  "effort": "Orta",
+  "stance": "Seçimli",
+  "rTopics": [
+   "R04",
+   "R22",
+   "R26"
+  ],
+  "facts": [
+   {
+    "text": "9.14.0 gözleminde Community MIT; bazı ileri özellikler Pro/Premium lisansı ister.",
+    "report": "synthesis_chatgpt-map-P6"
+   },
+   {
+    "text": "Pro/Premium yıllık abonelik ve geliştirici başına lisanstır; anahtar LicenseInfo.setLicenseKey ile kurulur.",
+    "report": "review_claude"
+   },
+   {
+    "text": "Sanallaştırma belgesindeki '100 rows' ifadesi kapasite veya lisans sınırı olarak yorumlanamaz.",
+    "report": "synthesis_chatgpt-map-P19"
+   }
+  ],
+  "risks": [
+   "Gerekli özellik ücretli katmanda kalabilir; toplam maliyet sürüm bazında izlenmeli.",
+   "Eş iş yükünde performans karşılaştırması yapılmadı."
+  ],
+  "url": "https://mui.com/x/introduction/",
+  "version": "9.14.0"
+ },
+ "heroui": {
+  "desc": "Tailwind CSS üzerine kurulu, modern görünümlü React bileşen kütüphanesi (eski adıyla NextUI).",
+  "summary": "HeroUI, UI temeli adayları arasında anılsa da raporlarda sürüm, lisans, erişilebilirlik ve davranış açısından incelenmedi. Raporlar bu incelenmemişliği adayın elenmesi için gerekçe saymıyor. Seçilirse aynı tablo/form senaryosuyla diğer kitlerle karşılaştırılması gerekiyor.",
+  "license": "MIT",
+  "maturity": "Kararlı",
+  "vendor": "HeroUI",
+  "platform": "React",
+  "effort": "Orta",
+  "stance": "Seçimli",
+  "rTopics": [
+   "R04"
+  ],
+  "facts": [
+   {
+    "text": "HeroUI için eş kapsamlı sürüm, lisans, erişilebilirlik ve davranış karşılaştırması tamamlanmadı; elenmesi desteklenmiyor.",
+    "report": "review_chatgpt"
+   },
+   {
+    "text": "Mantine, HeroUI ve ProComponents ilgili turda okunmadı (komşu parça kapsamı).",
+    "report": "review_claude"
+   }
+  ],
+  "risks": [
+   "Korpusta doğrudan kanıt yok; nitelikler genel bilgiye dayanıyor.",
+   "Tailwind tabanlı ikinci bir görsel sistem daisyUI ile çakışabilir."
+  ],
+  "url": "https://www.heroui.com/",
+  "version": ""
+ },
+ "shadcn-ui": {
+  "desc": "Bileşen kaynak kodunu CLI ile projeye kopyalatan, Radix ve Tailwind tabanlı bileşen dağıtımı.",
+  "summary": "Raporlar shadcn/ui'ı 'kaynağı sahiplenilen sistem' yaklaşımının temsilcisi olarak görüyor: marka uyarlaması kolaylaşıyor ama güncelleme birleştirme ve bakım sorumluluğu ürün ekibine geçiyor. AI Elements, Animate UI ve json-render'ın hazır bileşenleri shadcn ekosistemine dayanıyor. Karar ölçütü güncelleme birleştirme, tema ve davranış tutarlılığı olarak konuyor.",
+  "license": "MIT",
+  "maturity": "Kararlı",
+  "vendor": "shadcn (Vercel)",
+  "platform": "React",
+  "effort": "Orta",
+  "stance": "Seçimli",
+  "rTopics": [
+   "R04",
+   "R03",
+   "R20",
+   "R26"
+  ],
+  "facts": [
+   {
+    "text": "shadcn/ui ve Animate UI uygulamada sahiplenilip değiştirilebilen bileşen kodu dağıtır (C027, desteklendi).",
+    "report": "pre_research_chatgpt"
+   },
+   {
+    "text": "AI Elements bileşenleri shadcn CLI ile kopyalanır; hedef React 19 ve Tailwind CSS 4'tür.",
+    "report": "research_claude"
+   },
+   {
+    "text": "json-render 36 shadcn bileşeni sunar.",
+    "report": "research_claude"
+   },
+   {
+    "text": "shadcn kendini 'component library' olarak adlandırmaz; bu kullanışlı bileşen sunmadığı anlamına gelmez.",
+    "report": "synthesis_chatgpt-map-P21"
+   }
+  ],
+  "risks": [
+   "Yerel değişikliklerle upstream düzeltmelerini birleştirme süreci gerekir.",
+   "Radix/Base UI/Motion gibi dolaylı bağımlılıklar ayrıca izlenmeli."
+  ],
+  "url": "https://ui.shadcn.com/docs",
+  "version": ""
+ },
+ "daisyui": {
+  "desc": "Tailwind CSS için card, btn gibi anlamlı sınıflarla bileşen biçimlendiren CSS eklentisi.",
+  "summary": "Sentez raporu kullanıcı tercihine uygun olarak tek ana görsel sistem olarak daisyUI'ı, Astro kabuğuyla birlikte başlangıç yönü seçiyor. daisyUI yalnız görünümü sağlar; iş kuyruğu, veri doğrulama ve AI izin politikası ayrıca yazılmalıdır. Erişilebilir davranış gerektiren karmaşık parçaların ayrı kapsüllenmesi ve karmaşık form/tablo prototipiyle doğrulanması öneriliyor.",
+  "license": "MIT",
+  "maturity": "Kararlı",
+  "vendor": "Saadeghi (daisyUI)",
+  "platform": "Framework bağımsız",
+  "effort": "Düşük",
+  "stance": "Çekirdek aday",
+  "rTopics": [
+   "R04",
+   "R20"
+  ],
+  "facts": [
+   {
+    "text": "Sentez kararı: 'Tek ana görsel sistem seç: bu tercih bağlamında daisyUI.'",
+    "report": "GENUI-SENTEZ-RAPORU"
+   },
+   {
+    "text": "Karar defterinde Astro + daisyUI 'tercihe uygun başlangıç' olarak kabul ediliyor; yoğun çalışma alanının durum yönetimi ayrıca tasarlanmalı.",
+    "report": "GENUI-SENTEZ-RAPORU"
+   },
+   {
+    "text": "R04 için açık doğrulama: daisyUI ile karmaşık form/tablo prototipi.",
+    "report": "GENUI-SENTEZ-RAPORU"
+   }
+  ],
+  "risks": [
+   "Yalnız CSS sınıfları sunar; klavye/odak gibi karmaşık davranışlar ayrıca sağlanmalı.",
+   "Diğer raporlarda daisyUI için bağımsız inceleme yok."
+  ],
+  "url": "https://daisyui.com/docs/use/",
+  "version": ""
+ },
+ "tailwind": {
+  "desc": "Yardımcı sınıf tabanlı CSS çerçevesi; daisyUI, shadcn/ui ve AI Elements'in stil temeli.",
+  "summary": "Tailwind korpusta doğrudan değerlendirilmekten çok, seçilen ve incelenen bileşen dağıtımlarının ortak temeli olarak geçiyor. AI Elements Tailwind CSS 4 ve CSS Variables modunu, Animate UI ise React + Tailwind + Motion üçlüsünü varsayıyor. daisyUI kararının altyapısı olduğu için tasarım token'larının Tailwind teması üzerinden yönetilmesi pratik bir çıkarım.",
+  "license": "MIT",
+  "maturity": "Kararlı",
+  "vendor": "Tailwind Labs",
+  "platform": "Framework bağımsız",
+  "effort": "Düşük",
+  "stance": "Çekirdek aday",
+  "rTopics": [
+   "R04",
+   "R20"
+  ],
+  "facts": [
+   {
+    "text": "AI Elements hedefi React 19 ve Tailwind CSS 4'tür.",
+    "report": "research_claude"
+   },
+   {
+    "text": "AI Elements ön koşulları Node.js 18+, AI SDK'lı Next.js, shadcn/ui ve Tailwind CSS Variables modunu listeler.",
+    "report": "synthesis_chatgpt-map-P14"
+   },
+   {
+    "text": "Animate UI React, Tailwind CSS ve Motion temellidir.",
+    "report": "review_chatgpt"
+   }
+  ],
+  "risks": [
+   "Kurulum ön koşulu olması, bütün bileşenlerin çalışma zamanında Tailwind 4'e bağlı olduğunu kanıtlamaz.",
+   "Sürüm geçişleri kopyalanan bileşenlerde toplu düzeltme gerektirebilir."
+  ],
+  "url": "https://tailwindcss.com/",
+  "version": "4"
+ },
+ "react-aria": {
+  "desc": "Adobe'nin stil dayatmayan, erişilebilir davranış ve yerelleştirme altyapısı sunan React kütüphanesi.",
+  "summary": "Raporlar React Aria'yı özgün tasarım ve güçlü frontend kapasitesi olan ekipler için 'stil dayatmayan davranış temeli' olarak konumluyor. Klavye, odak, ekran okuyucu ve yerelleştirme altyapısı hazır gelirken stil, kontrast ve uygulama düzeyi erişilebilirlik ekipte kalıyor. Sentezdeki 'karmaşık erişilebilir parçayı tek bileşen olarak kapsülle' önerisine uygun bir adaydır.",
+  "license": "Apache-2.0",
+  "maturity": "Kararlı",
+  "vendor": "Adobe",
+  "platform": "React",
+  "effort": "Yüksek",
+  "stance": "Seçimli",
+  "rTopics": [
+   "R04",
+   "R21",
+   "R22"
+  ],
+  "facts": [
+   {
+    "text": "50'den fazla stil içermeyen bileşen, 30'dan fazla dil ve 13 takvim desteği aktarılıyor; bunlar ürün belgesi beyanı.",
+    "report": "synthesis_chatgpt-map-P22"
+   },
+   {
+    "text": "Beş rakam sistemi ve RTL desteği anlatılıyor; 50+ bileşen sayımından ayrı tutulmalı.",
+    "report": "synthesis_chatgpt-map-P18"
+   },
+   {
+    "text": "Virtualizer, sanallaştırmanın varsayılan stil sunmamakla birlikte olabildiğini gösterir.",
+    "report": "synthesis_chatgpt-map-P4"
+   }
+  ],
+  "risks": [
+   "Görsel katman, kontrast ve etiketler ekip tarafından yazılmalı.",
+   "Erişilebilirlik iddiaları satıcı beyanı; bağımsız denetim bulunamadı."
+  ],
+  "url": "https://react-aria.adobe.com/",
+  "version": ""
+ },
+ "radix": {
+  "desc": "Erişilebilir, stilsiz React primitive'leri sunan kütüphane; shadcn/ui'ın temel katmanı.",
+  "summary": "Radix korpusta doğrudan incelenmemiş; daha çok shadcn/ui ve Animate UI'ın dayandığı primitive kaynağı olarak anılıyor. Raporlar kopyalanan kodla gelen Radix bağımlılığının ayrıca izlenmesini ve upstream düzeltmelerin birleştirilmesini bakım yükü olarak görüyor. İncelenmemiş olması elenme gerekçesi sayılmıyor.",
+  "license": "MIT",
+  "maturity": "Kararlı",
+  "vendor": "WorkOS",
+  "platform": "React",
+  "effort": "Orta",
+  "stance": "Seçimli",
+  "rTopics": [
+   "R04",
+   "R03",
+   "R21"
+  ],
+  "facts": [
+   {
+    "text": "Animate UI primitive'leri Radix UI, Base UI ve Headless UI'dan taşınmıştır.",
+    "report": "review_claude"
+   },
+   {
+    "text": "HeroUI, ProComponents, Radix ve Ark UI/Zag için eş kapsamlı inceleme yapılmadı; elenmeleri için kanıt yok.",
+    "report": "pre_research_chatgpt"
+   },
+   {
+    "text": "Kopyalanan kod, yerel değişiklikler ve Radix/Base UI/Motion bağımlılıkları ayrı izlenmelidir.",
+    "report": "review_chatgpt"
+   }
+  ],
+  "risks": [
+   "Dolaylı bağımlılık olarak sürüm kaymalarını izlemek gerekir.",
+   "Korpusta davranış veya erişilebilirlik testi yok."
+  ],
+  "url": "https://www.radix-ui.com/primitives",
+  "version": ""
+ },
+ "ark-ui": {
+  "desc": "Zag durum makineleri üzerine kurulu, React/Vue/Solid/Svelte için stilsiz bileşen kütüphanesi.",
+  "summary": "Ark UI/Zag raporlarda UI temeli adayı olarak adıyla geçiyor fakat sürüm ve davranış incelemesi yapılmadı. Çoklu framework desteği, Astro gibi React dışı kabuklarla birlikte düşünülen bir mimaride potansiyel avantaj olabilir; bu korpusta sınanmamış bir çıkarım. Seçilirse aynı senaryo bake-off'una alınmalı.",
+  "license": "MIT",
+  "maturity": "Kararlı",
+  "vendor": "Chakra UI ekibi",
+  "platform": "Çoklu framework",
+  "effort": "Orta",
+  "stance": "Seçimli",
+  "rTopics": [
+   "R04",
+   "R21"
+  ],
+  "facts": [
+   {
+    "text": "Ark UI/Zag için eş kapsamlı sürüm ve davranış incelemesi tamamlanmadı; daha kötü sayılması için kanıt yok.",
+    "report": "pre_research_chatgpt"
+   },
+   {
+    "text": "R04 blind spot: HeroUI, ProComponents, Radix ve Ark UI/Zag için sürüm ve davranış incelemesi yapılmadı.",
+    "report": "review_claude"
+   }
+  ],
+  "risks": [
+   "Korpusta doğrudan kanıt yok; özellikler genel bilgiye dayanıyor.",
+   "Stil katmanı ve daisyUI uyarlaması ekipte kalır."
+  ],
+  "url": "https://ark-ui.com/",
+  "version": ""
+ },
+ "headless-ui": {
+  "desc": "Tailwind Labs'in React ve Vue için stilsiz, erişilebilir etkileşim bileşenleri.",
+  "summary": "Headless UI korpusta yalnız Animate UI'ın primitive kaynaklarından biri olarak anılıyor. Bağımsız bir UI temeli olarak değerlendirilmedi. Tailwind/daisyUI yığınıyla doğal uyumu olsa da bu raporlarca sınanmamış bir çıkarım.",
+  "license": "MIT",
+  "maturity": "Kararlı",
+  "vendor": "Tailwind Labs",
+  "platform": "Çoklu framework",
+  "effort": "Orta",
+  "stance": "Seçimli",
+  "rTopics": [
+   "R04",
+   "R03"
+  ],
+  "facts": [
+   {
+    "text": "Animate UI primitive'leri Radix, Base UI ve Headless UI karışımından gelir.",
+    "report": "pre_research_claude"
+   },
+   {
+    "text": "Farklı primitive sistemlerinin birlikte davranışı ve bakım yükü 'not established' olarak kaldı.",
+    "report": "review_chatgpt"
+   }
+  ],
+  "risks": [
+   "Doğrudan inceleme yok.",
+   "Bileşen kapsamı kurumsal tablo/form ihtiyacına dar kalabilir."
+  ],
+  "url": "https://headlessui.com/",
+  "version": ""
+ },
+ "base-ui": {
+  "desc": "MUI ekibinin stilsiz, erişilebilir React primitive kütüphanesi.",
+  "summary": "Base UI korpusta Animate UI ve shadcn ekosisteminde kullanılan primitive kaynaklarından biri olarak geçiyor. Bağımsız bir aday olarak sürüm veya davranış incelemesi yapılmadı. Kopyalanan kodla gelen dolaylı bağımlılık olarak izlenmesi öneriliyor.",
+  "license": "MIT",
+  "maturity": "Kararlı",
+  "vendor": "MUI",
+  "platform": "React",
+  "effort": "Orta",
+  "stance": "Seçimli",
+  "rTopics": [
+   "R04",
+   "R03"
+  ],
+  "facts": [
+   {
+    "text": "Animate UI primitive'leri Radix UI, Base UI veya Headless UI kökenli olabilir.",
+    "report": "review_chatgpt"
+   },
+   {
+    "text": "Kopyalanan kodun Radix/Base UI/Motion gibi bağımlılıkları ve upstream birleştirmesi bakım gerektirir.",
+    "report": "synthesis_chatgpt-map-P17"
+   }
+  ],
+  "risks": [
+   "Doğrudan inceleme yok; olgunluk genel bilgiye dayanıyor.",
+   "Birden çok primitive sisteminin karışması davranış tutarsızlığı yaratabilir."
+  ],
+  "url": "https://base-ui.com/",
+  "version": ""
+ },
+ "a2ui": {
+  "desc": "Ajanların kod çalıştırmadan, bildirimsel JSON ile arayüz tarifi göndermesini sağlayan Google kökenli protokol.",
+  "summary": "Sentez A2UI'yı 'bileşen tarifini istemciye aktarma yaklaşımı' olarak konumluyor ve farklı istemciler gerekiyorsa json-render ile aynı katalogla prototiplenmesini öneriyor. Raporlar A2UI'nın adaptör olarak kullanılmasını, ürünün kalıcı iş semantiğinin A2UI sürüm numarasına bağlanmamasını istiyor. Olgunluk etiketleri belgeler arasında çelişiyor; paket sürümü sabitlenmeli ve gerçek olay kayıtlarıyla denenmeli.",
+  "license": "Apache-2.0",
+  "maturity": "RC/Beta",
+  "vendor": "Google / A2UI projesi",
+  "platform": "Belirtim",
+  "effort": "Yüksek",
+  "stance": "Prototip adayı",
+  "rTopics": [
+   "R08",
+   "R09",
+   "R10",
+   "R12",
+   "R17"
+  ],
+  "facts": [
+   {
+    "text": "Yol haritası v0.9.1'i güncel kararlı, v1.0'ı aday (RC) gösteriyor; kök README 'Early stage public preview' diyor.",
+    "report": "pre_research_claude"
+   },
+   {
+    "text": "v1.0 aday belgesi 'Last Updated: Jun 8, 2026'; dört mesaj: createSurface, updateComponents, updateDataModel, deleteSurface.",
+    "report": "synthesis_chatgpt-map-P12"
+   },
+   {
+    "text": "React, Lit, Angular, Flutter ve Lynx renderer'ları Stable; SwiftUI/Compose Planned, Vue/Svelte Proposed.",
+    "report": "research_claude"
+   },
+   {
+    "text": "Q4 2026 hedefindeki kararlılık garantileri ve renderer sertifikasyonu plan; mevcut yetenek değil.",
+    "report": "review_claude"
+   }
+  ],
+  "risks": [
+   "v0.9.1'den v1.0'a geçiş kayıtlı görünüm ve katalogları kırabilir.",
+   "Sıralı teslim şartı var; sırasız teslim UI durumunu bozabilir.",
+   "Depo google/A2UI'dan a2ui-project/a2ui'ya taşındı; bağlantılar yeniden doğrulanmalı."
+  ],
+  "url": "https://a2ui.org/",
+  "version": "v0.9.1 (v1.0 RC)"
+ },
+ "ag-ui": {
+  "desc": "Ajan ile kullanıcı uygulaması arasındaki çalıştırma, mesaj, araç ve durum olaylarını standartlaştıran protokol.",
+  "summary": "Raporlar AG-UI'yı arayüz tarifinden ayrı bir olay katmanı olarak görüyor; A2UI ile birlikte kullanılabilir ama aynı şey değil. Sentezde 'olay adaptörü adayı' olarak kabul ediliyor, ancak sonlanma, iptal ve yeniden bağlanma davranışı uygulamada doğrulanmalı. 'RunFinished geldi = her şey başarılı' varsayımına karşı uyarılıyor.",
+  "license": "MIT",
+  "maturity": "Kararlı",
+  "vendor": "CopilotKit / AG-UI topluluğu",
+  "platform": "Belirtim",
+  "effort": "Orta",
+  "stance": "Prototip adayı",
+  "rTopics": [
+   "R08",
+   "R12",
+   "R13",
+   "R14"
+  ],
+  "facts": [
+   {
+    "text": "17 Eylül 2026 sürüm kaydı 1.0 şema dondurma ve paket yayımını bildiriyor.",
+    "report": "review_chatgpt"
+   },
+   {
+    "text": "1.0 şema kesitinde 31 olay değeri var; olay sayısı 2025-11'deki 17'den 28'e çıkmıştı.",
+    "report": "review_chatgpt"
+   },
+   {
+    "text": "1.0 lifecycle: RUN_FINISHED completed/interrupted/cancelled; outcome yoksa başarı sayılır.",
+    "report": "review_claude"
+   },
+   {
+    "text": "STATE_DELTA ve ACTIVITY_DELTA RFC 6902 JSON Patch dizisidir.",
+    "report": "pre_research_claude"
+   }
+  ],
+  "risks": [
+   "RunFinished.outcome belgede hem ana bölümde hem DRAFT uzantıda farklı statüyle geçiyor.",
+   "Eski istemciler tanımadığı sonlanmayı başarı sayabilir.",
+   "Belgeler ve CopilotKit ekosistemi aynı kaynak zinciri; bağımsız doğrulama sınırlı."
+  ],
+  "url": "https://docs.ag-ui.com/introduction",
+  "version": "1.0 (2026-09-17)"
+ },
+ "mcp": {
+  "desc": "Ajanların araçlara, verilere ve dış sistemlere standart biçimde bağlanmasını sağlayan açık protokol.",
+  "summary": "Korpusta MCP, AG-UI'nın anlattığı üçlüde 'ajan↔araç' katmanı olarak konumlanıyor; A2A ajan↔ajan, AG-UI ajan↔kullanıcıdır. Arayüz tarafındaki rolü MCP Apps uzantısı ve A2UI'nın taşıma seçenekleri üzerinden geliyor. Panel mimarisinde doğrudan UI sözleşmesi değil, arka uç araç bağlantısı için referans alınıyor.",
+  "license": "Standart",
+  "maturity": "Kararlı",
+  "vendor": "Anthropic kökenli açık standart",
+  "platform": "Belirtim",
+  "effort": "Orta",
+  "stance": "Referans",
+  "rTopics": [
+   "R08",
+   "R23"
+  ],
+  "facts": [
+   {
+    "text": "AG-UI belgeleri ekosistemi MCP (ajan↔araç), A2A (ajan↔ajan), AG-UI (ajan↔kullanıcı) üçlüsü olarak anlatır.",
+    "report": "pre_research_claude"
+   },
+   {
+    "text": "A2UI yol haritası taşıma katmanında MCP'yi 'Complete' listeliyor.",
+    "report": "research_claude"
+   },
+   {
+    "text": "Tambo MCP bağlantısını kendi araç setine dahil ediyor.",
+    "report": "review_claude"
+   }
+  ],
+  "risks": [
+   "'Üç katman' ifadesi farklı üçlüleri karıştırabilir; MCP/A2A/AG-UI ile taşıma/olay/tarif aynı ayrım değildir.",
+   "Araç çağrıları sunucuda ayrıca yetkilendirilmelidir."
+  ],
+  "url": "https://modelcontextprotocol.io/",
+  "version": ""
+ },
+ "mcp-apps": {
+  "desc": "MCP sunucularının sandbox iframe içinde etkileşimli HTML arayüzü sunmasını sağlayan MCP uzantısı (SEP-1865).",
+  "summary": "Raporlar MCP Apps'i açık uçlu üretim sınıfına yakın, en geniş saldırı yüzeyli seçenek olarak değerlendiriyor ve panel çekirdeğinde kullanılmamasını öneriyor. Yalnız ayrı origin ve sandbox ile, host yetenek anlaşması ve araç erişim denetimiyle düşünülmeli. Önceden geliştirilmiş sabit uygulamaları sunabildiği için sınırsız model kodu üretimiyle eşitlenmemesi gerektiği de not ediliyor.",
+  "license": "Standart",
+  "maturity": "Kararlı",
+  "vendor": "MCP topluluğu",
+  "platform": "Belirtim",
+  "effort": "Yüksek",
+  "stance": "Ertele/Kaçın",
+  "rTopics": [
+   "R02",
+   "R08",
+   "R23"
+  ],
+  "facts": [
+   {
+    "text": "SEP-1865 2025-11-21'de oluşturuldu, Final durumda; spesifikasyon yolu 2026-01-26.",
+    "report": "synthesis_chatgpt-map-P20"
+   },
+   {
+    "text": "ui:// kaynakları, text/html;profile=mcp-app türü, zorunlu sandbox iframe ve JSON-RPC postMessage kullanır.",
+    "report": "research_claude"
+   },
+   {
+    "text": "MCP-UI ve Apps SDK yaklaşımlarını tek açık standartta birleştirir; host UI kaynaklı araç çağrıları için onay isteyebilir.",
+    "report": "review_claude"
+   }
+  ],
+  "risks": [
+   "En geniş saldırı yüzeyi: XSS, oltalama ve izolasyon hataları.",
+   "Tasarım sistemine bağlılık sağlamaz; Final geçiş tarihi belirsiz."
+  ],
+  "url": "https://modelcontextprotocol.io/seps/1865-mcp-apps-interactive-user-interfaces-for-mcp",
+  "version": "2026-01-26"
+ },
+ "mcp-ui": {
+  "desc": "MCP sunucularından istemciye UI kaynakları taşıyan topluluk SDK'ları; MCP Apps'e öncülük etti.",
+  "summary": "MCP-UI korpusta çoğunlukla ad düzeyinde geçiyor: AG-UI onu desteklediği üretken UI belirtimlerinden biri, CopilotKit ise MCP sunucularının UI teslim kanalı olarak tanımlıyor. SEP-1865, MCP Apps'in MCP-UI ile Apps SDK yaklaşımlarını birleştirdiğini ve MCP-UI SDK'larının bu kalıpları desteklediğini söylüyor. Raporlar MCP Apps ile karşılaştırmasının yapılmadığını kör nokta olarak işaretliyor.",
+  "license": "Bilinmiyor",
+  "maturity": "Bilinmiyor",
+  "vendor": "Topluluk (Microsoft + Shopify katkılı)",
+  "platform": "Framework bağımsız",
+  "effort": "Orta",
+  "stance": "Referans",
+  "rTopics": [
+   "R08",
+   "R02"
+  ],
+  "facts": [
+   {
+    "text": "AG-UI belgeleri MCP-UI'ı Microsoft + Shopify kökenli bir üretken UI belirtimi olarak listeler.",
+    "report": "synthesis_claude-map-P10"
+   },
+   {
+    "text": "SEP-1865: MCP-UI istemci ve sunucu SDK'ları önerilen kalıpları destekler.",
+    "report": "review_claude"
+   },
+   {
+    "text": "Open-JSON-UI ve MCP-UI/MCP Apps karşılaştırması yalnız ad düzeyinde kaldı.",
+    "report": "synthesis_claude-map-P10"
+   }
+  ],
+  "risks": [
+   "Korpusta sürüm, lisans ve güvenlik incelemesi yok.",
+   "MCP Apps standardı ile örtüşme; hangi yolun kalıcı olacağı belirsiz."
+  ],
+  "url": "https://mcpui.dev/",
+  "version": ""
+ },
+ "a2a": {
+  "desc": "Ajanların birbirleriyle standart biçimde iletişim kurmasını sağlayan Agent2Agent protokolü.",
+  "summary": "Korpusta A2A, ajan↔ajan katmanı olarak ve A2UI'nın yerel taşıma seçeneklerinden biri olarak geçiyor. A2UI'nın web çekirdeği gelen A2A mesajlarını durum güncellemelerine çeviriyor. Tek ajanlı bir yönetim paneli için doğrudan gereksinim değil; çok ajanlı genişlemede referans alınabilir.",
+  "license": "Apache-2.0",
+  "maturity": "Bilinmiyor",
+  "vendor": "Google / Linux Foundation",
+  "platform": "Belirtim",
+  "effort": "Yüksek",
+  "stance": "Referans",
+  "rTopics": [
+   "R08"
+  ],
+  "facts": [
+   {
+    "text": "A2UI yol haritası 'A2A Protocol ✅ Complete — Native A2A transport' listeliyor.",
+    "report": "review_claude"
+   },
+   {
+    "text": "@a2ui/web_core MessageProcessor 'gelen A2A mesajlarını durum güncellemelerine çevirir' ve Zod ile doğrular.",
+    "report": "review_claude"
+   },
+   {
+    "text": "AG-UI, MCP ve A2A ile farklı sorumluluklarda konumlanır.",
+    "report": "review_chatgpt"
+   }
+  ],
+  "risks": [
+   "Korpusta A2A sürümü ve olgunluğu incelenmedi.",
+   "Çok ajanlı akış kimlik doğrulama ve yetki sınırlarını karmaşıklaştırır."
+  ],
+  "url": "https://a2a-protocol.org/",
+  "version": ""
+ },
+ "openui-lang": {
+  "desc": "Thesys'in LLM çıktısı için JSON yerine satır tabanlı, token tasarruflu UI tarif dili.",
+  "summary": "OpenUI Lang, A2UI ve json-render ile birlikte bildirimsel kompozisyon yaklaşımlarından biri olarak anılıyor. JSON'a göre yüzde 67'ye kadar token tasarrufu iddiası satıcı ölçümü olarak 'doğrulanmamış' kalıyor; raporlar gerçek prompt/spec benchmarkı istiyor. Özel dil sözleşmesi olduğu için çıkış maliyeti ve bağımlılığı ayrıca değerlendirilmeli.",
+  "license": "MIT",
+  "maturity": "Bilinmiyor",
+  "vendor": "Thesys",
+  "platform": "Belirtim",
+  "effort": "Orta",
+  "stance": "Referans",
+  "rTopics": [
+   "R08",
+   "R12",
+   "R26"
+  ],
+  "facts": [
+   {
+    "text": "'JSON'a göre %67'ye kadar az token' iddiası satıcıya ait; bağımsız benchmark yok (C025 unverified).",
+    "report": "pre_research_claude"
+   },
+   {
+    "text": "Benchmark 7 senaryo, tiktoken gpt-5 ile: contact-form'da json-render'a göre %67,1, toplamda %52,8 azalma.",
+    "report": "synthesis_chatgpt-map-P16"
+   },
+   {
+    "text": "Çözümleme gecikmesi sabit 60 token/s varsayımıyla tahmin ediliyor.",
+    "report": "review_claude"
+   }
+  ],
+  "risks": [
+   "Token avantajı düzeltme maliyeti ve toplam gecikmeyi kanıtlamaz.",
+   "Özel dil standart dışıdır; göç ve araç desteği riski taşır."
+  ],
+  "url": "https://www.openui.com/docs/openui-lang/overview",
+  "version": ""
+ },
+ "json-schema": {
+  "desc": "JSON verisinin yapısını ve kurallarını tanımlayan, dil bağımsız şema standardı.",
+  "summary": "Raporlar katalog şemasının React'e bağlanmamak için Zod/JSON Schema olarak tek kaynakta tutulmasını öneriyor. Sentez, modelin gördüğü bileşen tanımı ile uygulamanın doğruladığı tanımın aynı sürümlü kaynaktan üretilmesini istiyor. AG-UI 1.0 da bütün SDK'ların tek bir JSON Schema'dan üretildiği bir belirtim modeline geçiyor.",
+  "license": "Standart",
+  "maturity": "Kararlı",
+  "vendor": "JSON Schema topluluğu",
+  "platform": "Belirtim",
+  "effort": "Düşük",
+  "stance": "Çekirdek aday",
+  "rTopics": [
+   "R10",
+   "R08",
+   "R12"
+  ],
+  "facts": [
+   {
+    "text": "Katalog şeması Zod/JSON Schema olarak tek kaynakta tutulmalı.",
+    "report": "research_claude"
+   },
+   {
+    "text": "AG-UI 1.0 PR'ı 'her SDK'nın üretildiği tek bir JSON Schema' vaat ediyor; spec/draft/schema.json doğruluk kaynağı.",
+    "report": "review_claude"
+   },
+   {
+    "text": "AG-UI interrupt yapısında responseSchema alanı JSON Schema taşır.",
+    "report": "review_claude"
+   }
+  ],
+  "risks": [
+   "Şema geçerliliği veri doğruluğu veya yetkilendirme değildir.",
+   "Kısmi/akışlı çıktı tamamlanmadan şemaya karşı doğrulanamaz."
+  ],
+  "url": "https://json-schema.org/",
+  "version": ""
+ },
+ "zod": {
+  "desc": "TypeScript için çalışma zamanı şema doğrulama ve tip türetme kütüphanesi.",
+  "summary": "Zod, incelenen GenUI araçlarının çoğunda katalog ve prop şemalarının ortak dili: json-render, A2UI web çekirdeği, CopilotKit ve Tambo bileşen tanımlarını Zod ile yapıyor. Raporlar şemanın tek kaynaktan hem model istemine hem doğrulamaya beslenmesini öneriyor. Doğrulama zamanı ve bilinmeyen bileşen davranışı araç belgelerinde net değil.",
+  "license": "MIT",
+  "maturity": "Kararlı",
+  "vendor": "Colin McDonnell (topluluk)",
+  "platform": "Framework bağımsız",
+  "effort": "Düşük",
+  "stance": "Çekirdek aday",
+  "rTopics": [
+   "R10",
+   "R12"
+  ],
+  "facts": [
+   {
+    "text": "json-render kataloğu defineCatalog + Zod props ile tanımlar; catalog.prompt() açıklamaları ve şemaları istem olarak üretir.",
+    "report": "review_claude"
+   },
+   {
+    "text": "@a2ui/react v0.9 yolu Zod şemalarından türetilen tipli props kullanır.",
+    "report": "review_claude"
+   },
+   {
+    "text": "CopilotKit istemci kataloğunu (bileşen adları + Zod prop şemaları) ajan bağlamına serileştirir.",
+    "report": "review_chatgpt"
+   }
+  ],
+  "risks": [
+   "Katalog belgeleri doğrulama zamanını ve bilinmeyen bileşen davranışını belirtmiyor.",
+   "TypeScript'e özgüdür; Python arka uçla paylaşım için JSON Schema'ya dönüşüm gerekir."
+  ],
+  "url": "https://zod.dev/",
+  "version": ""
+ },
+ "json-render": {
+  "desc": "Vercel Labs'in Zod katalogla sınırlı JSON tariflerini çoklu framework'te bileşene çeviren renderer'ı.",
+  "summary": "Sentez json-render'ı 'kendi bileşenlerinle ilk prototip için aday' sayıyor ve A2UI ile aynı katalogla iki prototip kurulmasını öneriyor. SpecStream (JSONL + RFC 6902) ile aşamalı gösterim ve catalog.prompt() ile tek kaynaktan istem üretimi güçlü yanlar; LLM çağrısı, olay protokolü ve kimlik doğrulama uygulamaya kalıyor. A2UI örneği üretim uyumluluğu garantisi değil ve akış hatalarına karşı kendi replay testleri gerekiyor.",
+  "license": "Apache-2.0",
+  "maturity": "Deneysel",
+  "vendor": "Vercel Labs",
+  "platform": "Çoklu framework",
+  "effort": "Orta",
+  "stance": "Prototip adayı",
+  "rTopics": [
+   "R09",
+   "R10",
+   "R12",
+   "R24"
+  ],
+  "facts": [
+   {
+    "text": "SpecStream her satırı bir JSON Patch işlemi olan JSONL akışıdır; altı RFC 6902 işlemi desteklenir.",
+    "report": "review_claude"
+   },
+   {
+    "text": "PR #350 (20.09.2026): aynı metinli satırlar atlanıyor, iki özdeş 'add' işleminden ikincisi kayboluyordu.",
+    "report": "research_claude"
+   },
+   {
+    "text": "React, Vue, Svelte, Solid ve React Native desteği; 36 shadcn bileşeni ve YAML tel formatı.",
+    "report": "research_claude"
+   },
+   {
+    "text": "@json-render/core 0.16.0 Next.js renderer'ı ve shadcn-svelte ekledi.",
+    "report": "review_claude"
+   }
+  ],
+  "risks": [
+   "Labs statüsü sürüm ve süreklilik riski taşır.",
+   "replace işlemi RFC 6902'den sapar (hedef yoksa da yazar).",
+   "Bozuk/sırasız satır davranışı belgelenmemiş."
+  ],
+  "url": "https://json-render.dev/docs",
+  "version": "0.16.0"
+ },
+ "a2ui-react": {
+  "desc": "A2UI mesajlarını React bileşenlerine çeviren resmî renderer paketi (@a2ui/react).",
+  "summary": "research_claude, @a2ui/react'i sürümü sabitlenerek ve '@a2ui/react/v0_9' yoluyla kullanılacak birinci tarif adayı olarak öneriyor. Yol haritası renderer'ı 'Stable' gösterse de README ve renderer referansı çelişiyor; raporlar sınıfı 'mevcut, olgunluk belirsiz' olarak koruyor. v1.0 desteği planlı olduğundan göç testi gerekli.",
+  "license": "Apache-2.0",
+  "maturity": "RC/Beta",
+  "vendor": "Google / A2UI projesi",
+  "platform": "React",
+  "effort": "Orta",
+  "stance": "Prototip adayı",
+  "rTopics": [
+   "R09",
+   "R08",
+   "R26"
+  ],
+  "facts": [
+   {
+    "text": "npm'de 0.10.1 (2026-06-17), 0.11.0 (2026-09-01) ve 0.11.1 (2026-09-12) yayımlandı; lisans Apache-2.0.",
+    "report": "review_claude"
+   },
+   {
+    "text": "Varsayılan dışa aktarım hâlâ v0.8; v0.9 için '@a2ui/react/v0_9' kullanılır.",
+    "report": "review_claude"
+   },
+   {
+    "text": "Paket @a2ui/web_core >=0.8.0 <0.8.4 bağımlılığı taşır.",
+    "report": "review_claude"
+   },
+   {
+    "text": "Yol haritası React'i Stable listelerken kök README 'hope to work on' listesinde tutuyor.",
+    "report": "research_claude"
+   }
+  ],
+  "risks": [
+   "Paket sürümü protokol sürümüyle aynı değildir; exports haritası doğrulanmalı.",
+   "v1.0'da API kırılması olasılığı."
+  ],
+  "url": "https://www.npmjs.com/package/@a2ui/react",
+  "version": "0.11.1"
+ },
+ "a2ui-lit": {
+  "desc": "Lit, Angular ve React A2UI renderer'larının ortak web çekirdeği ve Web Components tabanlı Lit renderer'ı.",
+  "summary": "Resmî belgeler bütün web renderer'larının (Lit, Angular, React) @a2ui/web_core üzerine kurulduğunu söylüyor; çekirdek mesaj kuyruğu, şema doğrulama ve veri yolu çözümlemeyi üstleniyor. Lit renderer'ı framework bağımsız Web Components sunduğu için React dışı veya Astro gibi kabuklarda seçenek olabilir; bu, raporların genel 'React zorunlu değil' bulgusuna dayanan bir çıkarım. Ortak çekirdek, renderer'lar arasında eş katalog veya erişilebilirlik garantisi vermiyor.",
+  "license": "Apache-2.0",
+  "maturity": "RC/Beta",
+  "vendor": "Google / A2UI projesi",
+  "platform": "Framework bağımsız",
+  "effort": "Orta",
+  "stance": "Seçimli",
+  "rTopics": [
+   "R09",
+   "R08"
+  ],
+  "facts": [
+   {
+    "text": "'All web renderers (Lit, Angular, React) share a common foundation: @a2ui/web_core.'",
+    "report": "review_claude"
+   },
+   {
+    "text": "MessageProcessor mesajları sıraya alır, JSON şemasını doğrular ve veri yollarını çözer.",
+    "report": "research_gemini"
+   },
+   {
+    "text": "Renderer referansında Lit için v0.8 ve v0.9.1 Stable, v1.0 Planned.",
+    "report": "review_claude"
+   },
+   {
+    "text": "v0.9.1/v1.0 için '@a2ui/web_core/v0_9' kullanımı gösteriliyor.",
+    "report": "synthesis_chatgpt-map-P13"
+   }
+  ],
+  "risks": [
+   "Ortak çekirdek eş katalog veya erişilebilirlik garantisi değildir.",
+   "v1.0 desteği henüz planlı."
+  ],
+  "url": "https://github.com/a2ui-project/a2ui/tree/main/renderers/web_core",
+  "version": "0.8.x"
+ },
+ "copilotkit": {
+  "desc": "Ajan bağlantısı, araç gösterimi ve A2UI yollarını sunan tam yığın React GenUI çerçevesi; AG-UI'nın arkasındaki ekip.",
+  "summary": "Raporlar CopilotKit'i A2UI + AG-UI yolunda en çok hazır parçayı sunan seçenek olarak görüyor, ancak runtime ve middleware sözleşmelerine bağımlılık yarattığını vurguluyor. 'Kontrollü/bildirimsel/açık uçlu' spektrumunun tek eksenli bir satıcı taksonomisi olduğu tespit ediliyor. Sentez, Tambo ve OpenUI ile aynı işte uyarlama maliyeti ölçülmeden eşdeğer sayılmamasını istiyor.",
+  "license": "MIT",
+  "maturity": "Kararlı",
+  "vendor": "CopilotKit",
+  "platform": "React",
+  "effort": "Orta",
+  "stance": "Seçimli",
+  "rTopics": [
+   "R09",
+   "R02",
+   "R08"
+  ],
+  "facts": [
+   {
+    "text": "GenUI Spectrum sınıflaması tek eksenli satıcı taksonomisidir; öngörülebilirlik/güvenlik tablosu ölçüm içermez.",
+    "report": "pre_research_claude"
+   },
+   {
+    "text": "Dinamik A2UI şeması bileşen dizisi tamamlandıktan sonra yayımlanır; 'akışlı' ilk token'dan çizim demek değildir.",
+    "report": "pre_research_chatgpt"
+   },
+   {
+    "text": "A2UI araç çağrısı LangGraph üzerinden TOOL_CALL_ARGS olaylarıyla akar; createSurface önce gelmelidir.",
+    "report": "synthesis_claude-map-P10"
+   },
+   {
+    "text": "Playground üç bandı gösterir: Static, MCP Apps, A2UI.",
+    "report": "pre_research_claude"
+   }
+  ],
+  "risks": [
+   "Middleware bildirilmemiş sentetik log_a2ui_event araç çağrısı üretir; araç doğrulayan backend'ler reddedebilir.",
+   "v1.0 geçişi kırıcı olabilir; runtime bağımlılığı çıkış maliyetini artırır."
+  ],
+  "url": "https://docs.copilotkit.ai/concepts/generative-ui-overview",
+  "version": ""
+ },
+ "tambo": {
+  "desc": "React için bileşen kaydı, akış, durum yönetimi ve MCP bağlantısı sunan açık kaynak GenUI araç seti.",
+  "summary": "Tambo, React SDK'sı, yerleşik ajan, akış ve durum yönetimi sunan; arka ucu self-host veya Tambo Cloud ile çalışan bir aday olarak değerlendiriliyor. 'Generative' (tek seferlik) ve 'interactable' (kimlikle güncellenen kalıcı) bileşen ayrımı dikkat çekiyor. Raporlar hizmet bağımlılığı, React kilidi ve toplam işletim maliyetinin ölçülmesini şart koşuyor.",
+  "license": "MIT",
+  "maturity": "Kararlı",
+  "vendor": "Tambo AI",
+  "platform": "React",
+  "effort": "Orta",
+  "stance": "Seçimli",
+  "rTopics": [
+   "R09",
+   "R26"
+  ],
+  "facts": [
+   {
+    "text": "Tambo React'e özgüdür; backend self-host veya Tambo Cloud ile çalışır, sağlayıcı API anahtarı ister.",
+    "report": "pre_research_claude"
+   },
+   {
+    "text": "Lisans MIT; apps/api gibi alanlar Apache-2.0 olarak aktarılıyor.",
+    "report": "synthesis_chatgpt-map-P17"
+   },
+   {
+    "text": "README 'Tambo 1.0 is here!' duyurusunu ve Zod şemalarıyla bileşen kaydını anlatıyor.",
+    "report": "review_claude"
+   }
+  ],
+  "risks": [
+   "Self-host işletim ve model bağımlılıklarını kaldırmaz.",
+   "Tambo için aktarılan kapsam OpenUI'ye otomatik taşınmamalı."
+  ],
+  "url": "https://docs.tambo.co/",
+  "version": "1.0"
+ },
+ "openui": {
+  "desc": "Thesys'in OpenUI Lang ayrıştırıcısı ve renderer paketlerinden oluşan açık kaynak GenUI çatısı.",
+  "summary": "OpenUI, dil ve renderer'ın barındırılan hizmete bağımlı olmadığını belirtirken üretim belgelerinde Gateway'i öneriyor; raporlar Gateway'in isteğe bağlı olduğunu destekliyor. Resmî destek React'te, diğer framework paketleri topluluk düzeyinde. Lisans ve token iddiaları sürüm bazında, hizmet koşullarından ayrı değerlendirilmeli.",
+  "license": "MIT",
+  "maturity": "Bilinmiyor",
+  "vendor": "Thesys",
+  "platform": "Çoklu framework",
+  "effort": "Orta",
+  "stance": "Seçimli",
+  "rTopics": [
+   "R09",
+   "R26"
+  ],
+  "facts": [
+   {
+    "text": "LICENSE MIT ('Copyright (c) 2011-2024 Thesys Inc.'); react/vue/svelte/angular-lang, a2ui ve observability-cloud paketleri var.",
+    "report": "review_claude"
+   },
+   {
+    "text": "Çalışma zamanı barındırılan hizmete bağımlı görünmüyor; Gateway ve bulut gözlemlenebilirliği isteğe bağlı.",
+    "report": "research_claude"
+   },
+   {
+    "text": "docs.thesys.dev openui.com'a yönleniyor (yeniden markalama).",
+    "report": "pre_research_claude"
+   }
+  ],
+  "risks": [
+   "MIT depo lisansı Gateway/bulut hizmet koşullarına genişletilemez.",
+   "Resmî React ile topluluk framework'leri eş olgunlukta değil."
+  ],
+  "url": "https://github.com/thesysdev/openui",
+  "version": ""
+ },
+ "thesys": {
+  "desc": "Thesys'in LLM yanıtlarını üretken arayüze çeviren barındırılan GenUI API'si ve Gateway hizmeti.",
+  "summary": "Korpusta Thesys C1 esas olarak OpenUI benchmark'ında karşılaştırılan JSON biçimi ve OpenAI uyumlu Gateway uç noktası üzerinden görünüyor. Raporlar barındırılan hizmetlere (Gateway, Cloud) kilitlenme riskini ve çıkış maliyeti ölçülmeden kanonik yapılmamasını vurguluyor. Ürün çekirdeği yerine karşılaştırma referansı olarak ele alınması uygun.",
+  "license": "Ticari",
+  "maturity": "Bilinmiyor",
+  "vendor": "Thesys",
+  "platform": "Sunucu",
+  "effort": "Düşük",
+  "stance": "Referans",
+  "rTopics": [
+   "R09",
+   "R26"
+  ],
+  "facts": [
+   {
+    "text": "Gateway THESYS_API_KEY ile api.thesys.dev/v1/embed adresinde OpenAI uyumlu istemciyle çağrılıyor.",
+    "report": "review_chatgpt"
+   },
+   {
+    "text": "Benchmark tepe senaryosunda OpenUI Lang, Thesys C1 JSON'a göre %65,4, yedi senaryoda %51,7 daha az token kullanıyor.",
+    "report": "review_claude"
+   },
+   {
+    "text": "Üretim belgeleri Gateway, Autofix API ve console.thesys.dev güvenilirlik panosunu anlatıyor.",
+    "report": "synthesis_claude-map-P10"
+   }
+  ],
+  "risks": [
+   "Barındırılan hizmet bağımlılığı ve veri dışarı akışı.",
+   "Fiyat, SLA ve lisans koşulları korpusta incelenmedi."
+  ],
+  "url": "https://www.thesys.dev/",
+  "version": ""
+ },
+ "ai-sdk": {
+  "desc": "Vercel'in LLM çağrısı, akış ve yapılandırılmış çıktı için TypeScript araç seti.",
+  "summary": "Raporlar AI SDK'yı özellikle aşamalı gösterim için belirleyici bir kanıt olarak kullanıyor: kısmi yapılandırılmış çıktı tamamlanmadan şemaya karşı doğrulanamaz, elementStream ise tamamlanmış ve doğrulanmış öğeler verir. Bu, 'ilk token'da buton etkinleştir' yerine 'tamamlanmış semantik birim geldikçe' yaklaşımını destekliyor. AI Elements'in kurulum yolu da AI SDK'lı Next.js projesini varsayıyor.",
+  "license": "Apache-2.0",
+  "maturity": "Kararlı",
+  "vendor": "Vercel",
+  "platform": "Çoklu framework",
+  "effort": "Düşük",
+  "stance": "Seçimli",
+  "rTopics": [
+   "R12",
+   "R09"
+  ],
+  "facts": [
+   {
+    "text": "AI SDK v7'de kısmi çıktılar şemaya karşı doğrulanmaz; elementStream tam ve doğrulanmış öğeler verir (C011, desteklendi).",
+    "report": "pre_research_claude"
+   },
+   {
+    "text": "Ana dal manifestinde 7.0.114 sürümü görülüyor; yayımlanmış paketle eşliği sabitlenmedi.",
+    "report": "synthesis_chatgpt-map-P15"
+   },
+   {
+    "text": "AI SDK 7 için Node 22 gereksinimi aktarılıyor.",
+    "report": "synthesis_chatgpt-map-P15"
+   }
+  ],
+  "risks": [
+   "Şema geçerliliği iş verisi doğruluğu veya yetki değildir.",
+   "Hızlı sürüm döngüsü; API adları sürüme göre değişebilir."
+  ],
+  "url": "https://ai-sdk.dev/docs/ai-sdk-core/generating-structured-data",
+  "version": "7 (7.0.114)"
+ },
+ "flutter-genui": {
+  "desc": "Flutter için A2UI'yi arka planda kullanan, mobil/web/masaüstü üretken arayüz SDK'sı.",
+  "summary": "Flutter GenUI SDK, raporlarda 'GenUI için React zorunlu değildir' bulgusunun somut örneklerinden biri olarak geçiyor. A2UI renderer tablosunda v0.8 ve v0.9.1 için Stable, v1.0 için Planned görünüyor. Web tabanlı admin paneli için doğrudan aday değil; çoklu platform genişlemesinde referans.",
+  "license": "BSD",
+  "maturity": "RC/Beta",
+  "vendor": "Google Flutter ekibi",
+  "platform": "Çoklu framework",
+  "effort": "Yüksek",
+  "stance": "Referans",
+  "rTopics": [
+   "R09",
+   "R08"
+  ],
+  "facts": [
+   {
+    "text": "'For Flutter, check out the GenUI SDK, which uses A2UI under the hood.'",
+    "report": "review_claude"
+   },
+   {
+    "text": "Renderer referansı: Flutter (GenUI SDK) v0.8 ve v0.9.1 Stable, v1.0 Planned.",
+    "report": "review_claude"
+   },
+   {
+    "text": "Kurulum: flutter pub add flutter_genui; mobil, web ve masaüstünde çalışır.",
+    "report": "review_chatgpt"
+   }
+  ],
+  "risks": [
+   "Web paneli yığınından farklı bir platform; ekip yetkinliği ve bakım maliyeti ayrı.",
+   "Platformlar arası özellik ve maliyet eşitliği kanıtlanmadı."
+  ],
+  "url": "https://github.com/flutter/genui",
+  "version": ""
+ },
+ "httpagent": {
+  "desc": "AG-UI JS istemcisinin fetch ile POST yapan, olay akışını AG-UI olaylarına çeviren ajan sınıfı.",
+  "summary": "research_claude taşıma katmanı için AG-UI HttpAgent + FastAPI SSE uç noktasını öneriyor; HttpAgent EventSource kısıtlarına (yalnız GET, başlıksız) takılmıyor. Raporlar, HttpAgent yeterliyse ikinci bir SSE istemcisine gerek olmadığını belirtiyor. Ancak isteğin iptali sunucudaki işin durduğu anlamına gelmiyor; çoklu sekme ve replay davranışı belgelenmemiş.",
+  "license": "MIT",
+  "maturity": "Kararlı",
+  "vendor": "AG-UI topluluğu",
+  "platform": "Framework bağımsız",
+  "effort": "Düşük",
+  "stance": "Prototip adayı",
+  "rTopics": [
+   "R14",
+   "R13"
+  ],
+  "facts": [
+   {
+    "text": "HttpAgent fetch ile POST yapar, Authorization gibi başlıklar ve abortController.signal kullanır; SSE/protobuf akışını olaylara çevirir.",
+    "report": "research_claude"
+   },
+   {
+    "text": "Uygulama kodu JSON gövde ve Accept: text/event-stream kullanır; abortRun() yalnız HTTP isteğini iptal eder.",
+    "report": "synthesis_chatgpt-map-P12"
+   },
+   {
+    "text": "Çoklu sekme ve replay davranışı SDK belgesinde yok.",
+    "report": "research_claude"
+   }
+  ],
+  "risks": [
+   "Ağ abort'u sunucu uzun işinin iptal onayı değildir.",
+   "Alt sınıflarda requestInit değişebilir; gerçek ağ testi yapılmadı."
+  ],
+  "url": "https://docs.ag-ui.com/sdk/js/client/http-agent",
+  "version": ""
+ },
+ "sse": {
+  "desc": "Sunucudan istemciye tek yönlü, metin tabanlı olay akışı sağlayan web standardı.",
+  "summary": "SSE, uzun AI işlerinde sunucudan olay taşımak için raporların varsayılan tercihidir; ancak yerleşik EventSource kısıtları SSE biçiminin kendisine genellenmemeli. Sentez, tarayıcının yeniden bağlanmasının olayların saklandığı anlamına gelmediğini, olay kimliği, sıra numarası ve eksik aralığın yeniden okunmasının ürün sözleşmesinde tanımlanması gerektiğini vurguluyor. Ters vekilde tamponlama kapatılmalı ve HTTP/2 tercih edilmeli.",
+  "license": "Standart",
+  "maturity": "Kararlı",
+  "vendor": "WHATWG",
+  "platform": "Tarayıcı yerel",
+  "effort": "Orta",
+  "stance": "Çekirdek aday",
+  "rTopics": [
+   "R14",
+   "R13",
+   "R22"
+  ],
+  "facts": [
+   {
+    "text": "HTTP/1.1'de tarayıcı+alan başına sekmeler arasında paylaşılan 6 bağlantı sınırı var; HTTP/2'de akış sayısı müzakere edilir (rehberde 100).",
+    "report": "synthesis_chatgpt-map-P11"
+   },
+   {
+    "text": "Olayın gönderilmesi için boş satır gerekir; akışın kapanması son olayı tek başına dispatch etmez.",
+    "report": "synthesis_chatgpt-map-P12"
+   },
+   {
+    "text": "Öneri: ters vekilde (nginx) tamponlamayı kapat ve HTTP/2 kullan.",
+    "report": "research_claude"
+   }
+  ],
+  "risks": [
+   "Yeniden bağlanma kalıcı olay günlüğü veya tam bir kez işleme garantisi değildir.",
+   "HTTP/1.1'e düşüren vekil çoklu sekmede bağlantı tıkanması yaratabilir."
+  ],
+  "url": "https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events",
+  "version": ""
+ },
+ "eventsource": {
+  "desc": "Tarayıcının SSE akışlarını tüketmek için sunduğu yerleşik API.",
+  "summary": "Raporlar yerleşik EventSource'un yalnız GET kullandığını ve yazarın başlık ekleyemediğini, bu yüzden yetkilendirme başlığı ve POST gövdesi isteyen ajan çalıştırmaları için uygun olmadığını belirtiyor. Çerez/withCredentials veya ayrı POST başlatma + GET abonelik yoluyla yine kullanılabilir. Basit GET tabanlı olay akışları için yeterli seçenek olarak kalıyor.",
+  "license": "Standart",
+  "maturity": "Kararlı",
+  "vendor": "WHATWG",
+  "platform": "Tarayıcı yerel",
+  "effort": "Düşük",
+  "stance": "Seçimli",
+  "rTopics": [
+   "R14"
+  ],
+  "facts": [
+   {
+    "text": "EventSource yalnız GET kullanır, yazar başlık ekleyemez; Last-Event-ID ve retry ile yeniden bağlanır.",
+    "report": "pre_research_claude"
+   },
+   {
+    "text": "HTTP/1.1'deki 6 bağlantı sınırı Chrome/Firefox'ta 'Won't fix'; spesifikasyon paylaşılan worker öneriyor.",
+    "report": "pre_research_claude"
+   },
+   {
+    "text": "Yerleşik EventSource kısıtları SSE biçiminin bütün istemcilerine genellenemez (C016).",
+    "report": "pre_research_chatgpt"
+   }
+  ],
+  "risks": [
+   "Authorization başlığı ve POST gövdesi gerektiren akışlara doğrudan uymaz.",
+   "Çoklu sekmede bağlantı sınırına takılabilir."
+  ],
+  "url": "https://developer.mozilla.org/en-US/docs/Web/API/EventSource",
+  "version": ""
+ },
+ "fetch-event-source": {
+  "desc": "Microsoft'un fetch tabanlı, POST/başlık/gövde destekli SSE istemci kütüphanesi.",
+  "summary": "Raporlar fetch-event-source'u, EventSource kısıtlarının SSE biçimine genellenemeyeceğinin kanıtı olarak kullanıyor: POST, özel başlık, gövde ve özel yeniden deneme destekliyor. Ancak son sürüm 2021'den kalma olduğu için bakım riski işaretleniyor ve HttpAgent kullanılıyorsa ayrıca gerekmediği belirtiliyor. Görünürlükte bağlantıyı kapatma davranışı sunucu işinin durduğu anlamına gelmiyor.",
+  "license": "MIT",
+  "maturity": "Kararlı",
+  "vendor": "Microsoft (Azure)",
+  "platform": "Framework bağımsız",
+  "effort": "Düşük",
+  "stance": "Seçimli",
+  "rTopics": [
+   "R14",
+   "R26"
+  ],
+  "facts": [
+   {
+    "text": "Son npm sürümü 2.0.1 (2021-04-25); yaklaşık 5 yıldır yeni sürüm yok.",
+    "report": "research_claude"
+   },
+   {
+    "text": "Varsayılan olarak sayfa gizlenince bağlantıyı kapatır, görünürlükte Last-Event-ID ile yeniden dener; openWhenHidden ile değiştirilebilir.",
+    "report": "synthesis_chatgpt-map-P16"
+   },
+   {
+    "text": "POST, özel başlık, istek gövdesi ve özel retry politikasıyla aynı event-stream biçimini tüketir.",
+    "report": "research_chatgpt"
+   }
+  ],
+  "risks": [
+   "Bakım durağan; güvenlik/uyumluluk düzeltmeleri gelmeyebilir.",
+   "Replay ve idempotency uygulamaya kalır."
+  ],
+  "url": "https://github.com/Azure/fetch-event-source",
+  "version": "2.0.1"
+ },
+ "websocket": {
+  "desc": "Tarayıcı ile sunucu arasında kalıcı, çift yönlü mesajlaşma sağlayan web standardı.",
+  "summary": "Raporların taşıma matrisinde WebSocket yalnız yoğun çift yönlü trafik veya ortak düzenleme gerektiğinde öneriliyor. Bu seçimde geri basınç, yeniden bağlanma ve yeniden senkronizasyonun uygulamada çözülmesi gerekiyor. A2UI ve AG-UI taşıma bağımsız olduğundan WebSocket üzerinden de çalışabilir, ancak hazır entegrasyon durumu belgeler arasında tutarsız.",
+  "license": "Standart",
+  "maturity": "Kararlı",
+  "vendor": "IETF / WHATWG",
+  "platform": "Tarayıcı yerel",
+  "effort": "Yüksek",
+  "stance": "Seçimli",
+  "rTopics": [
+   "R14",
+   "R27"
+  ],
+  "facts": [
+   {
+    "text": "WebSocket: yoğun çift yönlü trafik veya ortak düzenleme; çözülmesi gereken geri basınç, reconnect, resync.",
+    "report": "research_chatgpt"
+   },
+   {
+    "text": "A2UI yol haritası WebSocket taşımasını 'Complete' gösteriyor.",
+    "report": "research_claude"
+   },
+   {
+    "text": "A2UI taşıma sayfasında ise WebSocket/SSE 'proposed' görünüyor; taşıyabilme ile hazır entegrasyon aynı değil.",
+    "report": "synthesis_chatgpt-map-P11"
+   }
+  ],
+  "risks": [
+   "Oturum, akış kontrolü ve yeniden senkronizasyon ek geliştirme ister.",
+   "Vekil/yük dengeleyici yapılandırması SSE'ye göre karmaşık."
+  ],
+  "url": "https://developer.mozilla.org/en-US/docs/Web/API/WebSocket",
+  "version": ""
+ },
+ "http2": {
+  "desc": "Tek bağlantıda çoklu akış taşıyan HTTP sürümü (RFC 9113).",
+  "summary": "HTTP/2, SSE ile çoklu sekme kullanımında HTTP/1.1'in tarayıcı+alan başına 6 bağlantı sınırını hafifleten altyapı olarak ele alınıyor. Raporlar 100 eşzamanlı akışın evrensel bir garanti olmadığını, müzakere ve vekil davranışına bağlı olduğunu vurguluyor. HTTP/1.1'e düşüren vekil riskine karşı yedi sekmeli kabul deneyi öneriliyor.",
+  "license": "Standart",
+  "maturity": "Kararlı",
+  "vendor": "IETF",
+  "platform": "Belirtim",
+  "effort": "Orta",
+  "stance": "Çekirdek aday",
+  "rTopics": [
+   "R14",
+   "R22"
+  ],
+  "facts": [
+   {
+    "text": "HTTP/2'de eşzamanlı akış sayısı müzakere edilir; 100 varsayılanı evrensel garanti değildir.",
+    "report": "synthesis_chatgpt-map-P18"
+   },
+   {
+    "text": "HTTP/1.1'e düşüren vekil riski ile 'yedi sekme' kabul deneyi korunmalı.",
+    "report": "synthesis_chatgpt-map-P1"
+   },
+   {
+    "text": "Ters vekilde HTTP/2 kullanılması öneriliyor.",
+    "report": "research_claude"
+   }
+  ],
+  "risks": [
+   "Vekil veya CDN sessizce HTTP/1.1'e düşürebilir.",
+   "HTTP/2 tek başına olay saklama veya replay sağlamaz."
+  ],
+  "url": "https://www.rfc-editor.org/rfc/rfc9113.html",
+  "version": "RFC 9113"
+ },
+ "last-event-id": {
+  "desc": "SSE yeniden bağlanmasında istemcinin son aldığı olay kimliğini sunucuya ileten başlık.",
+  "summary": "Raporlar Last-Event-ID'nin yeniden bağlantıda son olay bilgisini taşıyabildiğini, ancak sunucuda olay saklama, kayıpsız yeniden oynatma veya tam bir kez işleme sağlamadığını tekrar tekrar vurguluyor. Sentez, olay kimliği, sıra numarası, tekrar teslim ve eksik aralığın yeniden okunmasının ürün sözleşmesinde açıkça tanımlanmasını istiyor. Bu nedenle mekanizma gerekli ama yetersiz bir yapı taşı.",
+  "license": "Standart",
+  "maturity": "Kararlı",
+  "vendor": "WHATWG",
+  "platform": "Tarayıcı yerel",
+  "effort": "Orta",
+  "stance": "Çekirdek aday",
+  "rTopics": [
+   "R14",
+   "R13",
+   "R17"
+  ],
+  "facts": [
+   {
+    "text": "WHATWG: id alanı, boş id ile sıfırlama ve yeniden bağlantıda Last-Event-ID davranışı tanımlı.",
+    "report": "synthesis_chatgpt-map-P12"
+   },
+   {
+    "text": "Last-Event-ID olay saklama, yeniden oynatma veya tam bir kez uygulama garantisi değildir.",
+    "report": "synthesis_chatgpt-map-P14"
+   },
+   {
+    "text": "Sunucuda olay saklama veya tekrarları güvenli işleme kendiliğinden oluşmaz.",
+    "report": "pre_research_chatgpt"
+   }
+  ],
+  "risks": [
+   "Sunucu olay deposu ve kimlik şeması yoksa işe yaramaz.",
+   "Tekrar teslim edilen olaylar tekilleştirilmezse çift etki doğar."
+  ],
+  "url": "https://html.spec.whatwg.org/multipage/server-sent-events.html",
+  "version": ""
+ },
+ "abortcontroller": {
+  "desc": "Fetch isteklerini ve akışları iptal sinyaliyle durdurmayı sağlayan tarayıcı API'si.",
+  "summary": "AbortController, AG-UI HttpAgent'ın istek iptali için kullandığı mekanizma olarak geçiyor. Raporlar bağlantıyı istemcide kesmenin sunucudaki hesaplama, araç çağrısı veya yan etkinin durduğunu kanıtlamadığını vurguluyor. Sentez de sağlayıcının iptal onayı gelmeden 'iptal edildi' yazılmamasını istiyor.",
+  "license": "Standart",
+  "maturity": "Kararlı",
+  "vendor": "WHATWG",
+  "platform": "Tarayıcı yerel",
+  "effort": "Düşük",
+  "stance": "Çekirdek aday",
+  "rTopics": [
+   "R13",
+   "R14",
+   "R16"
+  ],
+  "facts": [
+   {
+    "text": "HttpAgent AbortController destekler.",
+    "report": "research_claude"
+   },
+   {
+    "text": "abortRun() için desteklenen sonuç mevcut HTTP isteğinin iptalidir; sunucu işinin durması kanıtlanmamış.",
+    "report": "synthesis_chatgpt-map-P12"
+   },
+   {
+    "text": "Uzakta süren model çağrısı açıkça belirtilmeli; iptal onayı gelmeden 'iptal edildi' yazılmamalı.",
+    "report": "GENUI-SENTEZ-RAPORU"
+   }
+  ],
+  "risks": [
+   "İstemci iptali sunucu iptali sanılırsa yanlış iptal güveni doğar.",
+   "Sonucu bilinmeyen istek kör yeniden gönderilirse çift işlem olabilir."
+  ],
+  "url": "https://developer.mozilla.org/en-US/docs/Web/API/AbortController",
+  "version": ""
+ },
+ "jsonl": {
+  "desc": "Her satırı ayrı bir JSON değeri olan, akışta mesaj sınırı sağlayan metin biçimi (JSON Lines).",
+  "summary": "Raporlar JSONL'yi akışlı tariflerde mesaj sınırını, JSON Patch'i ise güncelleme anlamını taşıyan katmanlar olarak ayırıyor. Ağ parçası tamamlanmış mesaj değildir; önce tam satır, sonra ayrıştırma, şema, katalog ve yetki kontrolü gelmeli. Bozuk JSONL satırı ve sırasız yama senaryolarının kayıtlı akış testleriyle sınanması öneriliyor.",
+  "license": "Uygulanmaz",
+  "maturity": "Kararlı",
+  "vendor": "Topluluk (jsonlines.org)",
+  "platform": "Belirtim",
+  "effort": "Düşük",
+  "stance": "Çekirdek aday",
+  "rTopics": [
+   "R12",
+   "R14",
+   "R24"
+  ],
+  "facts": [
+   {
+    "text": "json-render SpecStream 'her satırı bir JSON patch işlemi olan JSONL tabanlı akış biçimi'dir.",
+    "report": "review_claude"
+   },
+   {
+    "text": "AG-UI belgeleri A2UI'yı 'JSONL-based and streaming' bir belirtim olarak tanımlar.",
+    "report": "review_chatgpt"
+   },
+   {
+    "text": "JSONL mesaj sınırını, JSON Patch güncelleme anlamını taşır; ağ parçası atomik uygulama birimi değildir.",
+    "report": "synthesis_chatgpt-map-P1"
+   }
+  ],
+  "risks": [
+   "Başarısız bir yama bütün oturumun otomatik geri alınması anlamına gelmez.",
+   "Bozuk satır davranışı araç belgelerinde tanımsız kalabilir."
+  ],
+  "url": "https://jsonlines.org/",
+  "version": ""
+ }
+}

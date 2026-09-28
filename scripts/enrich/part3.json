@@ -1,0 +1,1431 @@
+{
+ "csp": {
+  "desc": "Tarayıcıya hangi betik, stil ve kaynakların yüklenebileceğini bildirerek XSS etkisini sınırlayan HTTP güvenlik politikası.",
+  "summary": "Raporlarda CSP, model çıktısının Markdown/HTML/JS yoluyla XSS'e dönüşmesine karşı katmanlı savunmanın bir parçası olarak geçer; OWASP LLM05:2025 sıkı CSP'yi bağlama duyarlı kodlama ve sıfır güven ile birlikte önerir. A2UI renderer belgeleri sanitizasyon, CSP ve gömülü içerik izolasyonunu geliştiricinin sorumluluğu sayar. Dış HTML/kod gösterilecekse ayrı köken, sandbox, dar mesajlaşma sözleşmesi ve CSP birlikte değerlendirilmeli; CSP'nin adını anmak uygulanmış koruma sayılmaz.",
+  "license": "Standart",
+  "maturity": "Kararlı",
+  "vendor": "W3C WebAppSec",
+  "platform": "Tarayıcı yerel",
+  "effort": "Orta",
+  "stance": "Çekirdek aday",
+  "rTopics": [
+   "R23",
+   "R02"
+  ],
+  "facts": [
+   {
+    "text": "OWASP LLM05:2025, LLM çıktısının tarayıcıda yorumlanan JS/Markdown ile XSS'e yol açabileceğini belirtir; sıfır güven, bağlama duyarlı kodlama ve CSP önerir.",
+    "report": "pre_research_claude"
+   },
+   {
+    "text": "MCP ext-apps (2026-01-26) web host'ta farklı origin'li sandbox proxy'yi zorunlu kılar ve ui.csp metadata'sındaki CSP'nin uygulanmasını ele alır.",
+    "report": "synthesis_claude-map-P12"
+   },
+   {
+    "text": "A2UI renderer README'leri dış ajan çıktısını güvenilmez girdi sayar; sanitizasyon/CSP/izolasyon geliştiricinin sorumluluğudur.",
+    "report": "synthesis_claude-map-P11"
+   }
+  ],
+  "risks": [
+   "Gerçek origin zinciri ve CSP kurulumu test edilmeden güvenlik sonucu çıkarılamaz.",
+   "CSP sunucu tarafı yetki denetiminin yerini tutmaz.",
+   "Hedef renderer üzerinde CSP/saldırı testi raporlarda yapılmadı."
+  ],
+  "url": "https://www.w3.org/TR/CSP3/",
+  "version": ""
+ },
+ "iframe-sandbox": {
+  "desc": "iframe'e gömülen içeriğin betik, form, gezinme ve köken yetkilerini kısıtlayan HTML sandbox özniteliği.",
+  "summary": "Açık uçlu HTML/JS üretimi ve MCP Apps gibi gömülü deneyimler için izolasyon aracı olarak ele alınır; raporlar serbest kod üretimini ancak yalıtılmış, yetkisiz ortamda ve deney kanıtı geldikten sonra açmayı önerir. WHATWG/MDN uyarısına göre allow-scripts ile allow-same-origin aynı kökenli iframe'de birlikte verilirse gömülü sayfa sandbox'ı kaldırıp yeniden yüklenebilir. Farklı kökende bu kaçış otomatik oluşmaz; ancak ayrı köken veri çıkışını tek başına engellemez, CSP ve mesaj doğrulaması ayrıca gerekir.",
+  "license": "Standart",
+  "maturity": "Kararlı",
+  "vendor": "WHATWG",
+  "platform": "Tarayıcı yerel",
+  "effort": "Orta",
+  "stance": "Seçimli",
+  "rTopics": [
+   "R23",
+   "R02",
+   "R08"
+  ],
+  "facts": [
+   {
+    "text": "MCP Apps (SEP-1865) 2026-01-26'da Final oldu; ui:// kaynakları, zorunlu sandbox iframe ve JSON-RPC postMessage kullanır.",
+    "report": "research_claude"
+   },
+   {
+    "text": "Aynı kökendeki iframe'e allow-scripts ve allow-same-origin birlikte verilirse kısıt kaldırılabilir.",
+    "report": "pre_research_chatgpt"
+   },
+   {
+    "text": "MCP ext-apps host ile sandbox proxy'nin farklı origin'de olmasını zorunlu kılar ve proxy'ye bu iki izni verir; bu koşulda belgeler çelişmez.",
+    "report": "synthesis_chatgpt-map-P12"
+   }
+  ],
+  "risks": [
+   "İki iznin her durumda yasak olduğu genellemesi aşırıdır; somut yapılandırma test edilmeli.",
+   "Ayrı köken ağ üzerinden veri çıkışını engellemez.",
+   "Kullanıcı düşmanca içeriği iframe dışında doğrudan açabilir."
+  ],
+  "url": "https://html.spec.whatwg.org/multipage/iframe-embed-object.html#attr-iframe-sandbox",
+  "version": ""
+ },
+ "trusted-types": {
+  "desc": "DOM XSS hedeflerine yalnızca politika ile üretilmiş tipli değerlerin atanmasına izin veren tarayıcı güvenlik API'si.",
+  "summary": "Korpus Trusted Types'ı yalnız dolaylı anar: React 19.3 (9 Eylül 2026) duyurusunda React DOM için tarayıcı Trusted Types desteği başlığı yer alır, ancak kapsamı okunmamıştır. Değerlendirmeler bu entegrasyonun DOM tabanlı XSS'in yalnız bir alt kümesine yöneldiğini, özellik değeri sanitizasyonu, CSP ve eylem yetkisinin uygulamada kaldığını vurgular. Ek savunma katmanı olarak değerlendirilebilir; tek başına güvenlik garantisi değildir.",
+  "license": "Standart",
+  "maturity": "Taslak",
+  "vendor": "W3C WebAppSec",
+  "platform": "Tarayıcı yerel",
+  "effort": "Orta",
+  "stance": "Seçimli",
+  "rTopics": [
+   "R23"
+  ],
+  "facts": [
+   {
+    "text": "React 19.3 (9 Eylül 2026) blogu React DOM özellikleri altında tarayıcı Trusted Types desteğini listeler.",
+    "report": "review_chatgpt"
+   },
+   {
+    "text": "React 19.3 Trusted Types entegrasyonunun kapsamı bu turda birincil kaynakla doğrulanmadı.",
+    "report": "review_claude"
+   },
+   {
+    "text": "Koşul notu: entegrasyon yalnız DOM tabanlı XSS'in bir alt kümesine yönelir; sanitizasyon, CSP ve yetki uygulamaya aittir.",
+    "report": "review_claude"
+   }
+  ],
+  "risks": [
+   "Hedef tarayıcı matrisinde destek Baseline/BCD ile ayrıca doğrulanmalı.",
+   "URL, özellik değeri ve eylem parametresi kaynaklı riskleri kapsamaz."
+  ],
+  "url": "https://www.w3.org/TR/trusted-types/",
+  "version": ""
+ },
+ "dompurify": {
+  "desc": "Güvenilmeyen HTML'den tehlikeli öğe ve öznitelikleri temizleyen açık kaynak XSS sanitizasyon kütüphanesi.",
+  "summary": "OWASP XSS rehberi önce textContent/value gibi güvenli hedefleri, HTML gösterimi zorunluysa DOMPurify ile temizlemeyi önerir; raporlar bunu dangerouslySetInnerHTML kaçış noktasının savunması olarak aktarır. GenUI panelinde model veya dosya kaynaklı Markdown/HTML ancak temizleme sonrası çizilmeli; bildirimsel JSON tek başına XSS'i ortadan kaldırmaz. Rehber, temizlenen içeriğin sonradan değiştirilmesinin korumayı boşa çıkardığını ve kütüphanenin düzenli yamanması gerektiğini vurgular.",
+  "license": "Apache-2.0",
+  "maturity": "Kararlı",
+  "vendor": "Cure53",
+  "platform": "Framework bağımsız",
+  "effort": "Düşük",
+  "stance": "Seçimli",
+  "rTopics": [
+   "R23",
+   "R12"
+  ],
+  "facts": [
+   {
+    "text": "OWASP XSS Cheat Sheet HTML sanitizasyonu için DOMPurify'ı önerir (DOMPurify.sanitize).",
+    "report": "review_claude"
+   },
+   {
+    "text": "Tarayıcı davranışı değiştiği ve atlatmalar bulunduğu için DOMPurify düzenli yamanmalıdır.",
+    "report": "review_chatgpt"
+   },
+   {
+    "text": "Temizlenmiş içerik sonradan değiştirilirse güvenlik çabası boşa gider.",
+    "report": "review_claude"
+   }
+  ],
+  "risks": [
+   "Atlatmalar düzenli bulunur; sürüm güncel tutulmalı.",
+   "Yalnız HTML içeriğini temizler; URL, eylem ve yetki denetiminin yerini tutmaz."
+  ],
+  "url": "https://github.com/cure53/DOMPurify",
+  "version": ""
+ },
+ "wcag": {
+  "desc": "W3C'nin web içeriğini engelli kullanıcılar için algılanabilir, işletilebilir, anlaşılır ve sağlam kılan erişilebilirlik yönergeleri.",
+  "summary": "Dinamik GenUI panelinin erişilebilirlik sözleşmesi için temel normdur; raporlar özellikle 2.2.2 Duraklat/Durdur/Gizle, 2.3.3 etkileşim animasyonu, 1.4.10 Reflow ve 4.1.3 durum mesajlarını tartışır. Beş saniye koşulu hareketli içerik içindir, otomatik güncellenen içerik için beş saniye istisnası yoktur ve yükleme istisnası sürekli akışlı çalışma alanına otomatik uygulanamaz. 320 CSS piksel reflow ölçüsü fiziksel cihaz genişliği değildir; iki boyutlu tablo/grafik istisnası tüm panelin yatay kaymasını haklı çıkarmaz. W3C Understanding sayfaları bazı turlarda 403 verdiğinden normatif yorumların bir kısmı doğrulanmamış kaldı.",
+  "license": "Standart",
+  "maturity": "Kararlı",
+  "vendor": "W3C WAI",
+  "platform": "Belirtim",
+  "effort": "Yüksek",
+  "stance": "Çekirdek aday",
+  "rTopics": [
+   "R21",
+   "R18",
+   "R05",
+   "R06"
+  ],
+  "facts": [
+   {
+    "text": "2.2.2 (A): otomatik başlayan, 5 s'den uzun ve paralel sunulan hareketli/otomatik güncellenen içerik için duraklat/durdur/gizle gerekir.",
+    "report": "pre_research_claude"
+   },
+   {
+    "text": "2.3.3 etkileşim kaynaklı hareketin kapatılabilmesi AAA düzeyindedir; tüm azaltılmış hareket gereksinimleri tek bir AA maddesine bağlanmamalı.",
+    "report": "pre_research_chatgpt"
+   },
+   {
+    "text": "Reflow dikey içerik için 320 CSS piksel eşdeğerini tanımlar; iki boyutlu içerik istisnası yalnız ilgili bölüme uygulanır.",
+    "report": "GENUI-SENTEZ-RAPORU"
+   },
+   {
+    "text": "WCAG 2.2.2/2.3.3/4.1.3/1.4.10 Understanding makbuzları doğrulama turunda 403 döndü.",
+    "report": "synthesis_claude-map-P4"
+   }
+  ],
+  "risks": [
+   "Otomatik tarama bütün WCAG ihlallerini bulmaz; manuel ve kapsayıcı kullanıcı testi gerekir.",
+   "Yükleme 'essential' istisnasının sürekli akışlı panele uygulanması açık soru.",
+   "Her yeni içeriği durum mesajı olarak duyurmak ekran okuyucuyu aşırı konuşkan yapar."
+  ],
+  "url": "https://www.w3.org/TR/WCAG22/",
+  "version": "2.2"
+ },
+ "wai-aria": {
+  "desc": "Dinamik web bileşenlerinin rol, durum ve özelliklerini yardımcı teknolojilere aktaran W3C erişilebilirlik belirtimi.",
+  "summary": "GenUI'de ilerleme göstergesi, akışlı sohbet günlüğü ve durum duyurularının ekran okuyucuya nasıl aktarılacağını belirler. Raporlar belirsiz ilerlemede aria-valuenow verilmemesini ve role=log öğelerinin örtük aria-live=polite taşıdığını aktarır; ancak her token veya güncellemeyi duyurmak aşırı konuşkanlık yaratır, anlamlı aşama değişiklikleri duyurulmalıdır. React Aria gibi kütüphanelerin ARIA desteği etiket, kontrast ve odak sorumluluğunu uygulamadan kaldırmaz; W3C sayfası bazı turlarda 403 verdiğinden bazı alıntılar doğrulanamadı.",
+  "license": "Standart",
+  "maturity": "Kararlı",
+  "vendor": "W3C WAI",
+  "platform": "Belirtim",
+  "effort": "Orta",
+  "stance": "Çekirdek aday",
+  "rTopics": [
+   "R21",
+   "R05",
+   "R13"
+  ],
+  "facts": [
+   {
+    "text": "WAI-ARIA 1.2 progressbar: değer belirsizse aria-valuenow verilmemesi önerilir (makbuz doğrulanmamış).",
+    "report": "synthesis_claude-map-P7"
+   },
+   {
+    "text": "role=log öğeleri örtük aria-live=polite taşır; AI Elements Conversation role=\"log\" kullanır.",
+    "report": "synthesis_claude-map-P8"
+   },
+   {
+    "text": "GitLab spinner'ı role=status ve aria-label ile tanımlar.",
+    "report": "synthesis_chatgpt-map-P13"
+   },
+   {
+    "text": "A2UI yol haritası ARIA üretimini 'uzun vadeli vizyon' olarak listeler; teslim edilmiş değildir.",
+    "report": "synthesis_claude-map-P11"
+   }
+  ],
+  "risks": [
+   "role=log ile azaltılmış hareketin duyuru taşmasını otomatik çözdüğü doğrulanmadı.",
+   "Kütüphane düzeyindeki ARIA desteği bütün uygulamanın uygunluğunu kanıtlamaz."
+  ],
+  "url": "https://www.w3.org/TR/wai-aria-1.2/",
+  "version": "1.2"
+ },
+ "intl": {
+  "desc": "JavaScript'te sayı, para birimi, tarih ve sıralamayı yerel ayara göre biçimlendiren ECMA-402 uluslararasılaştırma API'si.",
+  "summary": "Korpusta Intl doğrudan incelenmez; NumberFlow'un sayı geçişlerinde Intl.NumberFormat seçeneklerini ve locales özelliğini kullandığı aktarılır. Raporlar R21 için sayı/tarih biçimleri, saat dilimi, uzun Türkçe etiketler ve sağdan sola yazımı ayrı test değişkenleri sayar; sentez raporu ölçüm kartlarında birim, dönem ve saat dilimi etiketini zorunlu görür. Intl kullanmak bütün yerel rakam sistemlerinin veya RTL'nin desteklendiği anlamına gelmez.",
+  "license": "Standart",
+  "maturity": "Kararlı",
+  "vendor": "Ecma TC39 (ECMA-402)",
+  "platform": "Tarayıcı yerel",
+  "effort": "Düşük",
+  "stance": "Çekirdek aday",
+  "rTopics": [
+   "R21",
+   "R19",
+   "R15"
+  ],
+  "facts": [
+   {
+    "text": "NumberFlow Intl.NumberFormat seçenekleri ve locales özelliği sunar; respectMotionPreference varsayılanı true'dur.",
+    "report": "review_chatgpt"
+   },
+   {
+    "text": "NumberFlow RTL, Latin dışı rakam ve bilimsel gösterimi desteklemez; Intl kullanımı bu sınırı kaldırmaz.",
+    "report": "pre_research_claude"
+   },
+   {
+    "text": "Önerilen veri etiketi dönem, para birimi (TRY), kapsam ve güncelleme saatini birlikte taşır.",
+    "report": "GENUI-SENTEZ-RAPORU"
+   }
+  ],
+  "risks": [
+   "Tarayıcılar arası yerel veri farkları Türkçe biçimlerde test edilmeli.",
+   "Biçimlendirme veri doğruluğunu veya birim tutarlılığını garanti etmez."
+  ],
+  "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl",
+  "version": ""
+ },
+ "resizeobserver": {
+  "desc": "Bir öğenin boyutu değiştiğinde geri çağrı tetikleyerek kapsayıcı değişimini izlemeyi sağlayan tarayıcı API'si.",
+  "summary": "GenUI yerleşiminde yan panel açılıp kapandığında grafik kapsayıcısının boyutu pencere resize olayı üretmeden değişebilir; ECharts belgesi bu nedenle ResizeObserver seçeneğini önerir. Raporlar ResizeObserver'ı zorunlu değil, bir seçenek olarak konumlar: sarmalayıcı zaten gözlüyorsa veya uygulama doğrudan resize çağırıyorsa ikinci gözlemci gereksizdir. Gizli/sıfır boyutlu kapsayıcı, temizleme, gözlem döngüleri ve dar görünüm alternatifi ayrıca sınanmalı; gözlemci dar alanda okunabilirliği çözmez.",
+  "license": "Standart",
+  "maturity": "Kararlı",
+  "vendor": "W3C CSSWG",
+  "platform": "Tarayıcı yerel",
+  "effort": "Düşük",
+  "stance": "Seçimli",
+  "rTopics": [
+   "R18",
+   "R19",
+   "R22"
+  ],
+  "facts": [
+   {
+    "text": "ECharts, kapsayıcı boyut değişiminin her zaman window resize üretmediğini belirtir ve ResizeObserver kullanımını önerir.",
+    "report": "pre_research_chatgpt"
+   },
+   {
+    "text": "ResizeObserver tek zorunlu çözüm değildir; mevcut wrapper veya açık yerleşim bildirimi yeterli olabilir.",
+    "report": "synthesis_chatgpt-map-P15"
+   },
+   {
+    "text": "ResizeObserver döngüsel yeniden boyutlanma uyarıları üretebilir; kaynak temizliği uygulamaya aittir.",
+    "report": "review_claude"
+   }
+  ],
+  "risks": [
+   "Her bildirimde pahalı yeniden çizim performansı bozabilir.",
+   "Dar alanda okunabilirlik için ayrıca alternatif temsil gerekir."
+  ],
+  "url": "https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver",
+  "version": ""
+ },
+ "container-queries": {
+  "desc": "Bileşen stilini görünüm alanı yerine içinde bulunduğu kapsayıcının boyutuna göre uyarlayan CSS @container sorguları.",
+  "summary": "Araştırma brifi R18'de kapsayıcı sorguları, medya sorguları ve yerleşim sisteminin sorumluluk paylaşımını soru olarak açar; ancak raporlar bu özelliği ayrıca incelemez ve container query etkileşiminin test edilmediğini not eder. Raporlar AI'ın serbest piksel yerleşimi yerine izinli şablonlar seçmesini, her bileşenin minimum alanını ve dar görünüm alternatifini bildirmesini önerir; kapsayıcı sorguları bu sözleşmeyi CSS düzeyinde uygulamak için doğal adaydır. Ekran genişliği, cihaz gücü ve yakınlaştırma ayrı değişkenler olarak sınanmalıdır.",
+  "license": "Standart",
+  "maturity": "Kararlı",
+  "vendor": "W3C CSSWG",
+  "platform": "Tarayıcı yerel",
+  "effort": "Düşük",
+  "stance": "Prototip adayı",
+  "rTopics": [
+   "R18",
+   "R10"
+  ],
+  "facts": [
+   {
+    "text": "Brif R18, CSS Container Queries, medya sorguları ve yerleşim sistemlerinin hangi sorumlulukları üstleneceğini sorar.",
+    "report": "original-research-brief"
+   },
+   {
+    "text": "Bileşen kendi minimum alanını ve dar görünüm alternatifini bildirmeli; ekran genişliği, cihaz gücü ve yakınlaştırma ayrı değişkenlerdir.",
+    "report": "pre_research_chatgpt"
+   },
+   {
+    "text": "Dar görünüm alternatifi ve container query etkileşimi test edilmedi.",
+    "report": "review_claude"
+   }
+  ],
+  "risks": [
+   "Korpusta bu özellik için doğrudan kaynak veya test yok.",
+   "Grafik kütüphaneleri kapsayıcı değişimini ayrıca gözlemlemeyi gerektirebilir."
+  ],
+  "url": "https://www.w3.org/TR/css-contain-3/",
+  "version": ""
+ },
+ "design-tokens": {
+  "desc": "Renk, boşluk, tipografi gibi tasarım kararlarını araçlar arası taşınabilir adlandırılmış değerler olarak tanımlayan DTCG biçimi.",
+  "summary": "Raporlar AI'ın serbest renk uydurması yerine 'başarı rengi', 'uyarı rengi' gibi anlamlı token'lardan seçmesini önerir; ancak başarı rengini seçmek doğrulanmamış sonucu başarı durumu gibi göstermemelidir. Design Tokens 2025.10, 28 Ekim 2025 tarihli kararlı (Final) Community Group raporudur; W3C Standardı veya Standards Track belgesi değildir, belgede geçen 'Candidate Recommendation' ifadesi bu ayrımı değiştirmez. Figma, Style Dictionary ve kod arasında kayıpsız dönüşüm raporlarda gösterilmemiştir.",
+  "license": "Standart",
+  "maturity": "Kararlı",
+  "vendor": "W3C Design Tokens Community Group",
+  "platform": "Belirtim",
+  "effort": "Orta",
+  "stance": "Çekirdek aday",
+  "rTopics": [
+   "R20",
+   "R10",
+   "R21"
+  ],
+  "facts": [
+   {
+    "text": "Design Tokens 2025.10, 28.10.2025 tarihli Final Community Group Report'tur; W3C Recommendation değildir.",
+    "report": "research_chatgpt"
+   },
+   {
+    "text": "Belgede 'Candidate Recommendation' sözcükleri geçse de durum bölümü bunun Standards Track anlamına gelmediğini söyler.",
+    "report": "review_chatgpt"
+   },
+   {
+    "text": "W3C Standardı olmamak kullanılamazlık değildir; uygulama için kararlı sayılması korunur.",
+    "report": "synthesis_chatgpt-map-P16"
+   }
+  ],
+  "risks": [
+   "Araçlar arası kayıpsız dönüşüm garanti değil.",
+   "Token değişikliği kayıtlı GenUI tariflerini etkileyebilir; sürüm politikası gerekir.",
+   "Modele açılacak emphasis/density seçenekleri ürün sözleşmesidir, standart vermez."
+  ],
+  "url": "https://www.designtokens.org/tr/2025.10/",
+  "version": "2025.10"
+ },
+ "style-dictionary": {
+  "desc": "Tek kaynaktaki tasarım token'larını CSS, JS ve mobil platform çıktılarına dönüştüren açık kaynak token derleme aracı.",
+  "summary": "Brif R20, Figma Variables, Style Dictionary, kod tipleri ve doğrulama şemalarının tek kaynaktan üretilip üretilemeyeceğini sorar. Raporlar Style Dictionary'yi token hattı adayı olarak anar, ancak DTCG 2025.10 biçiminin Figma–Style Dictionary–kod arasında kayıpsız dönüşümü garanti etmediğini ve bu uyumun test edilmediğini vurgular. Araç desteği sürüm bazında ayrıca doğrulanmalıdır.",
+  "license": "Apache-2.0",
+  "maturity": "Kararlı",
+  "vendor": "Amazon / açık kaynak topluluğu",
+  "platform": "Framework bağımsız",
+  "effort": "Orta",
+  "stance": "Prototip adayı",
+  "rTopics": [
+   "R20",
+   "R26"
+  ],
+  "facts": [
+   {
+    "text": "Figma, Style Dictionary ve kod arasında kayıpsız dönüşüm doğrulanmadı; ortak token biçimi tek başına garanti vermez.",
+    "report": "pre_research_chatgpt"
+   },
+   {
+    "text": "Araç desteği (Style Dictionary, Figma) sürüm bazında ayrıca doğrulanmalıdır.",
+    "report": "review_claude"
+   },
+   {
+    "text": "Style Dictionary ve Figma Variables belgeleri araştırma turunda incelenmedi.",
+    "report": "review_claude"
+   }
+  ],
+  "risks": [
+   "Alias ve token türü dönüşümlerinde kayıp olabilir.",
+   "Çok markalı tema ve sürüm geçişi ayrı yönetişim gerektirir."
+  ],
+  "url": "https://styledictionary.com/",
+  "version": ""
+ },
+ "figma": {
+  "desc": "Arayüz tasarımı, prototipleme ve Variables ile token yönetimi sunan bulut tabanlı ortak tasarım platformu.",
+  "summary": "Korpusta Figma yalnız token hattının bir ucu olarak geçer: brif R20, Figma Variables'ın kod tipleri ve doğrulama şemalarıyla tek kaynaktan üretilmesini sorar. Raporlar DTCG biçiminin Figma–Style Dictionary–kod arasında kayıpsız aktarımı garanti etmediğini ve Figma Variables belgelerinin incelenmediğini not eder. Tasarım kaynağı olarak kullanılabilir; ancak modelin gördüğü ve uygulamanın doğruladığı bileşen tanımı aynı sürümlü kaynaktan üretilmelidir.",
+  "license": "Ticari",
+  "maturity": "Kararlı",
+  "vendor": "Figma, Inc.",
+  "platform": "Tasarım",
+  "effort": "Orta",
+  "stance": "Seçimli",
+  "rTopics": [
+   "R20"
+  ],
+  "facts": [
+   {
+    "text": "Brif R20: Figma Variables, Style Dictionary, kod tipleri ve doğrulama şemalarının tek kaynaktan üretimi araştırma sorusudur.",
+    "report": "original-research-brief"
+   },
+   {
+    "text": "Figma Variables, Style Dictionary ve kod şemaları arasında kayıpsız dönüşüm ve çok markalı sürüm geçişi kurulmadı.",
+    "report": "review_chatgpt"
+   },
+   {
+    "text": "DTCG 2025.10 statüsü Figma/Style Dictionary/kod arasında kayıpsız dönüşüm garantisi değildir.",
+    "report": "pre_brief_chatgpt"
+   }
+  ],
+  "risks": [
+   "Ticari lisans ve bulut hizmeti bağımlılığı.",
+   "Tasarım aracındaki token ile koddaki token zamanla sapabilir."
+  ],
+  "url": "https://www.figma.com/",
+  "version": ""
+ },
+ "axe": {
+  "desc": "Deque'nin web sayfalarındaki WCAG ihlallerini otomatik tespit eden açık kaynak erişilebilirlik test motoru.",
+  "summary": "Raporlar @axe-core/playwright gibi otomatik taramaları etiket ve kontrast gibi tekrar üretilebilir hatalar için değerli bulur, ancak bütün erişilebilirlik sorunlarını yakalamadığını vurgular. Deque'nin kendi çalışmasına atfedilen %57 oranı satıcı ölçümüdür; evrensel kapsama oranı değildir ve kalan sorunların tek bir manuel yöntemle bulunacağını göstermez. Menü, hata, kısmi sonuç, onay ve yeniden bağlantı durumları taramadan önce oluşturulmalı; klavye, ekran okuyucu ve gerçek kullanıcı testleri eklenmelidir.",
+  "license": "MPL-2.0",
+  "maturity": "Kararlı",
+  "vendor": "Deque Systems",
+  "platform": "Framework bağımsız",
+  "effort": "Düşük",
+  "stance": "Çekirdek aday",
+  "rTopics": [
+   "R21",
+   "R24"
+  ],
+  "facts": [
+   {
+    "text": "Deque'nin 2021-03-10 tarihli kendi çalışması otomatik testin sorunların %57'sini bulduğunu bildirir; evrensel kapsama oranı değildir.",
+    "report": "synthesis_chatgpt-map-P20"
+   },
+   {
+    "text": "%57 oranı 13.000+ sayfalık üretici ölçümüne dayanır; kesitte yeniden üretilebilir değildir.",
+    "report": "synthesis_chatgpt-map-P19"
+   },
+   {
+    "text": "Playwright a11y belgesi: @axe-core/playwright bazı sorunları yakalar, manuel test gerekir.",
+    "report": "synthesis_claude-map-P11"
+   },
+   {
+    "text": "Otomatik tarama bütün WCAG sorunlarını bulmaz; etiket/kontrast gibi tekrar üretilebilir hatalarda değerlidir.",
+    "report": "synthesis_chatgpt-map-P6"
+   }
+  ],
+  "risks": [
+   "Dinamik GenUI durumları oluşturulmadan tarama kapsam dışında kalır.",
+   "Geçen tarama uygunluk kanıtı sayılmamalı."
+  ],
+  "url": "https://github.com/dequelabs/axe-core",
+  "version": ""
+ },
+ "playwright": {
+  "desc": "Microsoft'un Chromium, Firefox ve WebKit üzerinde uçtan uca tarayıcı testi ve otomasyonu sağlayan açık kaynak aracı.",
+  "summary": "Raporlar Playwright'ı Storybook ve MSW ile birlikte katmanlı test mimarisinin uçtan uca adayı olarak görür; sentez raporundaki çift tıklama, kaybolan yanıt, ters sıralı olay, form koruma ve mobil klavye gibi senaryolar bu katmanda sınanabilir. Playwright'ın kendi belgesi otomatik erişilebilirlik testlerinin yalnız bazı yaygın sorunları bulduğunu, manuel değerlendirme ve kapsayıcı kullanıcı testi gerektiğini açıkça söyler. Özellikler ve sürüm uyumları raporlarda doğrulanmamıştır.",
+  "license": "Apache-2.0",
+  "maturity": "Kararlı",
+  "vendor": "Microsoft",
+  "platform": "Framework bağımsız",
+  "effort": "Orta",
+  "stance": "Çekirdek aday",
+  "rTopics": [
+   "R24",
+   "R21",
+   "R14"
+  ],
+  "facts": [
+   {
+    "text": "Playwright belgesi otomatik a11y testlerinin bütün WCAG ihlallerini bulamayacağını, manuel ve kapsayıcı kullanıcı testi gerektiğini söyler.",
+    "report": "research_chatgpt"
+   },
+   {
+    "text": "Storybook, MSW ve Playwright test katmanlarında aday araçlardır; sürüm uyumları bu turda doğrulanmadı.",
+    "report": "pre_research_chatgpt"
+   },
+   {
+    "text": "Sentez raporu 12 gözlenebilir test senaryosu önerir: çift gönderim, kayıp yanıt, ters sıralı/tekrar olay, kesik JSON, şirket değişimi, hareket azaltma.",
+    "report": "GENUI-SENTEZ-RAPORU"
+   }
+  ],
+  "risks": [
+   "Gerçek proxy tamponlama ve sunucu kalıcılığı sahte ortamda yakalanmayabilir.",
+   "Zamanlamaya bağlı akış testleri kırılgan olabilir."
+  ],
+  "url": "https://playwright.dev/docs/accessibility-testing",
+  "version": ""
+ },
+ "vitest": {
+  "desc": "Vite tabanlı, Jest uyumlu API sunan hızlı JavaScript/TypeScript birim ve bileşen test çalıştırıcısı.",
+  "summary": "Korpusta Vitest, A2UI React renderer testlerinin 'Vitest + React Testing Library' ile yazıldığı bilgisiyle geçer; README kısmi güncelleme veya prefers-reduced-motion testinden söz etmez. Raporlar bu araçların kullanılmasının odak, dinamik duyuru ve belirli kabul senaryolarının geçtiğini kanıtlamadığını vurgular. Vite tabanlı bir yığında renderer, katalog doğrulayıcı ve olay reducer'ı için birim test katmanı olarak doğal adaydır.",
+  "license": "MIT",
+  "maturity": "Kararlı",
+  "vendor": "Vitest ekibi (VoidZero)",
+  "platform": "Framework bağımsız",
+  "effort": "Düşük",
+  "stance": "Çekirdek aday",
+  "rTopics": [
+   "R24",
+   "R12"
+  ],
+  "facts": [
+   {
+    "text": "A2UI React renderer README'si birim testlerin Vitest + React Testing Library ile yazıldığını belirtir.",
+    "report": "review_claude"
+   },
+   {
+    "text": "Aynı README kısmi güncelleme veya prefers-reduced-motion testinden söz etmez.",
+    "report": "review_claude"
+   },
+   {
+    "text": "Açık soru: @a2ui/react test kapsamı (Vitest) kısmi güncellemeyi ve reduced-motion'ı içeriyor mu?",
+    "report": "pre_research_claude"
+   }
+  ],
+  "risks": [
+   "Birim testleri gerçek tarayıcı davranışını ve ağ kesintilerini kapsamaz.",
+   "Test aracının varlığı kabul senaryolarının geçtiğinin kanıtı değildir."
+  ],
+  "url": "https://vitest.dev/",
+  "version": ""
+ },
+ "msw": {
+  "desc": "Service Worker ve Node katmanında ağ isteklerini yakalayıp taklit eden, API'den bağımsız sahte sunucu kütüphanesi.",
+  "summary": "Raporlar MSW'yi tarayıcı ve Node isteklerini taklit ederek bozuk akış, gecikme ve hata senaryolarını tekrar üretilebilir kılan test katmanı olarak konumlar. Storybook play ve XState grafiği ile birlikte kontrollü deney sağlar; ancak gerçek proxy tamponlaması, UTF-8 parçalanması, yeniden oynatma, sunucu kalıcılığı ve yarış koşullarının tamamını kapsamaz. Bu nedenle gerçek ağ ve backend ile yapılan uçtan uca testlerin yerine geçmez.",
+  "license": "MIT",
+  "maturity": "Kararlı",
+  "vendor": "mswjs (Artem Zakharchenko)",
+  "platform": "Framework bağımsız",
+  "effort": "Düşük",
+  "stance": "Prototip adayı",
+  "rTopics": [
+   "R24",
+   "R14"
+  ],
+  "facts": [
+   {
+    "text": "MSW browser/Node isteklerini taklit edebilir; state graph araçlarıyla birlikte eksiksiz kapsam garanti edilmez.",
+    "report": "synthesis_chatgpt-map-P13"
+   },
+   {
+    "text": "Storybook, MSW ve durum grafikleri katmanlı test sağlar; bütün zamanlama/ağ/yarış koşullarını kapsamaz.",
+    "report": "synthesis_chatgpt-map-P16"
+   },
+   {
+    "text": "MSW belgesi küresel yanıt gecikmesi ve Vitest Browser Mode başlıklarını içerir.",
+    "report": "review_chatgpt"
+   }
+  ],
+  "risks": [
+   "Sahte yanıtlar gerçek sunucu sözleşmesinden sapabilir; mock'lar senkron tutulmalı.",
+   "SSE/akış parçalanması gerçek ortamda ayrıca sınanmalı."
+  ],
+  "url": "https://mswjs.io/docs/",
+  "version": ""
+ },
+ "storybook": {
+  "desc": "UI bileşenlerini yalıtılmış hikâyelerle geliştirip belgeleyen, etkileşim ve görsel testleri çalıştıran açık kaynak atölye aracı.",
+  "summary": "Raporlarda Storybook, bileşen kataloğunun durumlarını (yükleniyor, hata, kısmi sonuç, onay) yalıtılmış olarak sergilemek ve sınamak için aday katmandır. Storybook belgesine göre her story basit bir render (smoke) testidir; davranış doğrulaması için play etkileşimleri gerekir. MSW ve durum grafikleriyle birlikte kontrollü senaryolar sağlar, fakat gerçek ağ ve yarış koşullarını kapsamaz.",
+  "license": "MIT",
+  "maturity": "Kararlı",
+  "vendor": "Storybook (Chromatic)",
+  "platform": "Çoklu framework",
+  "effort": "Orta",
+  "stance": "Prototip adayı",
+  "rTopics": [
+   "R24",
+   "R10",
+   "R03"
+  ],
+  "facts": [
+   {
+    "text": "Storybook test belgesi basit render testini smoke test olarak ayırır; davranış için play etkileşimleri gerekir.",
+    "report": "synthesis_chatgpt-map-P12"
+   },
+   {
+    "text": "Storybook play ve MSW kontrollü deney sağlar; gerçek proxy, parçalanma ve sunucu kalıcılığı yerine geçmez.",
+    "report": "synthesis_chatgpt-map-P6"
+   },
+   {
+    "text": "Storybook, MSW ve Playwright katmanlarda aday araçlardır; özellikler ve sürüm uyumları doğrulanmadı.",
+    "report": "pre_research_chatgpt"
+   }
+  ],
+  "risks": [
+   "Story'lerin katalog şemasıyla senkron tutulmaması bakım yükü yaratır.",
+   "Görsel olarak doğru story veri doğruluğunu kanıtlamaz."
+  ],
+  "url": "https://storybook.js.org/docs/writing-tests",
+  "version": ""
+ },
+ "testing-library": {
+  "desc": "Bileşenleri kullanıcının göreceği rol, etiket ve metinlerle sorgulayarak test etmeyi teşvik eden test yardımcıları ailesi.",
+  "summary": "Korpusta React Testing Library, A2UI React renderer'ının Vitest ile birlikte kullandığı test aracı olarak geçer. Değerlendirmeler bu araçların kullanılmasının odak, okuma sırası, dinamik duyurular, hareket tercihi ve gerçek görev başarısının doğrulandığını tek başına göstermediğini vurgular. Rol/etiket tabanlı sorgular erişilebilir ad hatalarını erken yakalamaya yardımcı olabilir; ekran okuyucu ve manuel testin yerini tutmaz.",
+  "license": "MIT",
+  "maturity": "Kararlı",
+  "vendor": "Testing Library topluluğu",
+  "platform": "Çoklu framework",
+  "effort": "Düşük",
+  "stance": "Çekirdek aday",
+  "rTopics": [
+   "R24",
+   "R21"
+  ],
+  "facts": [
+   {
+    "text": "A2UI React renderer testleri 'Vitest + React Testing Library' ile yazılmıştır.",
+    "report": "review_claude"
+   },
+   {
+    "text": "Vitest/React Testing Library kullanılması belirli kabul senaryolarının geçtiğinin kanıtı değildir; hedef uygulamada çalıştırılmış test yok.",
+    "report": "synthesis_chatgpt-map-P16"
+   },
+   {
+    "text": "Test aracı kullanımı odak, okuma sırası, dinamik duyuru ve hareket tercihinin doğrulandığını göstermez.",
+    "report": "review_chatgpt"
+   }
+  ],
+  "risks": [
+   "jsdom ortamı gerçek tarayıcı yerleşimini ve animasyonu temsil etmez.",
+   "Duyuru ve odak davranışı gerçek yardımcı teknolojiyle ayrıca sınanmalı."
+  ],
+  "url": "https://testing-library.com/",
+  "version": ""
+ },
+ "opentelemetry": {
+  "desc": "İz, metrik ve log verisini üreticiden bağımsız toplamak için CNCF'nin açık gözlemlenebilirlik standardı ve SDK'ları.",
+  "summary": "R25 kapsamında kullanıcı sorusunu iş, aşama, istek, kaynak, veri sürümü ve ekrandaki kartla ilişkilendirmek için aday çerçevedir. Raporlar eski OpenTelemetry GenAI semantik kurallar sayfasının başka depoya taşındığını ve orada bakım görmediğini, bu yüzden güncel alanların kararlılığının varsayılamayacağını not eder. jobId/runId/eventId/dataRevision/componentId ilişkisi hazır standart alan değil ürün önerisidir; ham istem, dosya içeriği ve kişisel veri varsayılan olarak günlüklenmemelidir.",
+  "license": "Apache-2.0",
+  "maturity": "Kararlı",
+  "vendor": "CNCF",
+  "platform": "Framework bağımsız",
+  "effort": "Orta",
+  "stance": "Prototip adayı",
+  "rTopics": [
+   "R25",
+   "R24"
+  ],
+  "facts": [
+   {
+    "text": "Eski GenAI semconv sayfası taşındığını ve bu depoda artık bakım görmediğini bildirir.",
+    "report": "synthesis_claude-map-P6"
+   },
+   {
+    "text": "Taşınma bütün standardın bakımsız olduğu anlamına gelmez; yeni sözleşmenin kararlılığı ve taşınma tarihi belirlenmedi.",
+    "report": "review_chatgpt"
+   },
+   {
+    "text": "R25 için jobId/runId/eventId/dataRevision/componentId ilişkilendirmesi önerilir; günlükler ham istem ve dosya içeriği biriktirmemeli.",
+    "report": "pre_research_chatgpt"
+   }
+  ],
+  "risks": [
+   "GenAI semantik kurallarındaki alan adları değişebilir.",
+   "İz verisine hassas içerik sızabilir; maskeleme ve saklama politikası gerekir."
+  ],
+  "url": "https://opentelemetry.io/docs/specs/semconv/gen-ai/",
+  "version": ""
+ },
+ "inp": {
+  "desc": "Kullanıcı etkileşiminden sonraki görsel güncellemeye kadar geçen gecikmeyi ölçen Core Web Vitals yanıt verebilirlik metriği.",
+  "summary": "Raporlar INP'nin etkileşimden sonraki çizim gecikmesini ölçtüğünü, uzun AI işinin toplam tamamlanma süresini ölçmediğini vurgular; 75. yüzdelikte 200 ms 'iyi' eşiği AI analizinin 200 ms'de bitmesi gerektiği anlamına gelmez. Buna karşın akışlı tariflerin senkron ayrıştırılması ve çizimi ana iş parçacığını meşgul edip INP'yi bozabilir. Bu yüzden istek kabulü, ilk anlamlı geri bildirim, ilk kullanılabilir sonuç ve toplam bitiş ayrı ölçülmelidir.",
+  "license": "Uygulanmaz",
+  "maturity": "Kararlı",
+  "vendor": "Google Chrome (web.dev)",
+  "platform": "Tarayıcı yerel",
+  "effort": "Düşük",
+  "stance": "Referans",
+  "rTopics": [
+   "R22",
+   "R25"
+  ],
+  "facts": [
+   {
+    "text": "web.dev, cihaz sınıfları ayrılmış saha verisinde 75. yüzdelikte ≤200 ms'yi iyi yanıt verebilirlik sayar.",
+    "report": "pre_research_chatgpt"
+   },
+   {
+    "text": "INP makalesi 06.05.2022'de yayımlandı, 02.09.2025'te güncellendi.",
+    "report": "pre_research_chatgpt"
+   },
+   {
+    "text": "500 ms eşiği kesitte kurulmadı; INP ağ istekleri ve diğer eşzamansız işlerin tamamını ölçmez.",
+    "report": "synthesis_chatgpt-map-P19"
+   }
+  ],
+  "risks": [
+   "INP iyi olsa bile kullanıcı uzun AI işinde bekleyebilir; iş süresi ayrıca izlenmeli.",
+   "Yoğun akış ve grafik çizimi düşük güçlü cihazlarda INP'yi bozabilir."
+  ],
+  "url": "https://web.dev/articles/inp",
+  "version": ""
+ },
+ "can-i-use": {
+  "desc": "Web platformu özelliklerinin tarayıcı sürümlerine göre destek tablolarını ve küresel kullanım oranlarını sunan başvuru sitesi.",
+  "summary": "Raporlar View Transitions gibi animasyon kararlarında Can I Use tablolarını birincile yakın kaynak olarak kullanır. Ancak aynı gün alınan MDN BCD verisiyle çelişkiler görülmüş (Firefox belgeler arası geçiş: 'Partial' ile version_added:false), bazı sayfalar 404 vermiştir. Küresel kullanım yüzdesi hedef SaaS'ın kurumsal tarayıcı dağılımı değildir; ürün kendi tarayıcı matrisini tanımlamalıdır.",
+  "license": "Uygulanmaz",
+  "maturity": "Kararlı",
+  "vendor": "Alexis Deveria",
+  "platform": "Framework bağımsız",
+  "effort": "Düşük",
+  "stance": "Referans",
+  "rTopics": [
+   "R06"
+  ],
+  "facts": [
+   {
+    "text": "Erişim 2026-09-24: aynı belge VT Safari 18.0+ ve Firefox 144+ 'Supported'; belgeler arası VT'de Firefox 144–156 'Partial', Safari 18.2+ 'Supported'.",
+    "report": "research_claude"
+   },
+   {
+    "text": "Aynı belge View Transitions için küresel destek %91,75 olarak aktarılır.",
+    "report": "pre_research_claude"
+   },
+   {
+    "text": "TestMu AI (eski LambdaTest) Firefox 144 ve Safari 18'in @view-transition'ı yok saydığını iddia eder; çelişkide caniuse tercih edildi.",
+    "report": "research_claude"
+   }
+  ],
+  "risks": [
+   "Küresel yüzde kurumsal hedef tarayıcı dağılımını yansıtmaz.",
+   "Canlı tablo; hedef tarihteki durum kanıtlanamaz ve BCD ile çelişebilir."
+  ],
+  "url": "https://caniuse.com/view-transitions",
+  "version": ""
+ },
+ "baseline": {
+  "desc": "Bir web özelliğinin tüm büyük tarayıcılarda ne zamandan beri güvenle kullanılabildiğini etiketleyen WebDX sınıflandırması.",
+  "summary": "Raporlar Baseline etiketini CSS hareket kararlarında kullanır: @starting-style Ağustos 2024'ten beri Baseline 2024 iken interpolate-size 'Limited availability' durumundadır ve Baseline dışıdır. Baseline etiketi bir özelliğin çıkış animasyonu gibi bütün sorunları çözdüğü anlamına gelmez ve eski tarayıcı istisnalarını ortadan kaldırmaz. Ürün Baseline'ı kendi hedef tarayıcı matrisi ve aşamalı iyileştirme ilkesiyle birlikte kullanmalıdır.",
+  "license": "Uygulanmaz",
+  "maturity": "Kararlı",
+  "vendor": "W3C WebDX Community Group",
+  "platform": "Framework bağımsız",
+  "effort": "Düşük",
+  "stance": "Referans",
+  "rTopics": [
+   "R06",
+   "R26"
+  ],
+  "facts": [
+   {
+    "text": "@starting-style Baseline 2024'tür (Ağustos 2024'ten itibaren tüm büyük tarayıcılar); çıkış animasyonunu tek başına çözmez.",
+    "report": "pre_research_claude"
+   },
+   {
+    "text": "interpolate-size 'Limited availability' durumundadır, Baseline değildir ve opt-in gerektirir.",
+    "report": "pre_research_claude"
+   },
+   {
+    "text": "@starting-style için Baseline 2024 aktarımı interpolate-size desteğiyle aynı değildir; allow-keywords koşulu korunmalı.",
+    "report": "synthesis_chatgpt-map-P17"
+   }
+  ],
+  "risks": [
+   "Baseline etiketi hedef kurumsal tarayıcı sürümlerini garanti etmez.",
+   "Öğe kapsamlı View Transitions gibi yeni özellikler yalnız Chromium'da olabilir; aşamalı iyileştirme gerekir."
+  ],
+  "url": "https://web.dev/baseline",
+  "version": ""
+ },
+ "bcd": {
+  "desc": "MDN ve Can I Use gibi sitelerin kullandığı, web özelliklerinin tarayıcı uyumluluğunu tutan makine okunur JSON veri seti.",
+  "summary": "Raporlar View Transitions desteğini doğrulamak için BCD'nin view-transition.json ve Element.json dosyalarını birincile yakın kaynak olarak kullanır. Aynı gün alınan BCD verisinde Firefox için belgeler arası geçiş version_added:false görünürken Can I Use kısmi destek bildirmiş; bu çelişki çözümsüz bırakılmıştır. Tek bir uyumluluk kaynağına dayanmak yerine BCD, Can I Use ve tarayıcı sürüm notları birlikte okunmalıdır.",
+  "license": "Uygulanmaz",
+  "maturity": "Kararlı",
+  "vendor": "MDN (Mozilla ve topluluk)",
+  "platform": "Framework bağımsız",
+  "effort": "Düşük",
+  "stance": "Referans",
+  "rTopics": [
+   "R06"
+  ],
+  "facts": [
+   {
+    "text": "Tam MDN dosyasında Firefox için version_added:false; Can I Use aynı gün kısmi destek bildirir.",
+    "report": "synthesis_chatgpt-map-P11"
+   },
+   {
+    "text": "BCD Element.json, Chrome 147 öğe kapsamlı View Transitions iddiasının destek kaynaklarından biri olarak kullanıldı.",
+    "report": "synthesis_chatgpt-map-P10"
+   }
+  ],
+  "risks": [
+   "Canlı veri; hedef tarihteki anlık kayıt saklanmadıkça sonuç yeniden üretilemez.",
+   "Kısmi destek notları özellik düzeyinde ayrıntılı okunmalı."
+  ],
+  "url": "https://github.com/mdn/browser-compat-data",
+  "version": ""
+ },
+ "mdn": {
+  "desc": "Mozilla'nın HTML, CSS, JavaScript ve Web API'leri için topluluk destekli başvuru ve rehber belgeleri.",
+  "summary": "Raporlar MDN'i SSE/EventSource, iframe sandbox, prefers-reduced-motion, @starting-style, interpolate-size ve ResizeObserver gibi konularda teknik başvuru olarak sık kullanır. Öne çıkan çıkarımlar: tarayıcının SSE'de yeniden bağlanması uygulamanın bütün olayları sakladığı anlamına gelmez; HTTP/2 dışındaki SSE'de tarayıcı+alan adı başına 6 bağlantı sınırı vardır; prefers-reduced-motion hareketi kaldırma, azaltma veya değiştirme seçeneklerini kapsar. MDN ikincil teknik referanstır; normatif sonuçlar WHATWG/W3C metinleriyle desteklenmelidir.",
+  "license": "Uygulanmaz",
+  "maturity": "Kararlı",
+  "vendor": "Mozilla",
+  "platform": "Framework bağımsız",
+  "effort": "Düşük",
+  "stance": "Referans",
+  "rTopics": [
+   "R14",
+   "R06",
+   "R21",
+   "R23"
+  ],
+  "facts": [
+   {
+    "text": "HTTP/2 dışındaki SSE için tarayıcı+alan adı başına 6 bağlantı sınırı aktarılır; HTTP/2'de akış sayısı müzakere edilir.",
+    "report": "synthesis_chatgpt-map-P13"
+   },
+   {
+    "text": "MDN, aynı kökenli iframe'de allow-scripts + allow-same-origin'in sandbox'ı kaldırabileceğini uyarır ve ayrı origin önerir.",
+    "report": "review_claude"
+   },
+   {
+    "text": "prefers-reduced-motion hareketi kaldırma, azaltma veya değiştirmeyi kapsar; 'azalt, asla kaldırma' yorumu fazla dardır.",
+    "report": "synthesis_chatgpt-map-P19"
+   }
+  ],
+  "risks": [
+   "İkincil kaynak; normatif iddialar spesifikasyonla doğrulanmalı.",
+   "Canlı sayfalar değişir; erişim tarihi kaydedilmeli."
+  ],
+  "url": "https://developer.mozilla.org/",
+  "version": ""
+ },
+ "generative-interfaces": {
+  "desc": "Stanford'un LLM'lerin sohbet metni yerine etkileşimli arayüz üretmesini sohbet arayüzüyle karşılaştıran arXiv çalışması.",
+  "summary": "Raporlarda GenUI lehine en sık anılan tercih kanıtıdır: v1'de üretilen arayüzler sohbet çıktısına karşı güçlü biçimde tercih edilmiştir. Ancak oranlar karşılaştırıcıya göre değişir, v3'te kullanıcıların kendi sorgularıyla yapılan çalışmada fark belirgin biçimde daralır ve ölçülen şey tercihtir; görev doğruluğu, zaman kazancı veya iyi tasarlanmış sabit SaaS paneline üstünlük değildir. Raporlar bu nedenle hedef panelde sabit panel ile kontrollü GenUI'nin karşılaştırmalı deneyini şart koşar.",
+  "license": "Uygulanmaz",
+  "maturity": "Araştırma",
+  "vendor": "Stanford (arXiv 2508.19227)",
+  "platform": "Framework bağımsız",
+  "effort": "Düşük",
+  "stance": "Referans",
+  "rTopics": [
+   "R01",
+   "R02",
+   "R28"
+  ],
+  "facts": [
+   {
+    "text": "v1 (26.08.2025): 100 sorgu, karşılaştırma başına 3 değerlendirme; tercih oranları %84, %69 ve %75 (farklı karşılaştırıcılar).",
+    "report": "synthesis_chatgpt-map-P16"
+   },
+   {
+    "text": "v3: 76 katılımcı ve 380 gerçek sorguda %50,8 galibiyet / %8,2 beraberlik / %41,1 yenilgi.",
+    "report": "synthesis_chatgpt-map-P19"
+   },
+   {
+    "text": "Claude 3.7 karşılaştırıcısının yanıtlarının %26'sındaki artifact'ler karşılaştırmadan çıkarıldı.",
+    "report": "synthesis_chatgpt-map-P14"
+   },
+   {
+    "text": "v3 özetindeki '%72'ye kadar iyileşme' kazanma oranı olarak okunmamalı; paydası açıklanmamış.",
+    "report": "synthesis_chatgpt-map-P11"
+   }
+  ],
+  "risks": [
+   "Tercih ölçüsü görev başarısı değildir.",
+   "Karşılaştırma temeli sohbet çıktısıdır; sabit panel değildir.",
+   "Arayüz üretimi birkaç dakikaya kadar sürebilir."
+  ],
+  "url": "https://arxiv.org/abs/2508.19227",
+  "version": "v3"
+ },
+ "google-genui": {
+  "desc": "Google Research'ün modelin her istem için özel HTML/CSS/JS arayüzünü açık uçlu ürettiği Generative UI araştırması.",
+  "summary": "Raporlar bunu açık uçlu üretimin temsilcisi olarak konumlar: değerlendiriciler standart Markdown/LLM çıktısına karşı güçlü tercih bildirmiş, ancak insan uzman tasarımları en yüksek tercihi almış ve üretim bir dakika veya daha uzun sürebilmiştir. Hız değerlendirme dışında tutulmuş, hatalar kabul edilmiştir; Nielsen yorumu bağımsız deney değildir. Raporların çıkarımı, açık uçlu üretimin kurumsal panel çekirdeğine değil yalıtılmış deneylere uygun olduğudur.",
+  "license": "Uygulanmaz",
+  "maturity": "Araştırma",
+  "vendor": "Google Research",
+  "platform": "Framework bağımsız",
+  "effort": "Düşük",
+  "stance": "Referans",
+  "rTopics": [
+   "R01",
+   "R02",
+   "R05"
+  ],
+  "facts": [
+   {
+    "text": "Blog 18.11.2025; standart Markdown çıktısına karşı %83 tercih aktarılır.",
+    "report": "synthesis_claude-map-P6"
+   },
+   {
+    "text": "İnsan uzman tasarımı en yüksek tercihi aldı; üretim hızı değerlendirme dışında kaldı.",
+    "report": "synthesis_chatgpt-map-P14"
+   },
+   {
+    "text": "Üretim 'bir dakika veya daha uzun' sürebilir; Nielsen testlerin basit problemlerle sınırlı olduğunu belirtir.",
+    "report": "pre_research_claude"
+   }
+  ],
+  "risks": [
+   "Açık uçlu HTML/JS üretimi güvenlik ve izolasyon gerektirir.",
+   "Uzun üretim süresi etkileşimli panel beklentisiyle uyuşmaz.",
+   "Üreticinin kendi değerlendirmesi; Stanford çalışmasıyla birleştirilemez."
+  ],
+  "url": "https://research.google/blog/generative-ui-a-rich-custom-visual-interactive-user-experience-for-any-prompt/",
+  "version": ""
+ },
+ "design-theater": {
+  "desc": "GenUI araçlarının anlattığı tasarım gerekçeleri ile gerçekte ürettikleri arayüz arasındaki uyumu ölçen arXiv benchmark çalışması.",
+  "summary": "Raporlar Design Theater'ı modelin 'erişilebilir yaptım' gibi kalite açıklamalarının test yerine kullanılamayacağının kanıtı olarak kullanır. 24 görev, beş araç ve 120 arayüzde açıklanan gerekçelerin ortalama dörtte birinden fazlası arayüzde uygulanmamış, işlevsel gereksinimlerde başarısızlık %34'e çıkmıştır. Deney HTML/CSS/JS ile sınırlı olup bileşen kütüphanelerini dışladığından katalog tabanlı çalışma zamanı GenUI'sinin başarısızlığını göstermez.",
+  "license": "Uygulanmaz",
+  "maturity": "Araştırma",
+  "vendor": "arXiv 2607.22928 yazarları",
+  "platform": "Framework bağımsız",
+  "effort": "Düşük",
+  "stance": "Referans",
+  "rTopics": [
+   "R24",
+   "R11",
+   "R28",
+   "R01"
+  ],
+  "facts": [
+   {
+    "text": "24 görev, 5 araç, 120 arayüz; gerekçelerin ortalama %25'ten fazlası uygulanmadı, işlevsel gereksinimlerde %34 başarısızlık.",
+    "report": "research_chatgpt"
+   },
+   {
+    "text": "v2 (31 Temmuz 2026) için 0,54 ortalama ilke tanıma puanı ve dört aracın işlevsel ilkelerin en fazla %6'sını uygulaması aktarılır.",
+    "report": "synthesis_chatgpt-map-P17"
+   },
+   {
+    "text": "Deney HTML/CSS/JavaScript ile sınırlı, bileşen kütüphaneleri dışlandı; kullanıcı başarısı veya güven ölçülmedi.",
+    "report": "synthesis_chatgpt-map-P16"
+   }
+  ],
+  "risks": [
+   "Katalog tabanlı runtime GenUI'ye doğrudan genellenemez.",
+   "Bazı doğrulama turlarında %25/%34 alıntıları kaynakla eşleşmedi."
+  ],
+  "url": "https://arxiv.org/abs/2607.22928",
+  "version": "v2"
+ },
+ "nngroup": {
+  "desc": "Kullanılabilirlik araştırması ve UX rehberleri yayımlayan kuruluş; yanıt süresi, ilerleme ve iskelet ekran rehberleri sunar.",
+  "summary": "Raporlar NN/g'yi iki eksende kullanır: GenUI makalesindeki tutarsızlık ve yeniden öğrenme yükü uyarısı ile bekleme göstergesi süre rehberleri. 0,1/1/10 saniye sınırları, 2–10 saniye döngüsel gösterge, 10 saniye ve üzeri yüzde göstergesi ile tam sayfa iskelet ekranlar için 10 saniye altı önerileri bağlamsal rehberdir. Bu değerler deney sonucu gibi sunulmamalı ve ölçülemeyen AI işine sahte yüzde üretme gerekçesi yapılmamalıdır.",
+  "license": "Uygulanmaz",
+  "maturity": "Kararlı",
+  "vendor": "Nielsen Norman Group",
+  "platform": "Framework bağımsız",
+  "effort": "Düşük",
+  "stance": "Referans",
+  "rTopics": [
+   "R05",
+   "R01",
+   "R21"
+  ],
+  "facts": [
+   {
+    "text": "GenUI makalesi (2024-03-22) riskleri: tutarsızlıktan doğan yeniden öğrenme yükü, gizlilik, halüsinasyon/önyargı mirası, işlem yükü.",
+    "report": "pre_research_claude"
+   },
+   {
+    "text": "Progress rehberi (26.10.2014): döngüsel animasyon 2–10 s işler için; yüzde göstergesi 10 s ve üzeri.",
+    "report": "synthesis_chatgpt-map-P7"
+   },
+   {
+    "text": "Skeleton rehberi 04.06.2023 tarihli, 02.09.2026'da gözden geçirildi; tam sayfa yüklemesinde 10 s altını tartışır.",
+    "report": "synthesis_claude-map-P8"
+   },
+   {
+    "text": "0,1/1/10 s sınırları 1993 kaynaklı, 2014'te güncellenmiş rehberdir.",
+    "report": "research_gemini"
+   }
+  ],
+  "risks": [
+   "Rehber değerleri AI akışı için ölçülmemiştir.",
+   "2014'teki '10 saniye veya üzeri' koşulu '>10' diye daraltılmamalı."
+  ],
+  "url": "https://www.nngroup.com/articles/progress-indicators/",
+  "version": ""
+ },
+ "gajos-2008": {
+  "desc": "Uyarlanabilir arayüzlerde öngörülebilirlik ve doğruluğun performans ile memnuniyete etkisini inceleyen CHI 2008 çalışması.",
+  "summary": "Raporlar bu çalışmayı, AI'ın düzeni her istekte değiştirmesinin tekrarlı yönetim işlerinde kas hafızasını bozabileceği argümanına dayanak olarak kullanır. Çalışmada doğruluk artışı performans, kullanım ve bazı memnuniyet puanlarında öngörülebilirlikten daha güçlü etki göstermiştir; Lavie–Meyer derlemesi de yavaş uyarlamanın yarar, hızlı uyarlamanın zarar getirdiğini aktarır. Kanıt menü/araç çubuğu uyarlamasından gelir ve GenUI'ye doğrudan genellenemez; sabit arayüzün koşulsuz üstünlüğünü de göstermez.",
+  "license": "Uygulanmaz",
+  "maturity": "Araştırma",
+  "vendor": "Gajos, Everitt, Tan, Czerwinski, Weld",
+  "platform": "Framework bağımsız",
+  "effort": "Düşük",
+  "stance": "Referans",
+  "rTopics": [
+   "R01",
+   "R21",
+   "R28"
+  ],
+  "facts": [
+   {
+    "text": "CHI '08, s. 1271–1274; uyarlanabilir arayüzde %50 ve %70 doğruluk koşulları test edildi.",
+    "report": "research_claude"
+   },
+   {
+    "text": "23 katılımcı ve uyarlanan araç çubukları aktarılıyor.",
+    "report": "synthesis_chatgpt-map-P16"
+   },
+   {
+    "text": "Beklentinin aksine doğruluk artışı performans, kullanım ve bazı memnuniyet puanlarında öngörülebilirlikten güçlü etki yaptı.",
+    "report": "research_claude"
+   }
+  ],
+  "risks": [
+   "Menü uyarlaması bulgusu GenUI'ye doğrudan aktarılamaz.",
+   "Eski ve küçük örneklemli çalışma."
+  ],
+  "url": "https://www.microsoft.com/en-us/research/publication/predictability-and-accuracy-in-adaptive-user-interfaces/",
+  "version": ""
+ },
+ "viget-2017": {
+  "desc": "Viget'in mobil GIF simülasyonuyla iskelet ekran, spinner ve boş ekranın algılanan yükleme süresini karşılaştırdığı deney.",
+  "summary": "Raporlar Viget deneyini 'iskelet ekran her zaman daha iyidir' varsayımına karşı en somut kanıt olarak aktarır: iskelet koşulu algılanan süre ve hızlı yükleme algısında en kötü sonucu vermiştir. Ancak sonuçlar betimseldir, anlamlılık testi raporlanmamıştır ve mobil GIF simülasyonu gerçek AI beklemesini temsil etmez. Chung ve Mejtoft sonuçlarıyla birlikte, panel için kazanan göstergenin belirsiz olduğu sonucuna varılır.",
+  "license": "Uygulanmaz",
+  "maturity": "Araştırma",
+  "vendor": "Viget",
+  "platform": "Framework bağımsız",
+  "effort": "Düşük",
+  "stance": "Referans",
+  "rTopics": [
+   "R05"
+  ],
+  "facts": [
+   {
+    "text": "2017-10-19; n=136 (39 iskelet, 39 spinner, 58 boş ekran); 70 katılımcı ücretli Mechanical Turk.",
+    "report": "synthesis_chatgpt-map-P13"
+   },
+   {
+    "text": "Algılanan süre iskelet/spinner/boş ekran için 2,82 / 2,41 / 2,29 s.",
+    "report": "synthesis_chatgpt-map-P16"
+   },
+   {
+    "text": "'Hızlı yüklendi' ifadesine katılım iskelette %59, spinner'da %74, boş ekranda %66.",
+    "report": "synthesis_chatgpt-map-P13"
+   }
+  ],
+  "risks": [
+   "Anlamlılık testi yok; farklar betimsel.",
+   "Mobil GIF simülasyonu; belirsiz AI beklemesine genellenemez."
+  ],
+  "url": "https://www.viget.com/articles/a-bone-to-pick-with-skeleton-screens/",
+  "version": ""
+ },
+ "mejtoft-2018": {
+  "desc": "İskelet ekranın hız ve gezinme kolaylığı algısına etkisini spinner ile karşılaştıran ECCE 2018 hakemli çalışması.",
+  "summary": "Raporlar Mejtoft, Långström ve Söderström'ün çalışmasını iskelet–spinner tartışmasındaki hakemli veri olarak kullanır: iskelet algılanan hız ve gezinme kolaylığında ortalamada, spinner ise makaleyi bulma süresinde daha iyi sonuç vermiş, ancak hiçbir fark anlamlı çıkmamıştır. Anlamlı fark bulunmaması eşdeğerlik kanıtı değildir. Kurmaca haber sitesi ve kısa bekleme koşulu, AI panelinin belirsiz beklemelerine doğrudan aktarılamaz.",
+  "license": "Uygulanmaz",
+  "maturity": "Araştırma",
+  "vendor": "Mejtoft, Långström, Söderström (ECCE 2018)",
+  "platform": "Framework bağımsız",
+  "effort": "Düşük",
+  "stance": "Referans",
+  "rTopics": [
+   "R05"
+  ],
+  "facts": [
+   {
+    "text": "ECCE 2018 bildirisi; DOI 10.1145/3232078.3232086.",
+    "report": "research_claude"
+   },
+   {
+    "text": "2,75 saniyelik beklemeli kurmaca haber sitesi; iskelet öznel ortalamalarda, spinner ilk makaleyi bulma süresinde avantajlı.",
+    "report": "synthesis_chatgpt-map-P16"
+   },
+   {
+    "text": "Hiçbir karşılaştırmada anlamlı fark çıkmadı.",
+    "report": "research_claude"
+   }
+  ],
+  "risks": [
+   "Anlamlı fark yokluğu eşdeğerlik değildir.",
+   "Bazı turlarda makbuzlara erişilemedi; özet düzeyinde aktarım."
+  ],
+  "url": "https://dl.acm.org/doi/10.1145/3232078.3232086",
+  "version": ""
+ },
+ "chung-2018": {
+  "desc": "Chung'un iskelet ekranı spinner ile ve iskelet animasyon varyantlarını algılanan bekleme açısından karşılaştırdığı 2018 deneyi.",
+  "summary": "Raporlar Chung aktarımını Viget'e karşı yönde bir bulgu olarak ele alır: iskelet ekran mütevazı farkla daha iyi algılanmış, soldan sağa ve yavaş dalga animasyonu daha hızlı hissettirmiştir. İlk 80 kişilik aşama gösterge türlerini, sonraki 80 kişi iskelet varyantlarını karşılaştırdığından bu tek bir 160 kişilik deney değildir; yazar da örneklemin kesin sonuç için küçük olduğunu belirtir. Özgün sayfa ve ham veri doğrulanamamış, metin yeniden yayımlanmış kopyadan aktarılmıştır.",
+  "license": "Uygulanmaz",
+  "maturity": "Araştırma",
+  "vendor": "Chung (UX Collective yazısı)",
+  "platform": "Framework bağımsız",
+  "effort": "Düşük",
+  "stance": "Referans",
+  "rTopics": [
+   "R05",
+   "R06"
+  ],
+  "facts": [
+   {
+    "text": "İlk 80 kişi gösterge türlerini, sonraki dört 20 kişilik grup iskelet varyantlarını karşılaştırır; 160 kişilik tek deney değildir.",
+    "report": "synthesis_chatgpt-map-P16"
+   },
+   {
+    "text": "İskelet avantajı küçük; 5,5 saniyede spinner ile benzer sonuç aktarılıyor; yeniden yayım tarihi 31.10.2018.",
+    "report": "synthesis_chatgpt-map-P16"
+   },
+   {
+    "text": "Dalga yönü/hızı için %65/%68/%60 değerleri aktarılır; yazar örneklemin çok küçük olduğunu söyler.",
+    "report": "pre_research_claude"
+   }
+  ],
+  "risks": [
+   "Anlamlılık testi ve ham veri yok.",
+   "Özgün kaynak zinciri eksik; yeniden yayımdan aktarım."
+  ],
+  "url": "https://uxdesign.cc/what-you-should-know-about-skeleton-screens-a820c45a571a",
+  "version": ""
+ },
+ "counting-the-wait": {
+  "desc": "Tan ve Nov'un beklerken kalan/geçen süre göstermenin deneyim ve sonraki performansa etkisini ölçen CHI 2026 çalışması.",
+  "summary": "Raporlar bu çalışmayı bekleme deneyimi için en güncel kontrollü kanıt olarak kullanır: kalan süre göstermek geçen süreye göre daha fazla hayal kırıklığıyla, hiç zaman göstermemek ise daha uzun algılanan beklemeyle ilişkilendirilmiştir. Öznel farklar bekleme sonrasındaki görev performansında anlamlı iyileşmeye dönüşmemiştir. Süreler önceden bilinen kontrollü beklemeler olduğundan sonuçlar yanlış ETA'ya veya süresi belirsiz AI işlerine doğrudan genellenemez; ürün önerisi ölçülmeyen yüzde yerine gerçek aşama ve geçen süre göstermektir.",
+  "license": "Uygulanmaz",
+  "maturity": "Araştırma",
+  "vendor": "Tan & Nov (arXiv 2602.04138)",
+  "platform": "Framework bağımsız",
+  "effort": "Düşük",
+  "stance": "Referans",
+  "rTopics": [
+   "R05",
+   "R13"
+  ],
+  "facts": [
+   {
+    "text": "arXiv 2602.04138 v1, 04.02.2026; 600 katılımcıdan dışlamalar sonrası 425 yanıt analiz edildi.",
+    "report": "synthesis_chatgpt-map-P17"
+   },
+   {
+    "text": "10/30/60 s önceden belirli beklemeler, 1 Hz sayaçlar ve CLEVR görsel akıl yürütme görevi kullanıldı.",
+    "report": "synthesis_chatgpt-map-P17"
+   },
+   {
+    "text": "Kalan süre, geçen süreye göre daha fazla hayal kırıklığıyla ilişkili (p=.019 aktarılıyor).",
+    "report": "synthesis_chatgpt-map-P17"
+   },
+   {
+    "text": "Sonraki görev performansında anlamlı fark yok.",
+    "report": "synthesis_chatgpt-map-P16"
+   }
+  ],
+  "risks": [
+   "Öngörülemeyen AI gecikmelerine genellenemez.",
+   "Yanlış ETA ve güven kaybı sınanmadı."
+  ],
+  "url": "https://arxiv.org/abs/2602.04138",
+  "version": "v1"
+ },
+ "carbon": {
+  "desc": "IBM'in açık kaynak kurumsal tasarım sistemi; bileşenler, token'lar ve yükleme/ilerleme kullanım rehberleri içerir.",
+  "summary": "Raporlarda Carbon, ilerleme göstergesi ayrımının kaynağıdır: belirli ilerleme ölçülebilir bir hedefe, belirsiz gösterge ise süre veya ilerlemenin hesaplanamadığı duruma bağlanır; bu, 'LLM çalışıyor' durumuna keyfi yüzde atamayı desteklemez. Loading rehberinde göstergenin beklenen yüklemenin 3 saniyeyi aştığı durumlarla ilişkilendirildiği aktarılır; 5 saniye iddiası kaynakla eşleşmemiştir. Bu değerler evrensel deneysel eşik değil, bir tasarım sisteminin kullanım kararıdır.",
+  "license": "Apache-2.0",
+  "maturity": "Kararlı",
+  "vendor": "IBM",
+  "platform": "Tasarım",
+  "effort": "Düşük",
+  "stance": "Referans",
+  "rTopics": [
+   "R05",
+   "R04"
+  ],
+  "facts": [
+   {
+    "text": "Belirli ilerleme ölçülebilir hedefe, belirsiz gösterge hesaplanamayan süreye bağlanır.",
+    "report": "pre_research_chatgpt"
+   },
+   {
+    "text": "Carbon v10 loading rehberi: beklenen yükleme 3 saniyeyi aşıyorsa gösterge (aktarım).",
+    "report": "synthesis_claude-map-P8"
+   },
+   {
+    "text": "Carbon'un 5 s pasajı eşleşmedi; 3 s ayrı alt kayıtta yer alıyor.",
+    "report": "synthesis_chatgpt-map-P22"
+   },
+   {
+    "text": "Carbon bazı işlerde süre veya döngü tahminlerini de kabul eder.",
+    "report": "synthesis_chatgpt-map-P6"
+   }
+  ],
+  "risks": [
+   "Güncel sayfa ile v10 rehberi farklı olabilir; bazı turlarda sayfa boyut sınırı nedeniyle alınamadı.",
+   "Tasarım sistemi kararı; ürün içi ölçümün yerini tutmaz."
+  ],
+  "url": "https://carbondesignsystem.com/components/progress-bar/usage/",
+  "version": "v10"
+ },
+ "fluent": {
+  "desc": "Microsoft'un Fluent 2 tasarım sistemi; Wait UX rehberiyle spinner, iskelet ve ilerleme kullanımını tanımlar.",
+  "summary": "Raporlar Fluent 2 Wait UX rehberini yükleme göstergesi politikalarından biri olarak aktarır: bir saniyenin altındaki beklemelerde animasyon gösterilmemesi, spinner'ın tipik olarak üç saniyeden kısa belirsiz beklemelerde kullanılması, ölçülebilen işte gerçek ilerleme gösterilmesi ve yarışan çok sayıda göstergenin sınırlanması önerilir. Fluent, iskelet/shimmer'ın algılanan beklemeyi azaltabileceğini söyler; bu iddia Viget'in karşı bulgusuyla birlikte değerlendirilmelidir. Bir saniye altı kuralı anlık kabul geri bildirimini kaldırma kuralına dönüştürülmemelidir.",
+  "license": "MIT",
+  "maturity": "Kararlı",
+  "vendor": "Microsoft",
+  "platform": "Tasarım",
+  "effort": "Düşük",
+  "stance": "Referans",
+  "rTopics": [
+   "R05"
+  ],
+  "facts": [
+   {
+    "text": "1 s altındaki beklemelerde animasyon yok; spinner tipik olarak 3 s altı belirsiz beklemeler için.",
+    "report": "synthesis_claude-map-P12"
+   },
+   {
+    "text": "Ölçülebilen işte gerçek ilerleme gösterilmesi ve aynı anda yarışan göstergelerin sınırlanması önerilir.",
+    "report": "synthesis_chatgpt-map-P13"
+   },
+   {
+    "text": "Fluent 2 skeleton/shimmer'ın algılanan beklemeyi azaltabileceğini söyler.",
+    "report": "synthesis_chatgpt-map-P13"
+   }
+  ],
+  "risks": [
+   "Tasarım sistemi kararı, deneysel eşik değil.",
+   "Rehberin yayın/güncelleme tarihi bilinmiyor."
+  ],
+  "url": "https://fluent2.microsoft.design/wait-ux",
+  "version": "2"
+ },
+ "spectrum": {
+  "desc": "Adobe'nin tasarım sistemi; React Spectrum ve React Aria ile erişilebilir bileşenler ve ilerleme göstergesi rehberleri sunar.",
+  "summary": "Raporlarda Spectrum iki yönden geçer: React Spectrum Button'ın bekleme durumunda göstergeyi yaklaşık 1 saniye gecikmeyle göstermesi ve ProgressCircle'ın belirli ilerlemeyi hesaplanabilir hedefe bağlaması. Bu 1 saniyelik değer Carbon'un 3 saniyesi veya Adobe Commerce'in 500 ms'si ile aynı parametre değildir. Aynı ekosistemdeki React Aria klavye, odak ve ARIA davranışı sağlar; etiket, kontrast ve hareket tercihi uygulamaya kalır.",
+  "license": "Apache-2.0",
+  "maturity": "Kararlı",
+  "vendor": "Adobe",
+  "platform": "Tasarım",
+  "effort": "Düşük",
+  "stance": "Referans",
+  "rTopics": [
+   "R05",
+   "R04",
+   "R21"
+  ],
+  "facts": [
+   {
+    "text": "React Spectrum Button için 1 saniye gösterge gecikmesi; Carbon v10'un 3 s üstü seçimiyle aynı parametre değil.",
+    "report": "synthesis_chatgpt-map-P4"
+   },
+   {
+    "text": "Spectrum ProgressCircle belirli ilerlemeyi hesaplanabilir hedefle ilişkilendirir; kesin bitiş zamanını şart koşmaz.",
+    "report": "synthesis_chatgpt-map-P3"
+   },
+   {
+    "text": "Spectrum ve Carbon makbuzları bazı doğrulama turlarında doğrulanamadı.",
+    "report": "synthesis_claude-map-P7"
+   }
+  ],
+  "risks": [
+   "Değerler bileşen bağlamına özgü; evrensel eşik değil.",
+   "React Aria desteği bütün uygulamanın erişilebilirliğini kanıtlamaz."
+  ],
+  "url": "https://react-spectrum.adobe.com/v3/Button.html",
+  "version": "v3"
+ },
+ "atlassian-ds": {
+  "desc": "Atlassian'ın ürünlerinde kullandığı tasarım sistemi; spinner rehberiyle gecikme ve azaltılmış hareket nüansları sunar.",
+  "summary": "Raporlar Atlassian spinner rehberini tek tip 300/500 ms reçetesine karşı bir koşul olarak aktarır: yaklaşık 200 ms'de kısmi görünürlük (fade), 500–1000 ms örnekleri ve gecikmenin titremeyi önleme amacıyla kullanılmamasına ilişkin açıklama yer alır. Ayrıca azaltılmış hareket tercihinde donmuş bir spinner'ın işlemin durduğu izlenimi verebileceği gerekçesiyle spinner için istisna tanır. Bu, AutoAnimate'in hareketi otomatik kapatmasından farklı bir ürün politikasıdır.",
+  "license": "Apache-2.0",
+  "maturity": "Kararlı",
+  "vendor": "Atlassian",
+  "platform": "Tasarım",
+  "effort": "Düşük",
+  "stance": "Referans",
+  "rTopics": [
+   "R05",
+   "R21",
+   "R06"
+  ],
+  "facts": [
+   {
+    "text": "Yaklaşık 200 ms fade ve 500–1000 ms gecikme örnekleri.",
+    "report": "synthesis_chatgpt-map-P21"
+   },
+   {
+    "text": "Gecikmenin titremeyi önlemek için kullanılmamasına ilişkin açıklama, tek tip 300/500 ms reçetesine karşı koşuldur.",
+    "report": "synthesis_chatgpt-map-P20"
+   },
+   {
+    "text": "Donmuş spinner durmuş işlem izlenimi verebileceği için azaltılmış harekette spinner istisnası tanınır.",
+    "report": "synthesis_chatgpt-map-P19"
+   }
+  ],
+  "risks": [
+   "Değerler ürün politikasıdır, deneysel eşik değil.",
+   "Azaltılmış hareket istisnası WCAG yorumu açısından ayrıca değerlendirilmeli."
+  ],
+  "url": "https://atlassian.design/components/spinner/usage",
+  "version": ""
+ },
+ "kolibri": {
+  "desc": "Learning Equality'nin Kolibri eğitim platformu için geliştirdiği tasarım sistemi; yükleyici (loader) kullanım rehberi içerir.",
+  "summary": "Raporlar Kolibri Loaders rehberini doğrulanmış bekleme politikalarından biri olarak aktarır: göstergeyi göstermeden önce 300 ms beklemek ve gösterildikten sonra en az 400 ms görünür tutmak önerilir. Bu minimum görünürlük önerisi, sonucu hiçbir koşulda geciktirmeme görüşünün evrensel uzlaşma olmadığını gösterir; ancak Ontario'nun 1 saniyelik minimumu ile aynı amaca yönelik farklı bir ürün politikasıdır. Raporlar gerçek iş durumu ile görsel zamanlayıcının ayrı tutulmasını önerir.",
+  "license": "MIT",
+  "maturity": "Kararlı",
+  "vendor": "Learning Equality",
+  "platform": "Tasarım",
+  "effort": "Düşük",
+  "stance": "Referans",
+  "rTopics": [
+   "R05"
+  ],
+  "facts": [
+   {
+    "text": "Göstergeden önce 300 ms gecikme ve gösterildikten sonra en az 400 ms görünürlük.",
+    "report": "synthesis_chatgpt-map-P13"
+   },
+   {
+    "text": "Kolibri 300/400 ms makbuzu doğrulanmış kabul edildi.",
+    "report": "synthesis_claude-map-P7"
+   }
+  ],
+  "risks": [
+   "Minimum görünürlük tamamlanmış sonuca erişimi geciktirebilir; maliyeti ölçülmeli.",
+   "Tasarım sistemi politikası, deneysel optimum değil."
+  ],
+  "url": "https://design-system.learningequality.org/loaders/",
+  "version": ""
+ },
+ "semrush-intergalactic": {
+  "desc": "Semrush'ın açık kaynak Intergalactic tasarım sistemi; yükleme durumları ile Spin ve iskelet bileşen rehberleri sunar.",
+  "summary": "Raporlar Intergalactic yükleme durumları rehberini iskelet için 600 ms gecikme önerisiyle aktarır; ayrıca beş saniyeden uzun işler için ilerleme çubuğu önerisi ve Spin bileşeninin 300 ms ease-out görünme/kaybolma animasyonu anılır. Spin animasyon süresi başlatma gecikmesi değildir ve 600 ms değeri bazı doğrulama turlarında kaynakla eşleşmemiştir. Değerler Adobe'nin 500 ms'si gibi bağlama özgü rehberlerdir, evrensel eşik değildir.",
+  "license": "MIT",
+  "maturity": "Kararlı",
+  "vendor": "Semrush",
+  "platform": "Tasarım",
+  "effort": "Düşük",
+  "stance": "Referans",
+  "rTopics": [
+   "R05"
+  ],
+  "facts": [
+   {
+    "text": "İskelet gösterimi için 600 ms gecikme (v15.131.0 sürümlü loading-states sayfası).",
+    "report": "research_claude"
+   },
+   {
+    "text": "Beş saniyeden uzun işler için progress bar önerisi; Spin'in 300 ms ease-out animasyonu farklı bir ölçüdür.",
+    "report": "synthesis_chatgpt-map-P20"
+   },
+   {
+    "text": "Semrush 600 ms aktarımı bazı turlarda kaynakla eşleşmedi.",
+    "report": "synthesis_chatgpt-map-P4"
+   }
+  ],
+  "risks": [
+   "600 ms iddiasının kaynakla eşleşmesi tutarsız.",
+   "Sürümlü sayfalar arasında içerik farkı olabilir."
+  ],
+  "url": "https://developer.semrush.com/intergalactic/patterns/loading-states/loading-states",
+  "version": "v15.131.0"
+ },
+ "gitlab-pajamas": {
+  "desc": "GitLab'ın Pajamas tasarım sistemi; spinner bileşeni için gecikme, boyut ve erişilebilirlik kuralları tanımlar.",
+  "summary": "Raporlar Pajamas spinner rehberini bekleme politikaları arasında en kısa başlatma gecikmesiyle (100 ms) aktarır. Bileşen 16, 24, 32 ve 64 px boyutlarında bağlama göre kullanılır, role=status ve aria-label ile duyurulur; hareketin 'essential' sayılması GitLab'ın kendi bileşen değerlendirmesidir. GitLab'ın gösterim gecikmesi Ontario'nun minimum görünürlük süresiyle aynı ölçü değildir.",
+  "license": "MIT",
+  "maturity": "Kararlı",
+  "vendor": "GitLab",
+  "platform": "Tasarım",
+  "effort": "Düşük",
+  "stance": "Referans",
+  "rTopics": [
+   "R05",
+   "R21"
+  ],
+  "facts": [
+   {
+    "text": "Spinner gösteriminde 100 ms gecikme.",
+    "report": "synthesis_chatgpt-map-P13"
+   },
+   {
+    "text": "16, 24, 32 ve 64 px boyutları; role=status ve aria-label.",
+    "report": "synthesis_chatgpt-map-P13"
+   },
+   {
+    "text": "GitLab 100 ms gecikme makbuzu doğrulanmış kabul edildi.",
+    "report": "synthesis_claude-map-P6"
+   }
+  ],
+  "risks": [
+   "Hareketin 'essential' sayılması WCAG 2.2.2 yorumu açısından ayrıca değerlendirilmeli.",
+   "Ürün politikası; evrensel eşik değil."
+  ],
+  "url": "https://design.gitlab.com/components/spinner/",
+  "version": ""
+ },
+ "ontario-ds": {
+  "desc": "Ontario hükümetinin kamu hizmetleri için tasarım sistemi; yükleme göstergesi kullanım kuralları içerir.",
+  "summary": "Raporlar Ontario yükleme göstergesi rehberini minimum görünürlük politikasının örneği olarak aktarır: güvenilir biçimde 1 saniyeden kısa süren işlemlerde gösterge kullanılmaması, görünür göstergenin en az 1 saniye kalması ve 8 saniyeden sonra açıklamanın güncellenmesi önerilir. Metin normal göstergede 3, küçük göstergede 1 satırla sınırlıdır. Kolibri'nin 400 ms minimumu ile aynı amaca farklı bir politika olduğu ve evrensel optimum belirlemediği vurgulanır.",
+  "license": "Bilinmiyor",
+  "maturity": "Kararlı",
+  "vendor": "Ontario Hükümeti (Kanada)",
+  "platform": "Tasarım",
+  "effort": "Düşük",
+  "stance": "Referans",
+  "rTopics": [
+   "R05"
+  ],
+  "facts": [
+   {
+    "text": "1 s'den kısa işlemlerde gösterge yok; görünür gösterge en az 1 s kalır.",
+    "report": "synthesis_chatgpt-map-P13"
+   },
+   {
+    "text": "8 saniyeden sonra açıklama güncellenir; metin normal göstergede 3, küçük göstergede 1 satır.",
+    "report": "synthesis_chatgpt-map-P13"
+   },
+   {
+    "text": "Ontario 'minimum of 1 second' makbuzu doğrulanmış kabul edildi.",
+    "report": "synthesis_claude-map-P6"
+   }
+  ],
+  "risks": [
+   "Minimum görünürlük sonucu geciktirebilir; gerçek iş durumu ayrı tutulmalı.",
+   "Kamu hizmeti bağlamı yönetim paneline doğrudan aktarılamayabilir."
+  ],
+  "url": "https://designsystem.ontario.ca/components/detail/loading-indicator.html",
+  "version": ""
+ }
+}

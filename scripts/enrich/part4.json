@@ -1,0 +1,1365 @@
+{
+ "nsw-ds": {
+  "desc": "Avustralya Yeni Güney Galler (NSW) hükümetinin kamu dijital hizmetleri için tasarım sistemi; loader bileşeni rehberi içerir.",
+  "summary": "Raporlarda NSW, bekleme göstergesi zamanlamasına dair tasarım rehberlerinden biri olarak anılır: yazma ve doğrulama durumlarında göstergenin gecikmesiz gösterilmesini ister. Kolibri, Ontario, GitLab ve Vercel değerleriyle yan yana konur; bu çeşitliliğin evrensel bir 300/500 ms kuralı bulunmadığını gösterdiği sonucuna varılır. Başlatma gecikmesi, minimum görünürlük ve gerçek bekleme süresi ayrı değişkenler olarak ele alınmalıdır.",
+  "license": "Bilinmiyor",
+  "maturity": "Kararlı",
+  "vendor": "NSW Hükümeti (Digital NSW)",
+  "platform": "Tasarım",
+  "effort": "Düşük",
+  "stance": "Referans",
+  "rTopics": [
+   "R05"
+  ],
+  "facts": [
+   {
+    "text": "NSW loader rehberi yazma/doğrulama durumlarında göstergede gecikme kullanılmamasını öneriyor.",
+    "report": "synthesis_claude-map-P6"
+   },
+   {
+    "text": "NSW gecikmesiz gösterimi; Adobe koşullu 500 ms, Acorn ~200/400 ms, Kolibri 300/400 ms, GitLab 100 ms ve Ontario ≥1 s ile birlikte farklı politika örneği sayıldı.",
+    "report": "synthesis_claude-map-P5"
+   },
+   {
+    "text": "NSW sayfasının yayın tarihi bilinmiyor; erişim 25.09.2026 UTC, AI paneli deney dönemi yok.",
+    "report": "synthesis_chatgpt-map-P14"
+   }
+  ],
+  "risks": [
+   "Kamu hizmeti bağlamındaki bir rehber; AI panelinde deneyle sınanmış eşik değildir.",
+   "Yalnız belirli durumlar (yazma/doğrulama) için geçerli; bütün bekleme türlerine genellenmemeli."
+  ],
+  "url": "https://designsystem.nsw.gov.au/components/loader/",
+  "version": ""
+ },
+ "backbase-ds": {
+  "desc": "Bankacılık platformu Backbase'in ürün tasarım sistemi; web bileşenleri arasında showDelay ayarlı yükleme göstergesi bulunur.",
+  "summary": "Backbase, yükleme göstergesini geciktirerek gösterme örneklerinden biri olarak raporlarda geçer: loading-indicator bileşeni `showDelay` için örnek 500 ms değeri verir. Claude değerlendirmesi bu bulguyu Atlassian Spinner'ın 500–1000 ms önerisiyle birlikte kurulmuş sayar; ancak 'varsayılan 0 ms' bilgisi alıntıda görünmediği için doğrulanmamıştır. Değer bir ürün politikasıdır, AI işleri için deneysel optimum değildir.",
+  "license": "Ticari",
+  "maturity": "Kararlı",
+  "vendor": "Backbase",
+  "platform": "Tasarım",
+  "effort": "Düşük",
+  "stance": "Referans",
+  "rTopics": [
+   "R05"
+  ],
+  "facts": [
+   {
+    "text": "Backbase loading indicator `showDelay` özelliği için örnek değer 500 ms.",
+    "report": "review_claude"
+   },
+   {
+    "text": "Backbase'in 500 ms örneği aktarılıyor; varsayılan 0 ms kısmı kurulmamış.",
+    "report": "synthesis_chatgpt-map-P19"
+   },
+   {
+    "text": "Gecikme/minimum süre bulgusu (F24) Backbase ve Atlassian metinleriyle 'kurulmuş' sayıldı; Atlassian delay'in titremeyi önlemek için kullanılmamasını söylüyor.",
+    "report": "review_claude"
+   }
+  ],
+  "risks": [
+   "Ticari bankacılık ürününe bağlı rehber; genel AI paneline doğrudan taşınamaz.",
+   "Örnek değer ile varsayılan davranış karıştırılmamalı."
+  ],
+  "url": "https://designsystem.backbase.com/latest/components/web/loading-indicator-rBN1Ay23",
+  "version": ""
+ },
+ "oracle-apex": {
+  "desc": "Oracle APEX'in apex.util.delayLinger yardımcısı; kısa işlerde ilerleme göstergesinin yanıp sönmesini önlemek için gecikme ve asgari gösterim uygular.",
+  "summary": "Raporlar APEX 19.2 delayLinger belgesini, gösterge gecikmesi ile 'yeterince görünür kalma' süresini ayıran bir tasarım dayanağı olarak kullanır. Belge yanıp sönen ilerleme göstergeleri sorununu tanımlar ve yalnız geciktirmenin kısa parlamayı çözmediğini açıklar; kesitte evrensel bir milisaniye değeri yoktur. Adobe 500 ms ve Semrush 600 ms değerleriyle birlikte bağlama özgü rehber sayılır; 300/500 ms evrensel kuralının kanıtı değildir.",
+  "license": "Ticari",
+  "maturity": "Kararlı",
+  "vendor": "Oracle",
+  "platform": "Tasarım",
+  "effort": "Düşük",
+  "stance": "Referans",
+  "rTopics": [
+   "R05"
+  ],
+  "facts": [
+   {
+    "text": "APEX 19.2 delayLinger: gösterge en az algılanabilir süre kadar gösterilmeli (flash önleme).",
+    "report": "synthesis_claude-map-P11"
+   },
+   {
+    "text": "Oracle kesitinde özgül gecikme veya minimum görünürlük değeri belirlenemedi (yetersiz pasaj).",
+    "report": "synthesis_chatgpt-map-P13"
+   },
+   {
+    "text": "Evrensel AI zamanlama eşiği iddiası (pre_research_chatgpt:C011) reddedildi; Oracle delayLinger bağlama özgü rehber olarak geçerli kaldı.",
+    "report": "synthesis_claude-map-P9"
+   }
+  ],
+  "risks": [
+   "Eski 19.2 belgesine dayanır; güncel APEX davranışı doğrulanmadı.",
+   "Sayısal eşik vermez; ürün değerleri kendi kullanıcılarıyla deneyle belirlenmeli."
+  ],
+  "url": "https://docs.oracle.com/en/database/oracle/application-express/19.2/aexjs/apex.util.delayLinger.html",
+  "version": "19.2"
+ },
+ "vercel-guidelines": {
+  "desc": "Vercel'in web arayüzleri için etkileşim, animasyon, yükleme durumu ve erişilebilirlik kurallarını toplayan rehberi.",
+  "summary": "Raporlar Vercel rehberini yükleme göstergesi zamanlaması kaynağı olarak kullanır: yaklaşık 150–300 ms gösterim gecikmesi ve 300–500 ms minimum görünürlük önerisi aktarılır. Bu sayısal alıntı bazı incelemelerde eşleşmiş, bazılarında 'yetersiz pasaj' olarak işaretlenmiştir. Sentezler değerleri prototip deneyi için başlangıç adayı sayar; evrensel AI optimumu olarak kabul etmez.",
+  "license": "Uygulanmaz",
+  "maturity": "Kararlı",
+  "vendor": "Vercel",
+  "platform": "Tasarım",
+  "effort": "Düşük",
+  "stance": "Referans",
+  "rTopics": [
+   "R05"
+  ],
+  "facts": [
+   {
+    "text": "Vercel için ~150–300 ms gecikme ve ~300–500 ms minimum görünürlük aktarılıyor; Kolibri 300/≥400 ms ile karşılaştırılamaz satıcı kararları.",
+    "report": "synthesis_claude-map-P12"
+   },
+   {
+    "text": "Vercel '150–300ms' alıntısı bir doğrulama turunda insufficient_passage (doğrulanmamış) olarak sınıflandı.",
+    "report": "synthesis_claude-map-P10"
+   },
+   {
+    "text": "Vercel, Adobe ve Acorn önerileri deney başlangıç adayı; evrensel AI optimumu değil.",
+    "report": "synthesis_chatgpt-map-P18"
+   }
+  ],
+  "risks": [
+   "Sayısal alıntı raporlar arasında tutarsız doğrulandı.",
+   "Yayın/güncelleme tarihi bilinmiyor; rehber zamanla değişebilir."
+  ],
+  "url": "https://vercel.com/design/guidelines",
+  "version": ""
+ },
+ "acorn": {
+  "desc": "Mozilla'nın Firefox ürünleri için tasarım sistemi Acorn; hareket temelleri ve spinner zamanlama önerileri içerir.",
+  "summary": "Acorn'un hareket sayfası, 200 ms'yi aşabilecek işler için spinner gösterilmesini, 200 ms altındaki işlerde gösterilmemesini ve spinner'ın en az 400 ms görünmesini önerir. Raporlar bunu Adobe'nin koşullu 500 ms başlatma gecikmesinden ayrı bir parametre (minimum görünürlük) olarak değerlendirir. Değerler ürün rehberidir; hedef AI panelinde deneyle doğrulanacak başlangıç adaylarıdır.",
+  "license": "Bilinmiyor",
+  "maturity": "Kararlı",
+  "vendor": "Mozilla",
+  "platform": "Tasarım",
+  "effort": "Düşük",
+  "stance": "Referans",
+  "rTopics": [
+   "R05",
+   "R06"
+  ],
+  "facts": [
+   {
+    "text": "Acorn: 200 ms'yi aşabilecek işler için spinner, 400 ms minimum gösterim, 200 ms altında spinner yok.",
+    "report": "synthesis_claude-map-P10"
+   },
+   {
+    "text": "Acorn'un 400 ms minimum görünme önerisi Adobe'nin koşullu 500 ms spinner gecikmesiyle aynı parametre değil.",
+    "report": "review_chatgpt"
+   },
+   {
+    "text": "Bazı kesitlerde Acorn URL'si kesik geldiği için bağlantı tamamlanmadı ve zamanlama kuralına dayanak yapılmadı.",
+    "report": "synthesis_chatgpt-map-P4"
+   }
+  ],
+  "risks": [
+   "Tarayıcı ürün arayüzü bağlamı; uzun AI işlerine doğrudan genellenemez.",
+   "Yayın tarihi bilinmiyor."
+  ],
+  "url": "https://acorn.firefox.com/latest/foundations/styles/motion-YsUZhS6a",
+  "version": ""
+ },
+ "material": {
+  "desc": "Google'ın platformlar arası tasarım dili ve bileşen rehberi; güncel kuşağı Material 3.",
+  "summary": "Material Design raporlarda doğrudan değerlendirilemedi: Material 3 ilerleme göstergesi sayfaları içerik kesilmesi nedeniyle okunamadı ve belirli/belirsiz gösterge tanımı MDN `<progress>` ile ikame edildi. A2UI yol haritası planlanan Jetpack Compose renderer'ı için Material Design 3 desteğini hedefler. Sentez tek ana görsel sistem olarak daisyUI'yi önerdiğinden Material yalnız referans tasarım dilidir; MUI ayrı bir kütüphane olarak ele alınır.",
+  "license": "Uygulanmaz",
+  "maturity": "Kararlı",
+  "vendor": "Google",
+  "platform": "Tasarım",
+  "effort": "Orta",
+  "stance": "Referans",
+  "rTopics": [
+   "R04",
+   "R05",
+   "R20"
+  ],
+  "facts": [
+   {
+    "text": "Carbon ve Material 3 gösterge sayfaları içerik kesilmesi nedeniyle okunamadı; tasarım sistemi değerleri doğrulanmadı.",
+    "report": "review_claude"
+   },
+   {
+    "text": "A2UI yol haritası Q3 2026 kilometre taşında Jetpack Compose renderer için Material Design 3 desteği listeliyor.",
+    "report": "review_chatgpt"
+   },
+   {
+    "text": "Sentez başlangıçta tek ana görsel sistem olarak daisyUI seçilmesini öneriyor.",
+    "report": "GENUI-SENTEZ-RAPORU"
+   }
+  ],
+  "risks": [
+   "Birincil içerik raporlarda okunamadı; bekleme ve hareket değerleri doğrulanmadı.",
+   "Web tarafındaki uyarlamalar (ör. MUI) ikinci görsel sistem ve tema maliyeti getirir."
+  ],
+  "url": "https://m3.material.io/",
+  "version": "3"
+ },
+ "adk": {
+  "desc": "Google'ın ajan geliştirme çerçevesi; araç kullanımı, çok ajanlı akışlar ve A2A/AG-UI entegrasyonları sunar.",
+  "summary": "ADK, AG-UI entegrasyon listesinde birinci taraf çerçeve olarak geçer ve A2UI belgelerinde Python ajan yolu seçeneğidir. CopilotKit'in ADK dinamik şema yolunda A2UI araç çağrısı TOOL_CALL_ARGS olaylarıyla akar, fakat bileşen dizisinin tamamı beklendiği için 'akışlı' etiketi ilk kullanılabilir sonucu geciktirebilir. AG-UI issue #2031 ADK entegrasyonunun kesinti sonrası `resume[]` girdisini okumadığını kaydeder; A2UI yol haritası ADK desteğini 'In Progress' gösterir.",
+  "license": "Apache-2.0",
+  "maturity": "Kararlı",
+  "vendor": "Google",
+  "platform": "Sunucu",
+  "effort": "Orta",
+  "stance": "Seçimli",
+  "rTopics": [
+   "R08",
+   "R12",
+   "R13"
+  ],
+  "facts": [
+   {
+    "text": "A2UI yol haritasında ADK entegrasyonu 'In Progress' (geliştirici ergonomisi hâlâ tasarlanıyor).",
+    "report": "review_claude"
+   },
+   {
+    "text": "Issue #2031 ADK'nın resume[] okumadığını kaydediyor; bazı kesitlerde alıntı eşleşmediği için doğrulanmış hata sayılmadı.",
+    "report": "synthesis_claude-map-P9"
+   },
+   {
+    "text": "CopilotKit ADK dinamik yolu tam components dizisini bekliyor; veri öğeleri sonradan aşamalı gösteriliyor.",
+    "report": "synthesis_chatgpt-map-P22"
+   },
+   {
+    "text": "CopilotKit + ADK BYOC düzeni definitions/renderers/catalog olmak üzere üç dosyaya ayrılıyor.",
+    "report": "synthesis_claude-map-P12"
+   }
+  ],
+  "risks": [
+   "Kesinti/devam (interrupt/resume) sözleşmesi adaptörde eksik olabilir.",
+   "Adaptör davranışı, protokolün aşamalı çizim vaadiyle aynı gecikmeyi garanti etmez."
+  ],
+  "url": "https://google.github.io/adk-docs/",
+  "version": ""
+ },
+ "langgraph": {
+  "desc": "LangChain ekibinin durum grafiği tabanlı, uzun süreli ve kesintiye uğratılabilir ajan iş akışı çerçevesi.",
+  "summary": "LangGraph, CopilotKit A2UI örneğinde araç çağrısının TOOL_CALL_ARGS olayları olarak içinden aktığı ajan arka ucudur ve AG-UI uyumlu çerçeveler arasında sayılır. AG-UI `RunFinished.outcome` kesinti semantiğinin yalnız bunu yayan adaptörlerde çalıştığı, LangGraph'ta `emitInterruptOutcome`'un isteğe bağlı (opt-in) olduğu raporlanır. A2UI yol haritası doğrudan LangGraph entegrasyonunu henüz 'Proposed' düzeyinde tutar.",
+  "license": "MIT",
+  "maturity": "Kararlı",
+  "vendor": "LangChain Inc.",
+  "platform": "Sunucu",
+  "effort": "Orta",
+  "stance": "Seçimli",
+  "rTopics": [
+   "R08",
+   "R13"
+  ],
+  "facts": [
+   {
+    "text": "LangGraph'ta emitInterruptOutcome opt-in; outcome yoksa çalıştırma normal tamamlama sayılıyor.",
+    "report": "review_claude"
+   },
+   {
+    "text": "CopilotKit: A2UI araç çağrısı LangGraph üzerinden TOOL_CALL_ARGS olayları olarak akıyor; createSurface önce gelmeli.",
+    "report": "synthesis_claude-map-P10"
+   },
+   {
+    "text": "A2UI yol haritası: LangGraph entegrasyonu 'Proposed — Community interest'.",
+    "report": "review_claude"
+   }
+  ],
+  "risks": [
+   "Kesinti semantiği adaptör ayarına bağlı; opt-in kapalıysa kesinti başarı gibi görünebilir.",
+   "Doğrudan A2UI desteği henüz öneri aşamasında."
+  ],
+  "url": "https://www.langchain.com/langgraph",
+  "version": ""
+ },
+ "langchain": {
+  "desc": "LLM uygulamaları için model, araç ve zincir soyutlamaları sunan açık kaynak çerçeve ve ekosistem.",
+  "summary": "AG-UI'nin CopilotKit'in LangChain ve CrewAI ile ilk ortaklığından doğduğu belirtilir; LangChain entegrasyon listesinde 'ortaklık' kategorisindedir. A2UI belgeleri Python ajanı için Google ADK ve LangChain'i seçenek olarak sayar; Tambo da LangChain ile çalışabildiğini ama onu gerektirmediğini söyler. Generative Interfaces çalışmasının GenUI sistemi LangChain'in OpenCanvas projesi üzerine kurulmuştur; bu, çerçevenin ürün için seçildiği anlamına gelmez.",
+  "license": "MIT",
+  "maturity": "Kararlı",
+  "vendor": "LangChain Inc.",
+  "platform": "Sunucu",
+  "effort": "Orta",
+  "stance": "Seçimli",
+  "rTopics": [
+   "R08",
+   "R01"
+  ],
+  "facts": [
+   {
+    "text": "AG-UI belgesine göre protokol CopilotKit'in LangChain ve CrewAI ile ilk ortaklığından doğdu.",
+    "report": "review_claude"
+   },
+   {
+    "text": "arXiv 2508.19227 GenUI sistemi langchain-ai/open-canvas üzerine kurulu ve Claude 3.7 omurgası kullanıyor.",
+    "report": "review_chatgpt"
+   },
+   {
+    "text": "AG-UI entegrasyon listesinde LangChain 'ortaklık' kategorisinde; liste bağımsız uyum testi değil.",
+    "report": "pre_research_claude"
+   }
+  ],
+  "risks": [
+   "Satıcı entegrasyon listeleri bağımsız uyumluluk testi değildir.",
+   "Soyutlama katmanı sürüm geçişlerinde bakım yükü getirebilir."
+  ],
+  "url": "https://www.langchain.com/",
+  "version": ""
+ },
+ "mastra": {
+  "desc": "TypeScript ile ajan, iş akışı ve RAG uygulamaları geliştirmek için açık kaynak çerçeve.",
+  "summary": "Mastra raporlarda yalnız entegrasyon listelerinde geçer: AG-UI sayfası onu birinci taraf entegrasyon olarak sınıflar ve A2UI'nin AG-UI üzerinden eklenebildiği çerçeveler arasında sayılır. Tambo, LangChain ve Mastra gibi çerçevelerle çalışabildiğini ama bunları gerektirmediğini belirtir. Listeler bağımsız uyumluluk testi olmadığından, TypeScript arka uç seçilirse olay, kesinti ve iptal davranışı ayrıca sınanmalıdır.",
+  "license": "Bilinmiyor",
+  "maturity": "Bilinmiyor",
+  "vendor": "Mastra",
+  "platform": "Sunucu",
+  "effort": "Orta",
+  "stance": "Seçimli",
+  "rTopics": [
+   "R08",
+   "R09"
+  ],
+  "facts": [
+   {
+    "text": "AG-UI entegrasyon listesinde Mastra birinci taraf kategorisinde (satıcı beyanı).",
+    "report": "pre_research_claude"
+   },
+   {
+    "text": "A2UI rehberi, A2UI'yi ADK, LangGraph, Mastra, Strands veya CrewAI destekli AG-UI uygulamalarına eklemeyi anlatıyor.",
+    "report": "review_claude"
+   },
+   {
+    "text": "Tambo belgesi LangChain ve Mastra ile çalıştığını, ancak ikisinin de zorunlu olmadığını söylüyor.",
+    "report": "review_chatgpt"
+   }
+  ],
+  "risks": [
+   "Korpusta Mastra'ya özgü teknik doğrulama yapılmadı.",
+   "Lisans ve sürüm durumu raporlarda incelenmedi."
+  ],
+  "url": "https://mastra.ai",
+  "version": ""
+ },
+ "pydantic-ai": {
+  "desc": "Pydantic ekibinin tip güvenli Python ajan çerçevesi; AG-UI protokolüyle arayüze olay akışı sağlayan entegrasyonu vardır.",
+  "summary": "Pydantic AI, AG-UI entegrasyonunda birinci taraf çerçevedir ve kesinti (interrupt) desteği için `ag-ui-protocol >= 0.1.19` sürümünü şart koşar. Daha eski kurulumlarda `RUN_FINISHED` olayını outcome alanı olmadan sessizce gönderdiği aktarılır; bu, kesintinin normal bitiş gibi yorumlanması riskini doğurur. Raporlar bu sürüm koşulunun yalnız bu entegrasyona ait olduğunu, diğer SDK'lara genellenmemesi gerektiğini vurgular.",
+  "license": "MIT",
+  "maturity": "Kararlı",
+  "vendor": "Pydantic",
+  "platform": "Sunucu",
+  "effort": "Orta",
+  "stance": "Seçimli",
+  "rTopics": [
+   "R08",
+   "R13"
+  ],
+  "facts": [
+   {
+    "text": "Kesinti için ag-ui-protocol >= 0.1.19 gerekli; eski sürümlerde outcome'suz RUN_FINISHED gönderiliyor.",
+    "report": "research_claude"
+   },
+   {
+    "text": "Pydantic AI ve Microsoft Agent Framework Python outcome.type 'interrupt' üretiyor.",
+    "report": "review_claude"
+   },
+   {
+    "text": ">=0.1.19 koşulu entegrasyona özgü; diğer adaptörlere evrensel sürüm eşiği olarak taşınmamalı.",
+    "report": "synthesis_chatgpt-map-P9"
+   }
+  ],
+  "risks": [
+   "Protokol paketi sabitlenmezse kesinti sessizce normal bitiş gibi görünebilir.",
+   "Sürüm koşulu bazı doğrulama turlarında alıntıyla eşleşmedi."
+  ],
+  "url": "https://pydantic.dev/docs/ai/integrations/ui/ag-ui/",
+  "version": ""
+ },
+ "crewai": {
+  "desc": "Rol tabanlı çoklu ajan ekipleri kurmak için Python çerçevesi.",
+  "summary": "CrewAI, AG-UI'nin doğduğu ilk CopilotKit ortaklıklarından biri olarak anılır ve entegrasyon listesinde 'ortaklık' kategorisindedir. A2UI'nin AG-UI üzerinden eklenebildiği çerçeveler arasında sayılır; ancak A2UI yol haritasında doğrudan CrewAI entegrasyonu 'Proposed' durumundadır. Raporlarda CrewAI'ye özgü olay, kesinti veya performans testi yoktur.",
+  "license": "MIT",
+  "maturity": "Kararlı",
+  "vendor": "CrewAI",
+  "platform": "Sunucu",
+  "effort": "Orta",
+  "stance": "Seçimli",
+  "rTopics": [
+   "R08",
+   "R13",
+   "R27"
+  ],
+  "facts": [
+   {
+    "text": "AG-UI entegrasyon listesinde CrewAI 'ortaklık' kategorisinde.",
+    "report": "pre_research_claude"
+   },
+   {
+    "text": "A2UI yol haritası: CrewAI entegrasyonu 'Proposed — Community interest'.",
+    "report": "review_claude"
+   },
+   {
+    "text": "A2UI'nin AG-UI rehberi CrewAI destekli uygulamalara A2UI çizimi eklemeyi anlatıyor.",
+    "report": "review_claude"
+   }
+  ],
+  "risks": [
+   "Doğrudan A2UI desteği öneri aşamasında.",
+   "Çoklu ajan akışında paralel durum ve iptal semantiği ayrıca tasarlanmalı."
+  ],
+  "url": "https://www.crewai.com",
+  "version": ""
+ },
+ "llamaindex": {
+  "desc": "Belge alma, indeksleme ve RAG odaklı ajan/uygulama geliştirme çerçevesi.",
+  "summary": "LlamaIndex raporlarda yalnız AG-UI entegrasyon listelerinde birinci taraf çerçeve olarak geçer; CopilotKit blogu da onu herhangi bir AG-UI önyüzüne bağlanabilen ajanlar arasında sayar. Belge yükleme ve içerik çıkarma hattı için ilgili bir aday olabilir, ancak korpusta bu yönde değerlendirme yapılmamıştır. Liste bağımsız uyum testi olmadığından seçilirse olay ve kesinti davranışı sınanmalıdır.",
+  "license": "MIT",
+  "maturity": "Kararlı",
+  "vendor": "LlamaIndex",
+  "platform": "Sunucu",
+  "effort": "Orta",
+  "stance": "Seçimli",
+  "rTopics": [
+   "R08",
+   "R07",
+   "R15"
+  ],
+  "facts": [
+   {
+    "text": "AG-UI entegrasyon listesinde LlamaIndex birinci taraf kategorisinde.",
+    "report": "pre_research_claude"
+   },
+   {
+    "text": "CopilotKit'in 17 AG-UI olay türü yazısı LlamaIndex'i AG-UI uyumlu ajanlar arasında sayıyor.",
+    "report": "review_claude"
+   }
+  ],
+  "risks": [
+   "Korpusta LlamaIndex'e özgü teknik doğrulama yok.",
+   "RAG çıktısında kaynak ve veri doğruluğu ayrıca ölçülmeli."
+  ],
+  "url": "https://www.llamaindex.ai",
+  "version": ""
+ },
+ "fastapi": {
+  "desc": "Python tip ipuçlarıyla hızlı REST ve SSE API'leri kurmaya yarayan asenkron web çerçevesi.",
+  "summary": "Claude araştırması arka uç örneklerini FastAPI + PostgreSQL varsayımıyla verir ve taşıma için AG-UI HttpAgent (fetch POST + Authorization) ile FastAPI SSE uç noktasını önerir; ters vekilde tamponlamanın kapatılmasını ve HTTP/2 kullanılmasını ekler. Değerlendirmeler, HttpAgent'in POST/başlık desteğinin rastgele bir FastAPI uç noktasıyla uçtan uca uyumluluk, replay veya sunucu işi iptali garantisi olmadığını belirtir. Vite/React/XState/FastAPI yığınının bu ürün için optimal olduğu kurulmamıştır.",
+  "license": "MIT",
+  "maturity": "Kararlı",
+  "vendor": "Sebastián Ramírez (tiangolo) ve topluluk",
+  "platform": "Sunucu",
+  "effort": "Orta",
+  "stance": "Prototip adayı",
+  "rTopics": [
+   "R14",
+   "R13",
+   "R08"
+  ],
+  "facts": [
+   {
+    "text": "Backend örnekleri FastAPI + PostgreSQL varsayımıyla verildi; React kesin seçim sayılmadı.",
+    "report": "research_claude"
+   },
+   {
+    "text": "Önerilen taşıma: AG-UI HttpAgent + FastAPI SSE; nginx tamponlaması kapalı ve HTTP/2.",
+    "report": "research_claude"
+   },
+   {
+    "text": "'FastAPI ile doğrudan uyumlu' iddiası unverified: RunAgentInput, CORS, kimlik doğrulama ve hata sözleşmesi ayrıca gerekli.",
+    "report": "synthesis_chatgpt-map-P9"
+   }
+  ],
+  "risks": [
+   "Uç nokta AG-UI RunAgentInput ve olay sözleşmesini kendiliğinden karşılamaz.",
+   "İstek akışını abort etmek uzun süren sunucu işini durdurmakla eşdeğer değil."
+  ],
+  "url": "https://fastapi.tiangolo.com",
+  "version": ""
+ },
+ "temporal": {
+  "desc": "Uzun süren iş akışlarını dayanıklı yürütme, yeniden deneme ve kalıcı durumla çalıştıran iş akışı platformu.",
+  "summary": "Temporal platformu araştırma raporlarında değerlendirilmemiştir; korpustaki 'Temporal' geçişleri bekleme geri bildirimi (temporal feedback) deneyine aittir. Buna karşın sentez, uzun işler için kalıcı istek kimliği, sonuç kaydı, idempotency ve sağlayıcı onaylı iptal ister; Temporal bu gereksinimleri karşılayabilecek dayanıklı yürütme seçeneklerinden biridir. Seçimi, iş durumu modeli ve yeniden bağlanma sözleşmesi netleştikten sonra değerlendirilmelidir.",
+  "license": "MIT",
+  "maturity": "Kararlı",
+  "vendor": "Temporal Technologies",
+  "platform": "Sunucu",
+  "effort": "Yüksek",
+  "stance": "Seçimli",
+  "rTopics": [
+   "R13",
+   "R14",
+   "R27"
+  ],
+  "facts": [
+   {
+    "text": "Sentez: kesin başarısız istek ile sonucu bilinmeyen istek ayrılmalı; kalıcı istek kimliği, sonuç kaydı ve tekrar bağlanma temel özellik.",
+    "report": "GENUI-SENTEZ-RAPORU"
+   },
+   {
+    "text": "Sentez: sağlayıcı onayı gelmeden 'iptal edildi' yazılmamalı; sunucu aynı işlem kimliğini ikinci kez yürütmemeli.",
+    "report": "GENUI-SENTEZ-RAPORU"
+   },
+   {
+    "text": "Korpustaki 'Temporal' geçişleri 425 katılımcılı Temporal Feedback bekleme çalışmasına ait; platform incelenmedi.",
+    "report": "synthesis_chatgpt-map-P12"
+   }
+  ],
+  "risks": [
+   "Raporlarda değerlendirilmedi; ek altyapı ve işletim maliyeti getirir.",
+   "Dayanıklı iş akışı, AG-UI olayları ve iptal semantiğiyle ayrıca eşlenmeli."
+  ],
+  "url": "https://temporal.io",
+  "version": ""
+ },
+ "nodejs": {
+  "desc": "V8 tabanlı sunucu tarafı JavaScript çalışma zamanı; JS araç zincirinin ve ajan SDK'larının temel ortamı.",
+  "summary": "Node.js korpusta sürüm önkoşulu olarak geçer: AI Elements README'si Node.js 18+ isterken AI SDK 7 için Node 22 gereksinimi aktarılır. Raporlar bu iki önkoşulun aynı sürüm sözleşmesi olmadığını ve paket eşlemesi gerektirdiğini vurgular. A2UI belgeleri Node.js tarafında A2A SDK veya Vercel AI SDK ile ajan kurmayı seçenek olarak sayar.",
+  "license": "MIT",
+  "maturity": "Kararlı",
+  "vendor": "OpenJS Foundation",
+  "platform": "Sunucu",
+  "effort": "Düşük",
+  "stance": "Referans",
+  "rTopics": [
+   "R26",
+   "R03"
+  ],
+  "facts": [
+   {
+    "text": "AI Elements önkoşulları: Node.js 18+, AI SDK kurulu Next.js, shadcn/ui ve Tailwind CSS Variables.",
+    "report": "synthesis_chatgpt-map-P14"
+   },
+   {
+    "text": "AI SDK 7 için Node 22 gereksinimi aktarılıyor; eski Node önkoşuluyla aynı sözleşme değil.",
+    "report": "review_chatgpt"
+   },
+   {
+    "text": "A2UI ajan yolu: Node.js tarafında A2A SDK, Vercel AI SDK veya özel çözüm.",
+    "report": "review_claude"
+   }
+  ],
+  "risks": [
+   "Paketler arası farklı Node sürüm şartları CI ve dağıtımda çakışabilir.",
+   "Node 22 gereksinimi bağımsız olarak doğrulanmadı."
+  ],
+  "url": "https://nodejs.org",
+  "version": "22"
+ },
+ "gemini": {
+  "desc": "Google DeepMind'ın çok kipli büyük dil modeli ailesi; Gemini uygulaması ve API üzerinden sunulur.",
+  "summary": "Gemini iki rolde geçer: araştırma sağlayıcısı olarak pre_research_gemini aşaması 23.09.2026'da durdurulmuş, sonraki research_gemini raporu veri kümesine eklenmiştir. GenUI kanıtı tarafında Google Research blogu (18 Kasım 2025) Gemini 3 Pro ile HTML/CSS/JS üreten sistemin standart LLM çıktısına tercih edildiğini, ancak üretimin bir dakikayı aşabildiğini bildirir; Nielsen aktarımında insan uzman tasarımı %56'ya %43 önde kalmıştır. Generative Interfaces v3 kullanıcı çalışmasında iki arayüzde Gemini-2.5-flash kullanılmıştır.",
+  "license": "Ticari",
+  "maturity": "Kararlı",
+  "vendor": "Google DeepMind",
+  "platform": "Sunucu",
+  "effort": "Orta",
+  "stance": "Seçimli",
+  "rTopics": [
+   "R01",
+   "R11",
+   "R26"
+  ],
+  "facts": [
+   {
+    "text": "Google Research GenUI blogu (18.11.2025): Gemini 3 Pro; üretim bazen bir dakika veya daha fazla sürüyor.",
+    "report": "review_claude"
+   },
+   {
+    "text": "UX Tigers aktarımı: kullanıcılar insan tasarımını %56, AI tasarımını %43 oranında tercih etti.",
+    "report": "review_claude"
+   },
+   {
+    "text": "v3 kullanıcı çalışması: 76 katılımcı, 380 sorgu, Gemini-2.5-flash; %50,8 kazanma / %8,2 beraberlik / %41,1 kayıp.",
+    "report": "synthesis_chatgpt-map-P14"
+   },
+   {
+    "text": "pre_research_gemini 2026-09-23T21:52 UTC'de durduruldu; Gemini katkısı uzlaşma sayılmadı.",
+    "report": "research_claude"
+   }
+  ],
+  "risks": [
+   "Tercih sonuçları görev başarısı veya sabit panele üstünlük kanıtı değil.",
+   "Dakikalar süren üretim gecikmesi panel deneyimi için risk."
+  ],
+  "url": "https://research.google/blog/generative-ui-a-rich-custom-visual-interactive-user-experience-for-any-prompt/",
+  "version": "Gemini 3 Pro; Gemini 2.5 Flash"
+ },
+ "claude": {
+  "desc": "Anthropic'in büyük dil modeli ailesi; bu araştırmada hem rapor sağlayıcısı hem GenUI deneylerinde omurga ve hakem model.",
+  "summary": "Generative Interfaces çalışmasında (arXiv 2508.19227, v1 26.08.2025) GenUI sistemi OpenCanvas üzerinde Claude 3.7 omurgasıyla kurulmuş; ConvUI (Claude 3.7) karşısında %84 tercih bildirilmiş, ancak karşılaştırmada Claude yanıtlarının %26'sındaki artifact'ler kaldırılmıştır. Küçük model A2UI çalışmasında (arXiv 2609.04184) Sonnet 4.6 semantik, Opus 4.6 görsel hakem olmuş ve bileşen uygunluğunda hakem–insan korelasyonu ρ=0,08 kalmıştır. Araştırma sürecinde Claude'un son sentezi tamamlanmamış, 13. parça sağlayıcı tarafından reddedilmiştir.",
+  "license": "Ticari",
+  "maturity": "Kararlı",
+  "vendor": "Anthropic",
+  "platform": "Sunucu",
+  "effort": "Orta",
+  "stance": "Seçimli",
+  "rTopics": [
+   "R01",
+   "R24",
+   "R26"
+  ],
+  "facts": [
+   {
+    "text": "GenUI omurgası Claude 3.7; ConvUI (Claude 3.7) karşısında 8 boyutta %81–89 tercih.",
+    "report": "synthesis_claude-map-P12"
+   },
+   {
+    "text": "Karşılaştırmada Claude 3.7 yanıtlarının %26'sındaki artifact'ler çıkarıldı.",
+    "report": "synthesis_chatgpt-map-P12"
+   },
+   {
+    "text": "arXiv 2609.04184: hakemler Sonnet 4.6/Opus 4.6; bileşen uygunluğunda hakem–insan ρ=0,08.",
+    "report": "research_claude"
+   },
+   {
+    "text": "Claude sentezinin 13. parçası sağlayıcı tarafından reddedildi; 12 ara parça kullanılabilir veri sayıldı.",
+    "report": "GENUI-SENTEZ-RAPORU"
+   }
+  ],
+  "risks": [
+   "LLM hakem skorları insan yargısıyla zayıf ilişkili olabilir.",
+   "Tercih yüzdeleri karşılaştırıcı koşuluna bağlı; ürün görev başarısı değil."
+  ],
+  "url": "https://www.anthropic.com/news/claude-3-7-sonnet",
+  "version": "Claude 3.7; Sonnet/Opus 4.6"
+ },
+ "gpt": {
+  "desc": "OpenAI'ın GPT model ailesi ve ChatGPT ürünü; bu araştırmada rapor sağlayıcısı ve GenUI karşılaştırmalarında temel model.",
+  "summary": "ChatGPT bu programda ön araştırma, araştırma ve yeniden araştırma raporlarını üreten sağlayıcılardan biridir; sentez anında bağımsız ChatGPT sentezi hâlâ sürüyordu. Generative Interfaces v1'de GPT-4o sohbet çıktısı Claude 3.7'den daha rekabetçi karşılaştırıcı olmuş, GenUI tercihi %69'da kalmıştır. OpenUI'nin '%67'ye kadar az token' iddiası GPT-5.2 (sıcaklık 0) ve gpt-5 tokenizer ile yapılmış satıcı kıyaslamasıdır; toplam azalma %52,8 olup bağımsız tekrar yoktur.",
+  "license": "Ticari",
+  "maturity": "Kararlı",
+  "vendor": "OpenAI",
+  "platform": "Sunucu",
+  "effort": "Orta",
+  "stance": "Seçimli",
+  "rTopics": [
+   "R01",
+   "R26",
+   "R08"
+  ],
+  "facts": [
+   {
+    "text": "GenUI v1: GPT-4o sohbet karşılaştırıcısına karşı %69, Claude 3.7'ye karşı %84 tercih (100 sorgu).",
+    "report": "synthesis_chatgpt-map-P9"
+   },
+   {
+    "text": "ConvUI (GPT-4o) karşısında GenUI kazanma oranı 8 boyutta %54–80.",
+    "report": "synthesis_claude-map-P12"
+   },
+   {
+    "text": "OpenUI benchmark: GPT-5.2, sıcaklık 0; en yüksek %67,1 (contact-form), toplam %52,8 çıktı-token azalması.",
+    "report": "synthesis_chatgpt-map-P7"
+   },
+   {
+    "text": "MCP Apps, MCP-UI ile OpenAI Apps SDK yaklaşımlarını tek açık standartta birleştiriyor.",
+    "report": "review_chatgpt"
+   }
+  ],
+  "risks": [
+   "Satıcı benchmark'ları toplam maliyet, kalite ve gecikmeyi ölçmez.",
+   "Sağlayıcı kota/iptal hataları iş durumunda ayrı gösterilmeli."
+  ],
+  "url": "https://openai.com",
+  "version": "GPT-4o; GPT-5.2"
+ },
+ "react": {
+  "desc": "Meta'nın bileşen tabanlı UI kütüphanesi; 19.3 sürümüyle ViewTransition ve Fragment Refs kararlı hale geldi.",
+  "summary": "Sentez React'i yoğun etkileşimli çalışma alanı için makul bir aday sayar, ancak GenUI'nin zorunlu koşulu olmadığını vurgular; A2UI Lit, Angular, Flutter ve Lynx renderer'ları da sunar. React 19.3 (09.09.2026) `<ViewTransition>` ve `addTransitionType` API'lerini kararlı yapmıştır; bunlar yalnız DOM'da çalışır ve normal setState geçişi tetiklemez. Durum korumada bileşen türü, konumu ve anahtarı belirleyicidir; görsel süreklilik kullanıcı durumunun korunduğunu garanti etmez.",
+  "license": "MIT",
+  "maturity": "Kararlı",
+  "vendor": "Meta",
+  "platform": "React",
+  "effort": "Orta",
+  "stance": "Çekirdek aday",
+  "rTopics": [
+   "R04",
+   "R06",
+   "R09",
+   "R16"
+  ],
+  "facts": [
+   {
+    "text": "React 19.3 (2026-09-09): ViewTransition ve addTransitionType kararlı; yalnız DOM'da çalışır.",
+    "report": "pre_research_claude"
+   },
+   {
+    "text": "@a2ui/react npm sürümleri: 0.10.1 (17.06.2026), 0.11.0 (01.09.2026), 0.11.1 (12.09.2026); Apache-2.0.",
+    "report": "review_claude"
+   },
+   {
+    "text": "React 19.3, Suspense fallback'ını geciktirmeden göstermeyi ve fallback→final geçişini animasyonlamayı öneriyor.",
+    "report": "research_chatgpt"
+   },
+   {
+    "text": "Karar defteri: React etkileşimli alan için aday, GenUI'nin zorunlu koşulu değil.",
+    "report": "GENUI-SENTEZ-RAPORU"
+   }
+  ],
+  "risks": [
+   "AI Elements, Tambo gibi React'e özgü araçlar kilitlenme yaratabilir.",
+   "ViewTransition'ın Motion'a karşı performans üstünlüğü ölçülmedi.",
+   "Azaltılmış hareket tercihi otomatik uygulanmaz."
+  ],
+  "url": "https://react.dev/blog/2026/09/09/react-19-3",
+  "version": "19.3"
+ },
+ "vue": {
+  "desc": "Evan You liderliğindeki ilerlemeli (progressive) JavaScript UI framework'ü.",
+  "summary": "Vue raporlarda React'e alternatif ekosistem olarak geçer: json-render ve OpenUI (vue-lang) Vue adaptörü sunar, NumberFlow ve dotLottie Vue'yu hedefler. A2UI yol haritası Vue renderer'ını yalnız 'Proposed — Community interest' düzeyinde tutar. Raporlar topluluk Vue desteğinin resmi React desteğiyle eş olgunlukta olmadığını, alternatiflerin eş kapsam ve maliyetinin gösterilmediğini belirtir.",
+  "license": "MIT",
+  "maturity": "Kararlı",
+  "vendor": "Vue ekibi (Evan You)",
+  "platform": "Çoklu framework",
+  "effort": "Yüksek",
+  "stance": "Referans",
+  "rTopics": [
+   "R09",
+   "R26"
+  ],
+  "facts": [
+   {
+    "text": "A2UI yol haritası: Vue ve Svelte 'Proposed'; React, Lit, Angular, Flutter ve Lynx 'Stable'.",
+    "report": "research_claude"
+   },
+   {
+    "text": "json-render React, Vue, Svelte, Solid ve React Native destekliyor; 36 shadcn bileşeni sunuyor.",
+    "report": "research_claude"
+   },
+   {
+    "text": "Ön araştırmanın seçim yanlılığı: Angular/Lit/Vue alternatifleri değerlendirilmedi.",
+    "report": "pre_research_claude"
+   }
+  ],
+  "risks": [
+   "A2UI için resmi renderer yok.",
+   "React merkezli hazır AI bileşenleri (AI Elements vb.) doğrudan kullanılamaz."
+  ],
+  "url": "https://vuejs.org",
+  "version": ""
+ },
+ "angular": {
+  "desc": "Google'ın TypeScript tabanlı, kurumsal ölçekli web uygulama framework'ü.",
+  "summary": "A2UI yol haritası Angular renderer'ını 'Stable — Full Angular integration' olarak listeler; Lit ve React ile birlikte `@a2ui/web_core` ortak mesaj işleme çekirdeğini kullanır. Angular renderer README'si dış ajan tanımlarını güvenilmeyen girdi sayan güvenlik uyarıları içerir; bu, 'bildirimsel tarif kendiliğinden güvenlidir' anlatımını sınırlar. OpenUI de Angular entegrasyonu sunar, ancak renderer'lar arasında eş katalog kapsamı veya bakım kalitesi gösterilmemiştir.",
+  "license": "MIT",
+  "maturity": "Kararlı",
+  "vendor": "Google",
+  "platform": "Çoklu framework",
+  "effort": "Yüksek",
+  "stance": "Referans",
+  "rTopics": [
+   "R09",
+   "R23"
+  ],
+  "facts": [
+   {
+    "text": "A2UI yol haritası: Angular 'Stable — Full Angular integration'.",
+    "report": "review_chatgpt"
+   },
+   {
+    "text": "A2UI istemci kurulumu: npm install @a2ui/angular @a2ui/web_core.",
+    "report": "synthesis_claude-map-P6"
+   },
+   {
+    "text": "A2UI React ve Angular README'leri dış ajan tanımlarını güvenilmeyen girdi sayıyor; oltalama ve özellik enjeksiyonu uyarısı var.",
+    "report": "synthesis_chatgpt-map-P11"
+   }
+  ],
+  "risks": [
+   "Astro/React yönelimli kabukta ek framework ve ekip becerisi maliyeti.",
+   "Renderer'lar arasında eş katalog ve erişilebilirlik garantisi yok."
+  ],
+  "url": "https://angular.dev",
+  "version": ""
+ },
+ "svelte": {
+  "desc": "Derleme zamanında reaktif kod üreten hafif UI framework'ü; SvelteKit uygulama çatısıyla birlikte kullanılır.",
+  "summary": "Svelte; json-render ve OpenUI (svelte-lang) adaptörleri ile NumberFlow ve dotLottie sarmalayıcıları üzerinden raporlarda geçer. A2UI yol haritası Svelte/Kit renderer'ını 'Proposed — Community interest' olarak tutar. Raporlar React dışı yolların varlığını 'GenUI = React' varsayımına karşı kanıt sayar; ancak Svelte için eş olgunluk veya maliyet ölçümü yoktur.",
+  "license": "MIT",
+  "maturity": "Kararlı",
+  "vendor": "Svelte ekibi",
+  "platform": "Çoklu framework",
+  "effort": "Yüksek",
+  "stance": "Referans",
+  "rTopics": [
+   "R09"
+  ],
+  "facts": [
+   {
+    "text": "A2UI yol haritası: Svelte/Kit 'Proposed — Community interest'.",
+    "report": "review_chatgpt"
+   },
+   {
+    "text": "OpenUI deposunda vue-lang, svelte-lang ve angular-lang paketleri bulunuyor.",
+    "report": "research_claude"
+   },
+   {
+    "text": "Topluluk Vue/Svelte/Angular desteği resmi React desteğiyle eş olgunluk değil.",
+    "report": "synthesis_chatgpt-map-P17"
+   }
+  ],
+  "risks": [
+   "A2UI için resmi renderer yok.",
+   "Topluluk adaptörleri eş olgunluk garantisi vermez."
+  ],
+  "url": "https://svelte.dev/docs/kit/introduction",
+  "version": ""
+ },
+ "lit": {
+  "desc": "Google'ın standart Web Components üzerine kurulu hafif bileşen kütüphanesi.",
+  "summary": "A2UI yol haritasında 'Web Components (Lit)' renderer'ı 'Stable — framework-agnostic, works anywhere' olarak listelenir ve Angular/React ile ortak `@a2ui/web_core` çekirdeğini paylaşır. Raporlar bunu GenUI için React'in zorunlu olmadığının kanıtı sayar; Astro tabanlı bir kabukta çerçeveden bağımsız renderer seçeneği olabilir. Ancak Lit renderer'ının React ile eş katalog kapsamı ve erişilebilirliği doğrulanmamıştır.",
+  "license": "BSD",
+  "maturity": "Kararlı",
+  "vendor": "Google",
+  "platform": "Framework bağımsız",
+  "effort": "Orta",
+  "stance": "Seçimli",
+  "rTopics": [
+   "R09",
+   "R04"
+  ],
+  "facts": [
+   {
+    "text": "A2UI yol haritası: 'Web Components (Lit)' Stable, framework bağımsız, her yerde çalışır.",
+    "report": "review_chatgpt"
+   },
+   {
+    "text": "Lit, Angular ve React @a2ui/web_core üzerinden ortak mesaj işleme, durum ve bağlama altyapısını kullanıyor.",
+    "report": "synthesis_chatgpt-map-P12"
+   },
+   {
+    "text": "'GenUI için React zorunlu değil' iddiası A2UI Lit/Angular/Flutter renderer'larıyla desteklendi.",
+    "report": "pre_research_chatgpt"
+   }
+  ],
+  "risks": [
+   "Hazır AI bileşen ekosistemi React kadar geniş değil.",
+   "Renderer'lar arası eş kapsam kanıtlanmadı."
+  ],
+  "url": "https://lit.dev",
+  "version": ""
+ },
+ "solid": {
+  "desc": "İnce taneli (fine-grained) reaktivite kullanan, sanal DOM'suz JavaScript UI kütüphanesi.",
+  "summary": "Solid korpusta yalnız dolaylı olarak geçer: json-render'ın React, Vue, Svelte ve React Native yanında Solid adaptörü sunduğu aktarılır ve devtools sayfası Solid adaptör paketini listeler. Raporlarda Solid için A2UI renderer'ı, eş kapsam veya performans testi yoktur. Bu nedenle yalnız React dışı ekosistem çeşitliliğinin bir örneği olarak referans değeri taşır.",
+  "license": "MIT",
+  "maturity": "Kararlı",
+  "vendor": "Solid ekibi (Ryan Carniato)",
+  "platform": "Çoklu framework",
+  "effort": "Yüksek",
+  "stance": "Referans",
+  "rTopics": [
+   "R09"
+  ],
+  "facts": [
+   {
+    "text": "json-render React/Vue/Svelte/Solid/React Native renderer'ları sunuyor.",
+    "report": "pre_research_claude"
+   },
+   {
+    "text": "json-render devtools sayfası React/Vue/Svelte/Solid adaptör paketlerini ve production'da null render'ı yazıyor.",
+    "report": "review_claude"
+   },
+   {
+    "text": "Çerçeve listesi ve 36 shadcn aktarımı eş kapsam testi değil.",
+    "report": "synthesis_chatgpt-map-P2"
+   }
+  ],
+  "risks": [
+   "A2UI için renderer yok; ekosistem küçük.",
+   "Korpusta Solid'e özgü doğrulama yapılmadı."
+  ],
+  "url": "https://www.solidjs.com",
+  "version": ""
+ },
+ "astro": {
+  "desc": "İçerik odaklı siteler için adalar (islands) mimarili web framework'ü; farklı UI framework'lerini bir arada barındırabilir.",
+  "summary": "Sentez, kullanıcı tercihine uygun başlangıç olarak Astro + daisyUI'yi kabul eder: Astro belge, yardım, rapor ve uygulama kabuğu için; yoğun etkileşimli çalışma alanı ise tek, iyi tanımlanmış istemci uygulaması (React makul aday) olarak konumlandırılır. Her kartı ayrı ada yapıp ortak seçim, form ve akışı onlarca parçaya taşımaktan kaçınılması önerilir. Bu bir uygulama tasarımı önerisidir; Astro'nun tek doğru kullanımı veya ölçülmüş sonuç değildir.",
+  "license": "MIT",
+  "maturity": "Kararlı",
+  "vendor": "Astro ekibi",
+  "platform": "Çoklu framework",
+  "effort": "Orta",
+  "stance": "Çekirdek aday",
+  "rTopics": [
+   "R04",
+   "R16"
+  ],
+  "facts": [
+   {
+    "text": "Karar defteri: Astro + daisyUI tercihe uygun başlangıç; yoğun çalışma alanının durum yönetimi ayrıca tasarlanır.",
+    "report": "GENUI-SENTEZ-RAPORU"
+   },
+   {
+    "text": "Astro'nun adalar yaklaşımı statik içerikle etkileşimli bölümleri birlikte sunmayı destekler (resmi belge, 26.09.2026 erişimi).",
+    "report": "GENUI-SENTEZ-RAPORU"
+   },
+   {
+    "text": "Örnek: rapor sayfası hızlı açılan Astro sayfası, 'Bu veriyi incele' alanı etkileşimli uygulama.",
+    "report": "GENUI-SENTEZ-RAPORU"
+   }
+  ],
+  "risks": [
+   "Birbirine bağlı tablo/filtre/grafik adalara bölünürse durum senkronizasyonu zorlaşır.",
+   "Astro yalnız sentez aşamasında ele alındı; önceki raporlar karşılaştırmalı değerlendirmedi."
+  ],
+  "url": "https://docs.astro.build/en/concepts/islands/",
+  "version": ""
+ },
+ "nextjs": {
+  "desc": "Vercel'in React tabanlı tam yığın web framework'ü; App Router ve sunucu bileşenleri sunar.",
+  "summary": "Next.js, AI Elements'in belgelenmiş kurulum önkoşulu olarak geçer (Node.js 18+, React 19, Next.js 14+ ve App Router önerisi, AI SDK, shadcn/ui, Tailwind 4). Raporlar bunun bir kurulum yolu olduğunu, her kopyalanan bileşen için çalışma zamanı zorunluluğu kanıtlamadığını ve Vite desteğine dair yalnız topluluk bildirimleri bulunduğunu vurgular. Bazı A2UI iskeleleri CopilotKit ile Next.js kullansa da protokol Next.js gerektirmez.",
+  "license": "MIT",
+  "maturity": "Kararlı",
+  "vendor": "Vercel",
+  "platform": "React",
+  "effort": "Orta",
+  "stance": "Referans",
+  "rTopics": [
+   "R03",
+   "R26"
+  ],
+  "facts": [
+   {
+    "text": "AI Elements kurulumu React 19, Next.js 14+ ve Tailwind 4 ekliyor; AI Gateway 'Recommended'.",
+    "report": "synthesis_chatgpt-map-P19"
+   },
+   {
+    "text": "'Next.js çalışma zamanında zorunludur' iddiası kanıtlanamadı; kurulum örneği zorunlu bağımlılık değil.",
+    "report": "research_claude"
+   },
+   {
+    "text": "Bazı A2UI iskeleleri CopilotKit'in A2UI runtime'ı ile Next.js kullanıyor; kurulum yüzeyi AG-UI öncelikli.",
+    "report": "review_claude"
+   }
+  ],
+  "risks": [
+   "Astro tabanlı kabukla birlikte ikinci uygulama çatısı maliyeti.",
+   "Next.js dışı derleme testi raporlarda yapılmadı."
+  ],
+  "url": "https://nextjs.org",
+  "version": "14+"
+ },
+ "vite": {
+  "desc": "Hızlı geliştirme sunucusu ve derleme aracı; React, Vue, Svelte gibi birçok framework'ü destekler.",
+  "summary": "Claude araştırmasının koşullu önerisi ön yüz için Vite + React 19.3 + TanStack Router/Query'dir; değerlendirmeler bu yığının ürün için optimal olduğunun kurulmadığını belirtir. AI Elements'in Vite ile çalıştığına dair resmi belge yoktur, yalnız topluluk yanıtları vardır; bu nedenle prototipte Vite + React derleme testi yapılması önerilir. Vite, bileşen kodunun Next.js'e bağımlılığını sınamak için doğal bir deney ortamıdır.",
+  "license": "MIT",
+  "maturity": "Kararlı",
+  "vendor": "Vite ekibi (VoidZero)",
+  "platform": "Çoklu framework",
+  "effort": "Düşük",
+  "stance": "Prototip adayı",
+  "rTopics": [
+   "R04",
+   "R26",
+   "R28"
+  ],
+  "facts": [
+   {
+    "text": "Koşullu karar: 'Frontend: Vite + React 19.3 + TanStack Router/Query'; kabuk sabit, üretken alan analiz yüzeylerinde.",
+    "report": "research_claude"
+   },
+   {
+    "text": "AI Elements için Vite desteğine dair resmi belge yok; topluluk çalıştığını bildiriyor.",
+    "report": "research_claude"
+   },
+   {
+    "text": "Vite/React/Query/Router/XState/FastAPI yığınının hedef ürün için optimal olduğu kurulmadı.",
+    "report": "synthesis_chatgpt-map-P18"
+   }
+  ],
+  "risks": [
+   "Next.js varsayan bileşenlerde uyarlama gerekebilir.",
+   "Derleme ve entegrasyon testi raporlarda yapılmadı."
+  ],
+  "url": "https://vite.dev",
+  "version": ""
+ },
+ "lynx": {
+  "desc": "ByteDance'in mobil, web ve masaüstünde yerel görünüm çizen, ReactLynx ile geliştirilen çoklu platform UI çerçevesi.",
+  "summary": "A2UI yol haritası Lynx'i 'Stable — Mobile, Web, Desktop — ReactLynx renderer for A2UI v0.9' olarak listeler; OpenUI da Lynx hedefini sayar. Raporlar Lynx adının listede bulunmasının eşit katalog kapsamı veya bakım kalitesi sağlamadığını, React dışı listelerin eşdeğer olgunluk garantisi olmadığını belirtir. Hedef ürün masaüstü tarayıcılı B2B panel olduğundan Lynx doğrudan gereksinim değildir.",
+  "license": "Apache-2.0",
+  "maturity": "Kararlı",
+  "vendor": "ByteDance",
+  "platform": "React",
+  "effort": "Yüksek",
+  "stance": "Referans",
+  "rTopics": [
+   "R09"
+  ],
+  "facts": [
+   {
+    "text": "A2UI yol haritası: Lynx 'Stable'; ReactLynx renderer A2UI v0.9 içindir.",
+    "report": "review_chatgpt"
+   },
+   {
+    "text": "Renderer listesinde React, Lit, Angular, Flutter ve bazı kayıtlarda Lynx adının bulunması eşit katalog kapsamı sağlamaz.",
+    "report": "synthesis_chatgpt-map-P18"
+   },
+   {
+    "text": "OpenUI'nin React dışı Vue/Svelte/Angular/React Native/Lynx listeleri eşdeğer olgunluk garantisi değil.",
+    "report": "synthesis_chatgpt-map-P19"
+   }
+  ],
+  "risks": [
+   "Renderer A2UI v0.9'a bağlı; v1.0 geçişi belirsiz.",
+   "Web yönetim paneli hedefi için ek platform ve ekip maliyeti."
+  ],
+  "url": "https://lynxjs.org/next/react/genui/a2ui.html",
+  "version": ""
+ },
+ "flutter": {
+  "desc": "Google'ın Dart tabanlı çoklu platform UI araç takımı; GenUI SDK ile A2UI tabanlı üretken arayüz sunar.",
+  "summary": "A2UI yol haritası Flutter (GenUI SDK) renderer'ını 'Stable — works on mobile, web, desktop' olarak listeler; A2UI README'si Flutter için A2UI'yi içeride kullanan GenUI SDK'ya yönlendirir. Raporlar bunu 'React zorunlu' varsayımına karşı kanıt olarak kullanır. Web yönetim paneli hedefinde Flutter doğrudan aday değildir; platformlar arası eş özellik ve maliyet kanıtlanmamıştır.",
+  "license": "BSD",
+  "maturity": "Kararlı",
+  "vendor": "Google",
+  "platform": "Çoklu framework",
+  "effort": "Yüksek",
+  "stance": "Referans",
+  "rTopics": [
+   "R09"
+  ],
+  "facts": [
+   {
+    "text": "A2UI yol haritası: 'Flutter (GenUI SDK)' Stable, çoklu platform.",
+    "report": "review_chatgpt"
+   },
+   {
+    "text": "A2UI README'si Flutter için A2UI'yi içeride kullanan GenUI SDK'ya yönlendiriyor.",
+    "report": "review_claude"
+   },
+   {
+    "text": "'React zorunlu' varsayımı Flutter/GenUI SDK ve renderer'dan bağımsız çekirdeklerle çürük bulundu.",
+    "report": "synthesis_claude-map-P10"
+   }
+  ],
+  "risks": [
+   "Web panel için ayrı teknoloji yığını ve Dart becerisi gerekir.",
+   "Renderer'lar arası eş katalog kapsamı doğrulanmadı."
+  ],
+  "url": "https://github.com/flutter/genui",
+  "version": ""
+ },
+ "web-components": {
+  "desc": "Custom Elements, Shadow DOM ve HTML şablonlarından oluşan, tarayıcıya yerleşik yeniden kullanılabilir bileşen standartları.",
+  "summary": "Web Components, A2UI'nin Lit tabanlı 'framework-agnostic, works anywhere' renderer'ı üzerinden raporlarda yer alır; dotLottie de Web Components sarmalayıcısı sunar. Çerçeveden bağımsız bir renderer, Astro gibi çok framework'lü bir kabukta aynı kataloğu farklı adalarda kullanmanın yolu olabilir. Raporlarda Web Components'in erişilebilirlik, form ilişkilendirme veya stil izolasyonu davranışı ayrıca test edilmemiştir.",
+  "license": "Standart",
+  "maturity": "Kararlı",
+  "vendor": "W3C / WHATWG",
+  "platform": "Tarayıcı yerel",
+  "effort": "Orta",
+  "stance": "Seçimli",
+  "rTopics": [
+   "R09",
+   "R04"
+  ],
+  "facts": [
+   {
+    "text": "A2UI yol haritası: Web Components (Lit) renderer 'Stable', framework bağımsız.",
+    "report": "review_chatgpt"
+   },
+   {
+    "text": "dotLottie React/Vue/Svelte/Web Components sarmalayıcıları sunuyor.",
+    "report": "synthesis_chatgpt-map-P11"
+   }
+  ],
+  "risks": [
+   "Shadow DOM, tema token'ları ve ekran okuyucu davranışı ayrıca sınanmalı.",
+   "React ekosistemindeki hazır AI bileşenleri doğrudan kullanılamaz."
+  ],
+  "url": "https://developer.mozilla.org/en-US/docs/Web/API/Web_components",
+  "version": ""
+ },
+ "vercel": {
+  "desc": "Next.js, AI SDK, AI Elements ve json-render'ın arkasındaki bulut barındırma ve geliştirici platformu şirketi.",
+  "summary": "Vercel ekosistemi raporlarda birden çok adayla temsil edilir: Vercel Labs'in json-render'ı (Apache-2.0), AI SDK 7, AI Elements ve web arayüz rehberi. Claude haritası bu araçların aynı kuruma ait olduğunu, bu nedenle birbirini doğrulayan bağımsız kanıt sayılmaması gerektiğini not eder. AI Elements kurulumunda AI Gateway önerilir; bu bir hizmet bağımlılığıdır, zorunluluk değildir.",
+  "license": "Ticari",
+  "maturity": "Kararlı",
+  "vendor": "Vercel",
+  "platform": "Sunucu",
+  "effort": "Düşük",
+  "stance": "Referans",
+  "rTopics": [
+   "R09",
+   "R12",
+   "R26"
+  ],
+  "facts": [
+   {
+    "text": "json-render: Vercel Labs, Apache-2.0; katalog Zod ile, SpecStream RFC 6902 satırlı JSONL.",
+    "report": "pre_research_claude"
+   },
+   {
+    "text": "Vercel AI SDK/AI Elements, json-render ile aynı kurum; kaynak zinciri tek ekosistem sayıldı.",
+    "report": "synthesis_claude-map-P1"
+   },
+   {
+    "text": "AI Elements kurulumunda Vercel AI Gateway öneriliyor (hizmet bağımlılığı).",
+    "report": "review_claude"
+   },
+   {
+    "text": "AI SDK main manifestinde 7.0.114 aktarılıyor; yayımlanmış paketle eşliği bilinmiyor.",
+    "report": "synthesis_chatgpt-map-P15"
+   }
+  ],
+  "risks": [
+   "Tek satıcı ekosistemine bağımlılık ve kilitlenme riski.",
+   "Labs projeleri sürüm ve bakım belirsizliği taşır."
+  ],
+  "url": "https://vercel.com",
+  "version": ""
+ },
+ "chrome": {
+  "desc": "Google'ın Chromium motorlu tarayıcısı; View Transitions ve interpolate-size gibi hareket API'lerini ilk sunan tarayıcı.",
+  "summary": "Chrome 147 (kararlı sürüm 7 Nisan 2026), `Element.startViewTransition()` ile öğe kapsamlı, eşzamanlı ve iç içe View Transitions sunar; 'VT yalnız sayfa ölçeğindedir' iddiasının reddi buna dayanır. Aynı-belge VT Chrome/Edge 111+, belgeler arası VT Chrome 126+ ile gelir; `interpolate-size` için Chrome 129 ve 130 bildirimleri çelişkilidir. Öğe kapsamlı VT şimdilik yalnız Chromium'da olduğundan aşamalı iyileştirme olarak ele alınmalıdır.",
+  "license": "Uygulanmaz",
+  "maturity": "Kararlı",
+  "vendor": "Google",
+  "platform": "Tarayıcı yerel",
+  "effort": "Düşük",
+  "stance": "Referans",
+  "rTopics": [
+   "R06",
+   "R14",
+   "R22"
+  ],
+  "facts": [
+   {
+    "text": "Chrome 147: öğe kapsamlı VT kararlı; kapsam kökü geçiş boyunca contain: layout alıyor (belge 27.03.2026).",
+    "report": "research_claude"
+   },
+   {
+    "text": "Chrome 147 kararlı sürüm tarihi 07.04.2026; BCD'de Firefox ve Safari için version_added: false.",
+    "report": "synthesis_chatgpt-map-P12"
+   },
+   {
+    "text": "interpolate-size için Chrome/Edge 129 ve 130 aktarımları raporlar arasında çelişkili.",
+    "report": "synthesis_chatgpt-map-P20"
+   },
+   {
+    "text": "HTTP/1.1'de tarayıcı+alan başına 6 SSE bağlantısı sınırı Chrome/Firefox'ta 'Won't fix'; HTTP/2 hafifletir.",
+    "report": "pre_research_claude"
+   }
+  ],
+  "risks": [
+   "Chromium'a özgü özellikler Firefox/Safari'de animasyonsuz geri dönüş gerektirir.",
+   "Hedef kurumsal tarayıcı dağılımı bilinmiyor."
+  ],
+  "url": "https://developer.chrome.com/release-notes/147",
+  "version": "147"
+ },
+ "safari": {
+  "desc": "Apple'ın WebKit motorlu tarayıcısı; macOS ve iOS'ta varsayılan tarayıcı.",
+  "summary": "Raporlara göre aynı-belge View Transitions Safari 18+, belgeler arası VT Safari 18.2+ ile desteklenir; WebKit desteksiz tarayıcıda geçişsiz geri dönüşü anlatır. Safari'nin öğe kapsamlı VT sunduğuna dair kanıt yoktur; MDN verisi `Element.startViewTransition` için Safari'de desteksizlik gösterir. WebKit'in Interop 2025 skorları (Safari %99,2, genel %90,8) test uyumunu anlatır, hedef cihaz davranışını değil.",
+  "license": "Uygulanmaz",
+  "maturity": "Kararlı",
+  "vendor": "Apple",
+  "platform": "Tarayıcı yerel",
+  "effort": "Düşük",
+  "stance": "Referans",
+  "rTopics": [
+   "R06"
+  ],
+  "facts": [
+   {
+    "text": "Belgeler arası VT: Safari 18.2+ 'Supported', aynı-belge Safari 18.0+ (caniuse, 24.09.2026).",
+    "report": "research_claude"
+   },
+   {
+    "text": "BCD: Element.startViewTransition Chrome 147'de var; Firefox ve Safari için version_added: false.",
+    "report": "synthesis_chatgpt-map-P12"
+   },
+   {
+    "text": "Interop 2025: Safari %99,2, genel %90,8 uyum skoru; pazar payı değildir.",
+    "report": "synthesis_chatgpt-map-P14"
+   }
+  ],
+  "risks": [
+   "Öğe kapsamlı VT yok; animasyonsuz geri dönüş şart.",
+   "Safari 18 ile 18.2 destek farkları kaynaklar arasında karışık aktarılıyor."
+  ],
+  "url": "https://webkit.org/blog/16301/webkit-features-in-safari-18-2/",
+  "version": "18.2"
+ },
+ "firefox": {
+  "desc": "Mozilla'nın Gecko motorlu açık kaynak tarayıcısı.",
+  "summary": "Firefox 144 (14 Ekim 2025) aynı-belge View Transitions Level 1'i getirmiştir (143'te varsayılan kapalı); Firefox 147 yalnız SPA view transition types desteği eklemiştir. Belgeler arası VT'de caniuse Firefox 144+ için 'kısmi' derken MDN verisi desteksizlik gösterir; bu çelişki raporlarda ihtilaflı kalmıştır. Öğe kapsamlı VT ve interpolate-size için Firefox desteği gösterilmemiştir; Mozilla'nın Acorn sistemi ayrıca bekleme rehberi olarak kullanılır.",
+  "license": "MPL-2.0",
+  "maturity": "Kararlı",
+  "vendor": "Mozilla",
+  "platform": "Tarayıcı yerel",
+  "effort": "Düşük",
+  "stance": "Referans",
+  "rTopics": [
+   "R06",
+   "R05"
+  ],
+  "facts": [
+   {
+    "text": "Firefox 144 (14.10.2025) yalnız aynı-belge VT Level 1'i getirdi; öğe kapsamlı VT kanıtı yok.",
+    "report": "research_claude"
+   },
+   {
+    "text": "Firefox 147 notu: yalnız SPA view transition types, belgeler arası types değil.",
+    "report": "review_claude"
+   },
+   {
+    "text": "Belgeler arası VT: caniuse Firefox 144+ kısmi, MDN version_added:false; ihtilaf açık.",
+    "report": "synthesis_chatgpt-map-P11"
+   }
+  ],
+  "risks": [
+   "Chromium'a özgü hareket API'leri için geri dönüş gerekli.",
+   "Destek verisi kaynaklar arasında çelişkili; hedef kitle payı bilinmiyor."
+  ],
+  "url": "https://developer.mozilla.org/en-US/docs/Mozilla/Firefox/Releases/144",
+  "version": "144; 147"
+ },
+ "edge": {
+  "desc": "Microsoft'un Chromium tabanlı tarayıcısı; Windows'ta varsayılan tarayıcı.",
+  "summary": "Edge raporlarda ayrı incelenmez; destek matrislerinde Chrome ile birlikte 'Chrome/Edge' olarak anılır. Aynı-belge View Transitions için Edge 111+, belgeler arası VT için Edge 126+ aktarılır; interpolate-size için Chrome/Edge 129 ve 130 bilgileri çelişkilidir. Chromium tabanlı olduğundan öğe kapsamlı VT'nin Chrome'u izlemesi beklenebilir, ancak Edge için ayrıca doğrulanmamıştır.",
+  "license": "Uygulanmaz",
+  "maturity": "Kararlı",
+  "vendor": "Microsoft",
+  "platform": "Tarayıcı yerel",
+  "effort": "Düşük",
+  "stance": "Referans",
+  "rTopics": [
+   "R06"
+  ],
+  "facts": [
+   {
+    "text": "Aynı-belge VT: Chrome/Edge 111+ (caniuse aktarımı, küresel %91,75).",
+    "report": "pre_research_claude"
+   },
+   {
+    "text": "Belgeler arası VT: Safari 18.2, Chrome 126 ve Edge 126.",
+    "report": "synthesis_chatgpt-map-P13"
+   },
+   {
+    "text": "interpolate-size için Chrome/Edge 129 ve 130 aktarımları çelişkili.",
+    "report": "synthesis_chatgpt-map-P20"
+   }
+  ],
+  "risks": [
+   "Kurumsal Edge sürüm dağılımı ve politika kısıtları bilinmiyor.",
+   "Edge'e özgü test yapılmadı."
+  ],
+  "url": "https://www.microsoft.com/edge",
+  "version": "111; 126"
+ },
+ "w3c": {
+  "desc": "Web standartlarını geliştiren uluslararası konsorsiyum; WCAG, WAI-ARIA ve CSS belirtimlerini yayımlar.",
+  "summary": "W3C belgeleri raporlarda erişilebilirlik ve hareket ölçütlerinin dayanağıdır: WCAG 2.2 Reflow (320 CSS px), 2.2.2 Pause/Stop/Hide ve 2.3.3 hareket ölçütleri, WAI-ARIA 1.2 progressbar ve CSS View Transitions 1 atıf alır. Design Tokens 2025.10 (28 Ekim 2025) ise kararlı bir Community Group raporudur, W3C Standardı değildir. Bazı w3.org sayfaları doğrulama sırasında HTTP 403 döndürmüştür.",
+  "license": "Standart",
+  "maturity": "Kararlı",
+  "vendor": "W3C",
+  "platform": "Belirtim",
+  "effort": "Orta",
+  "stance": "Referans",
+  "rTopics": [
+   "R21",
+   "R20",
+   "R18",
+   "R06"
+  ],
+  "facts": [
+   {
+    "text": "Design Tokens 2025.10 (28.10.2025) kararlı Community Group raporu; W3C Standardı değil.",
+    "report": "pre_research_chatgpt"
+   },
+   {
+    "text": "WCAG 2.2.2: otomatik başlayan, 5 s'den uzun ve paralel hareketli içerik için durdur/duraklat/gizle mekanizması gerekir.",
+    "report": "pre_research_claude"
+   },
+   {
+    "text": "320 CSS px genişlik ve yakınlaştırma testleri yeniden akışı değerlendirmek için önemli.",
+    "report": "GENUI-SENTEZ-RAPORU"
+   },
+   {
+    "text": "Doğrulama turunda üç w3.org sayfası HTTP 403 döndürdü.",
+    "report": "synthesis_claude-map-P10"
+   }
+  ],
+  "risks": [
+   "Otomatik erişilebilirlik araçları tam kapsama sağlamaz; manuel test gerekir.",
+   "Community Group raporu ile W3C Önerisi statüsü karıştırılmamalı."
+  ],
+  "url": "https://www.w3.org/WAI/WCAG22/Understanding/reflow.html",
+  "version": "WCAG 2.2"
+ },
+ "whatwg": {
+  "desc": "HTML, DOM ve Fetch gibi yaşayan (living) web standartlarını sürdüren tarayıcı üreticileri topluluğu.",
+  "summary": "WHATWG HTML standardı raporlarda SSE ve bekleme semantiğinin birincil kaynağıdır: yerleşik EventSource yalnız GET kullanır, özel başlık ekleyemez, `Last-Event-ID` ve `retry` ile yeniden bağlanır; boş satırla bitmeyen son olay gönderilmez. `<progress>` öğesinde value yoksa gösterge belirsizdir; iframe sandbox izolasyon için anılır ama tek başına yetkilendirme değildir. Raporlar EventSource kısıtlarının SSE biçimini kullanan bütün istemcilere genellenmemesi gerektiğini vurgular.",
+  "license": "Standart",
+  "maturity": "Kararlı",
+  "vendor": "WHATWG",
+  "platform": "Belirtim",
+  "effort": "Düşük",
+  "stance": "Referans",
+  "rTopics": [
+   "R14",
+   "R05",
+   "R23"
+  ],
+  "facts": [
+   {
+    "text": "EventSource yalnız GET; yazar başlık ekleyemez; Last-Event-ID ve retry ile yeniden bağlanma.",
+    "report": "pre_research_claude"
+   },
+   {
+    "text": "SSE: değersiz id satırı son olay kimliğini boşa sıfırlar; boş satırla bitmeyen son blok gönderilmez.",
+    "report": "synthesis_claude-map-P12"
+   },
+   {
+    "text": "<progress>: value kaldırılırsa gösterge indeterminate olur; position −1.",
+    "report": "synthesis_claude-map-P11"
+   }
+  ],
+  "risks": [
+   "Tarayıcı yeniden bağlanması uygulamanın olayları sakladığı anlamına gelmez; replay ayrıca tasarlanmalı.",
+   "Yaşayan standart değişebilir; erişim tarihi kaydedilmeli."
+  ],
+  "url": "https://html.spec.whatwg.org/",
+  "version": "HTML Living Standard"
+ },
+ "ietf": {
+  "desc": "İnternet protokollerini RFC belgeleriyle standartlaştıran kuruluş; JSON Patch ve HTTP belirtimlerini yayımlar.",
+  "summary": "IETF RFC'leri akış ve güvenilirlik katmanının normatif dayanağıdır: RFC 6902 JSON Patch (Nisan 2013) AG-UI STATE_DELTA olaylarının ve json-render SpecStream satırlarının işlem biçimini tanımlar; başarısız işlem sonrası yama başarılı sayılamaz. RFC 9113 (HTTP/2) eşzamanlı akış sınırı için en az 100 önerir; RFC 9110 idempotent yöntem semantiğini verir. Raporlar tek yama belgesinin atomikliğinin çok mesajlı bir akışa kendiliğinden genellenmediğini vurgular.",
+  "license": "Standart",
+  "maturity": "Kararlı",
+  "vendor": "IETF",
+  "platform": "Belirtim",
+  "effort": "Düşük",
+  "stance": "Referans",
+  "rTopics": [
+   "R12",
+   "R14",
+   "R16"
+  ],
+  "facts": [
+   {
+    "text": "RFC 6902 (Nisan 2013): AG-UI STATE_DELTA/ACTIVITY_DELTA ve SpecStream JSON Patch işlemleri taşıyor.",
+    "report": "pre_research_claude"
+   },
+   {
+    "text": "json-render types.ts replace'te hedef yoksa da setByPath çağırıyor; katı RFC eşdeğerliği değil.",
+    "report": "synthesis_chatgpt-map-P11"
+   },
+   {
+    "text": "RFC 9113: SETTINGS_MAX_CONCURRENT_STREAMS için en az 100 öneriliyor.",
+    "report": "synthesis_claude-map-P12"
+   },
+   {
+    "text": "RFC 6902'nin iki farklı URL'si aynı standart ve tek kanıt zinciri sayıldı.",
+    "report": "pre_brief_chatgpt"
+   }
+  ],
+  "risks": [
+   "Yama atomikliği çok mesajlı akışa otomatik yayılmaz.",
+   "Uygulamalar RFC'den sapabilir; tekrar oynatma testi gerekir."
+  ],
+  "url": "https://www.rfc-editor.org/rfc/rfc6902",
+  "version": "RFC 6902"
+ }
+}

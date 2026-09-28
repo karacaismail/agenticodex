@@ -1,0 +1,40 @@
+{
+  "pi": {
+    "desc": "Birleşik LLM API’si, araç çağıran ajan çalışma zamanı ve etkileşimli kodlama CLI’si sunan araç takımı.",
+    "summary": "Kullanıcının isteğiyle 28 Eylül 2026 tarihinde GitHub README’si incelenerek eklendi. Pi; pi-ai ile sağlayıcı erişimini, pi-agent-core ile ajan döngüsünü, pi-coding-agent ile terminalde kodlama deneyimini bir araya getirir. Atlas için ajan arka ucu adayıdır. Mantine arayüzüne bağlanması olay adaptörü ve uygulama tarafında yetki denetimi gerektirir. Özgün sekiz araştırma raporunda değerlendirilmedi; ürün uyumluluğu çalıştırılarak doğrulanmadı.",
+    "license": "MIT",
+    "maturity": "Bilinmiyor",
+    "vendor": "Earendil Works",
+    "platform": "Sunucu",
+    "effort": "Yüksek",
+    "stance": "Referans",
+    "rTopics": [
+      "R08",
+      "R09",
+      "R13",
+      "R14",
+      "R23"
+    ],
+    "facts": [
+      {
+        "text": "pi-ai çoklu sağlayıcı LLM API’si; pi-agent-core araç çağrısı ve durum yönetimi; pi-coding-agent etkileşimli CLI sağlar.",
+        "report": "Pi GitHub README · 2026-09-28"
+      },
+      {
+        "text": "Depoda terminal arayüzü için pi-tui paketi de bulunur. Lisans MIT olarak belirtilmiştir.",
+        "report": "Pi GitHub README · 2026-09-28"
+      }
+    ],
+    "risks": [
+      "Yerleşik dosya sistemi, süreç, ağ veya kimlik bilgisi izin sınırlandırması bulunmadığı README’de belirtilir; çalışma ortamı izolasyonu ayrıca tasarlanmalıdır.",
+      "AG-UI/A2UI ile hazır uyumluluk bu incelemede doğrulanmadı; adaptör prototipi ve kabul testi gerekir."
+    ],
+    "url": "https://github.com/earendil-works/pi",
+    "version": "",
+    "provenance": {
+      "kind": "external",
+      "url": "https://github.com/earendil-works/pi",
+      "checkedAt": "2026-09-28"
+    }
+  }
+}

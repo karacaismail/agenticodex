@@ -72,6 +72,8 @@ def execute(command, timeout, root):
 def reserve(db, project, event, task, source):
     db.execute('CREATE TABLE IF NOT EXISTS events (project TEXT, event TEXT, task TEXT, source TEXT, result TEXT, PRIMARY KEY(project,event))')
     with db:
+        # Acquire the write lock before reading so concurrent claims serialize.
+        db.execute('BEGIN IMMEDIATE')
         old = db.execute('SELECT task,source,result FROM events WHERE project=? AND event=?', (project,event)).fetchone()
         if old:
             if old[:2] != (task, source):

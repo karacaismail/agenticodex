@@ -35,6 +35,30 @@ class KaizenTests(unittest.TestCase):
         with self.assertRaises(ValueError): k.reserve(db,'p','e','t','different')
         self.assertEqual(db.execute('SELECT count(*) FROM events').fetchone()[0],1)
 
+    def test_concurrent_reservation(self):
+        from concurrent.futures import ThreadPoolExecutor
+        from threading import Barrier
+        with tempfile.TemporaryDirectory() as tmp:
+            path = str(Path(tmp) / 'events.sqlite')
+            db = sqlite3.connect(path)
+            k.reserve(db, 'setup', 'setup', 't', 'hash')
+            db.close()
+            barrier = Barrier(8)
+            def attempt(_):
+                connection = sqlite3.connect(path, timeout=5)
+                try:
+                    barrier.wait()
+                    try:
+                        return k.reserve(connection, 'p', 'e', 't', 'hash')
+                    except ValueError:
+                        return 'in_progress'
+                finally:
+                    connection.close()
+            with ThreadPoolExecutor(max_workers=8) as pool:
+                results = list(pool.map(attempt, range(8)))
+            self.assertEqual(results.count(None), 1)
+            self.assertEqual(results.count('in_progress'), 7)
+
     def test_dirty_source_and_secret_exclusion(self):
         with tempfile.TemporaryDirectory() as tmp:
             root=Path(tmp)

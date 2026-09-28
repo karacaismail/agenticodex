@@ -80,7 +80,7 @@ export default function ToolsPage() {
       <PageHeader
         eyebrow="Keşfet"
         title="Araçlar ve varlıklar"
-        description={`Korpustan çıkarılan ${tools.length} varlık: kütüphaneler, protokoller, standartlar, tarayıcı API’leri, tasarım sistemleri, araştırmalar ve modeller. Her kart, raporlardaki geçiş, iddia ve kaynak verisinden hesaplanan puanları taşır.`}
+        description={`Araştırma korpusu ve ek kaynak incelemelerinden ${tools.length} varlık: kütüphaneler, protokoller, standartlar, tarayıcı API’leri, tasarım sistemleri, araştırmalar ve modeller. Puanlar korpus kanıtından hesaplanır; dış kaynakla eklenen araçların inceleme bilgisi detay sayfasındadır.`}
         crumbs={[{ label: 'Genel bakış', to: '/' }, { label: 'Araçlar' }]}
       />
       <Paper p="md" className="glass" mb="lg">

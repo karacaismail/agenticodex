@@ -1,0 +1,266 @@
+{
+  "langfuse": {
+    "desc": "İzler, veri kümeleri ve deneylerle LLM uygulamalarını değerlendirir.",
+    "summary": "İzler, veri kümeleri ve deneylerle LLM uygulamalarını değerlendirir. Kaizen içinde değerlendirme veya kanıt toplama adayıdır. Tam CAPA yaşam döngüsü ve bağımsız kabul otoritesi ayrıca kurulmalıdır. Bu entegrasyon katalog ve süreç eşlemesidir; servis kurulmadı, hesap açılmadı, API anahtarı eklenmedi.",
+    "license": "Bilinmiyor",
+    "maturity": "Bilinmiyor",
+    "vendor": "Langfuse",
+    "platform": "Framework bağımsız",
+    "effort": "Orta",
+    "stance": "Referans",
+    "rTopics": [
+      "R23",
+      "R26",
+      "R27",
+      "R28"
+    ],
+    "facts": [
+      {
+        "text": "İzler, veri kümeleri ve deneylerle LLM uygulamalarını değerlendirir.",
+        "report": "https://langfuse.com/docs/evaluation/overview"
+      }
+    ],
+    "risks": [
+      "LLM değerlendirici puanı tek başına kabul kararı değildir; insan ve deterministik kontrollerle kalibre edilmelidir.",
+      "İzler ve test veri kümeleri hassas içerik taşıyabilir; erişim, maskeleme ve saklama politikası gerekir."
+    ],
+    "url": "https://langfuse.com/docs/evaluation/overview",
+    "version": "",
+    "provenance": {
+      "kind": "external",
+      "url": "https://langfuse.com/docs/evaluation/overview",
+      "checkedAt": "2026-09-28"
+    }
+  },
+  "langsmith": {
+    "desc": "Çevrimdışı veri kümesi değerlendirmesi ve çevrimiçi iz değerlendirmesi sağlar.",
+    "summary": "Çevrimdışı veri kümesi değerlendirmesi ve çevrimiçi iz değerlendirmesi sağlar. Kaizen içinde değerlendirme veya kanıt toplama adayıdır. Tam CAPA yaşam döngüsü ve bağımsız kabul otoritesi ayrıca kurulmalıdır. Bu entegrasyon katalog ve süreç eşlemesidir; servis kurulmadı, hesap açılmadı, API anahtarı eklenmedi.",
+    "license": "Bilinmiyor",
+    "maturity": "Bilinmiyor",
+    "vendor": "LangSmith",
+    "platform": "Framework bağımsız",
+    "effort": "Orta",
+    "stance": "Referans",
+    "rTopics": [
+      "R23",
+      "R26",
+      "R27",
+      "R28"
+    ],
+    "facts": [
+      {
+        "text": "Çevrimdışı veri kümesi değerlendirmesi ve çevrimiçi iz değerlendirmesi sağlar.",
+        "report": "https://docs.langchain.com/langsmith/evaluation-types"
+      }
+    ],
+    "risks": [
+      "LLM değerlendirici puanı tek başına kabul kararı değildir; insan ve deterministik kontrollerle kalibre edilmelidir.",
+      "İzler ve test veri kümeleri hassas içerik taşıyabilir; erişim, maskeleme ve saklama politikası gerekir."
+    ],
+    "url": "https://docs.langchain.com/langsmith/evaluation-types",
+    "version": "",
+    "provenance": {
+      "kind": "external",
+      "url": "https://docs.langchain.com/langsmith/evaluation-types",
+      "checkedAt": "2026-09-28"
+    }
+  },
+  "arize-phoenix": {
+    "desc": "LLM uygulamalarında izleme, deney ve değerlendirmeyi bir araya getirir.",
+    "summary": "LLM uygulamalarında izleme, deney ve değerlendirmeyi bir araya getirir. Kaizen içinde değerlendirme veya kanıt toplama adayıdır. Tam CAPA yaşam döngüsü ve bağımsız kabul otoritesi ayrıca kurulmalıdır. Bu entegrasyon katalog ve süreç eşlemesidir; servis kurulmadı, hesap açılmadı, API anahtarı eklenmedi.",
+    "license": "Bilinmiyor",
+    "maturity": "Bilinmiyor",
+    "vendor": "Arize Phoenix",
+    "platform": "Framework bağımsız",
+    "effort": "Orta",
+    "stance": "Referans",
+    "rTopics": [
+      "R23",
+      "R26",
+      "R27",
+      "R28"
+    ],
+    "facts": [
+      {
+        "text": "LLM uygulamalarında izleme, deney ve değerlendirmeyi bir araya getirir.",
+        "report": "https://arize.com/docs/phoenix/"
+      }
+    ],
+    "risks": [
+      "LLM değerlendirici puanı tek başına kabul kararı değildir; insan ve deterministik kontrollerle kalibre edilmelidir.",
+      "İzler ve test veri kümeleri hassas içerik taşıyabilir; erişim, maskeleme ve saklama politikası gerekir."
+    ],
+    "url": "https://arize.com/docs/phoenix/",
+    "version": "",
+    "provenance": {
+      "kind": "external",
+      "url": "https://arize.com/docs/phoenix/",
+      "checkedAt": "2026-09-28"
+    }
+  },
+  "promptfoo": {
+    "desc": "İstem ve model karşılaştırmalarını testlerle değerlendirir; red team kontrolleri sunar.",
+    "summary": "İstem ve model karşılaştırmalarını testlerle değerlendirir; red team kontrolleri sunar. Kaizen içinde değerlendirme veya kanıt toplama adayıdır. Tam CAPA yaşam döngüsü ve bağımsız kabul otoritesi ayrıca kurulmalıdır. Bu entegrasyon katalog ve süreç eşlemesidir; servis kurulmadı, hesap açılmadı, API anahtarı eklenmedi.",
+    "license": "Bilinmiyor",
+    "maturity": "Bilinmiyor",
+    "vendor": "Promptfoo",
+    "platform": "Framework bağımsız",
+    "effort": "Orta",
+    "stance": "Referans",
+    "rTopics": [
+      "R23",
+      "R26",
+      "R27",
+      "R28"
+    ],
+    "facts": [
+      {
+        "text": "İstem ve model karşılaştırmalarını testlerle değerlendirir; red team kontrolleri sunar.",
+        "report": "https://www.promptfoo.dev/docs/intro/"
+      }
+    ],
+    "risks": [
+      "LLM değerlendirici puanı tek başına kabul kararı değildir; insan ve deterministik kontrollerle kalibre edilmelidir.",
+      "İzler ve test veri kümeleri hassas içerik taşıyabilir; erişim, maskeleme ve saklama politikası gerekir."
+    ],
+    "url": "https://www.promptfoo.dev/docs/intro/",
+    "version": "",
+    "provenance": {
+      "kind": "external",
+      "url": "https://www.promptfoo.dev/docs/intro/",
+      "checkedAt": "2026-09-28"
+    }
+  },
+  "deepeval": {
+    "desc": "LLM çıktıları ve ajan süreçleri için Python tabanlı değerlendirme testleri sağlar.",
+    "summary": "LLM çıktıları ve ajan süreçleri için Python tabanlı değerlendirme testleri sağlar. Kaizen içinde değerlendirme veya kanıt toplama adayıdır. Tam CAPA yaşam döngüsü ve bağımsız kabul otoritesi ayrıca kurulmalıdır. Bu entegrasyon katalog ve süreç eşlemesidir; servis kurulmadı, hesap açılmadı, API anahtarı eklenmedi.",
+    "license": "Bilinmiyor",
+    "maturity": "Bilinmiyor",
+    "vendor": "DeepEval",
+    "platform": "Framework bağımsız",
+    "effort": "Orta",
+    "stance": "Referans",
+    "rTopics": [
+      "R23",
+      "R26",
+      "R27",
+      "R28"
+    ],
+    "facts": [
+      {
+        "text": "LLM çıktıları ve ajan süreçleri için Python tabanlı değerlendirme testleri sağlar.",
+        "report": "https://deepeval.com/docs/getting-started"
+      }
+    ],
+    "risks": [
+      "LLM değerlendirici puanı tek başına kabul kararı değildir; insan ve deterministik kontrollerle kalibre edilmelidir.",
+      "İzler ve test veri kümeleri hassas içerik taşıyabilir; erişim, maskeleme ve saklama politikası gerekir."
+    ],
+    "url": "https://deepeval.com/docs/getting-started",
+    "version": "",
+    "provenance": {
+      "kind": "external",
+      "url": "https://deepeval.com/docs/getting-started",
+      "checkedAt": "2026-09-28"
+    }
+  },
+  "opik": {
+    "desc": "LLM izleme, değerlendirme ve optimizasyon deneylerini destekler.",
+    "summary": "LLM izleme, değerlendirme ve optimizasyon deneylerini destekler. Kaizen içinde değerlendirme veya kanıt toplama adayıdır. Tam CAPA yaşam döngüsü ve bağımsız kabul otoritesi ayrıca kurulmalıdır. Bu entegrasyon katalog ve süreç eşlemesidir; servis kurulmadı, hesap açılmadı, API anahtarı eklenmedi.",
+    "license": "Bilinmiyor",
+    "maturity": "Bilinmiyor",
+    "vendor": "Opik",
+    "platform": "Framework bağımsız",
+    "effort": "Orta",
+    "stance": "Referans",
+    "rTopics": [
+      "R23",
+      "R26",
+      "R27",
+      "R28"
+    ],
+    "facts": [
+      {
+        "text": "LLM izleme, değerlendirme ve optimizasyon deneylerini destekler.",
+        "report": "https://www.comet.com/docs/opik/"
+      }
+    ],
+    "risks": [
+      "LLM değerlendirici puanı tek başına kabul kararı değildir; insan ve deterministik kontrollerle kalibre edilmelidir.",
+      "İzler ve test veri kümeleri hassas içerik taşıyabilir; erişim, maskeleme ve saklama politikası gerekir."
+    ],
+    "url": "https://www.comet.com/docs/opik/",
+    "version": "",
+    "provenance": {
+      "kind": "external",
+      "url": "https://www.comet.com/docs/opik/",
+      "checkedAt": "2026-09-28"
+    }
+  },
+  "stryker": {
+    "desc": "Mutasyon testiyle mevcut testlerin kasıtlı kod kusurlarını yakalama gücünü ölçer.",
+    "summary": "Mutasyon testiyle mevcut testlerin kasıtlı kod kusurlarını yakalama gücünü ölçer. Kaizen içinde değerlendirme veya kanıt toplama adayıdır. Tam CAPA yaşam döngüsü ve bağımsız kabul otoritesi ayrıca kurulmalıdır. Bu entegrasyon katalog ve süreç eşlemesidir; servis kurulmadı, hesap açılmadı, API anahtarı eklenmedi.",
+    "license": "Bilinmiyor",
+    "maturity": "Bilinmiyor",
+    "vendor": "Stryker Mutator",
+    "platform": "Framework bağımsız",
+    "effort": "Orta",
+    "stance": "Referans",
+    "rTopics": [
+      "R23",
+      "R26",
+      "R27",
+      "R28"
+    ],
+    "facts": [
+      {
+        "text": "Mutasyon testiyle mevcut testlerin kasıtlı kod kusurlarını yakalama gücünü ölçer.",
+        "report": "https://stryker-mutator.io/docs/"
+      }
+    ],
+    "risks": [
+      "Mutasyon puanı tek başına ürün doğruluğunu kanıtlamaz; gerçek kullanıcı görevleri ayrıca sınanmalıdır.",
+      "İzler ve test veri kümeleri hassas içerik taşıyabilir; erişim, maskeleme ve saklama politikası gerekir."
+    ],
+    "url": "https://stryker-mutator.io/docs/",
+    "version": "",
+    "provenance": {
+      "kind": "external",
+      "url": "https://stryker-mutator.io/docs/",
+      "checkedAt": "2026-09-28"
+    }
+  },
+  "agent-kaizen": {
+    "desc": "Görev düzeltme, CAPA ve süreç deneylerini kanıtla birbirine bağlayan proje içi kalite düzeni.",
+    "summary": "Kullanıcının Agent Kaizen şartnamesinden uyarlanmıştır. Projede skill, süreç belgeleri, koşullu akışlar ve tek seferlik yerel gözlem komutu bulunur. Bağımsız evaluator, otomatik onarım, MCP sunucusu ve politika terfisi etkin değildir.",
+    "license": "Bilinmiyor",
+    "maturity": "Bilinmiyor",
+    "vendor": "Proje içi",
+    "platform": "Framework bağımsız",
+    "effort": "Orta",
+    "stance": "Referans",
+    "rTopics": [
+      "R23",
+      "R26",
+      "R27",
+      "R28"
+    ],
+    "facts": [
+      {
+        "text": "Görev düzeltme, CAPA ve süreç deneylerini kanıtla birbirine bağlayan proje içi kalite düzeni.",
+        "report": "https://github.com/karacaismail/agenticodex/tree/main/docs/kaizen"
+      }
+    ],
+    "risks": [
+      "LLM değerlendirici puanı tek başına kabul kararı değildir; insan ve deterministik kontrollerle kalibre edilmelidir.",
+      "İzler ve test veri kümeleri hassas içerik taşıyabilir; erişim, maskeleme ve saklama politikası gerekir."
+    ],
+    "url": "https://github.com/karacaismail/agenticodex/tree/main/docs/kaizen",
+    "version": "",
+    "provenance": {
+      "kind": "external",
+      "url": "https://github.com/karacaismail/agenticodex/tree/main/docs/kaizen",
+      "checkedAt": "2026-09-28"
+    }
+  }
+}

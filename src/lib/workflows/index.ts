@@ -1,5 +1,7 @@
 import type { Workflow, WorkflowFamily } from '@/data/types';
 import type { GenInput } from './common';
+import { kaizenFamily } from './kaizen';
+import { apiFamily } from './api';
 import { adoptionFamily } from './adoption';
 import { communityFamily, gateFamily, goldenFamily, topicFamily } from './structural';
 import { lifecycleFamily } from './lifecycles';
@@ -12,6 +14,8 @@ import { bucketSchemeFamily, smartClusterFamily } from './clusters';
 export type { GenInput } from './common';
 
 export const FAMILY_DEFS: Omit<WorkflowFamily, 'count'>[] = [
+  { id: 'kaizen', name: 'Agent Kaizen kalite döngüleri', desc: 'Üç döngü, 12 alt süreç ve 24 kabul senaryosu. Süreç tasarımlarıdır; çalışan otomasyon iddiası değildir.', diagram: 'flowchart' },
+  { id: 'api-surecleri', name: 'API geliştirme ve test süreçleri', desc: 'Keşif, kimlik doğrulama, sözleşme, Git paylaşımı, CI regresyonu, SSE hata ayıklaması, IDE ve smoke testleri.', diagram: 'flowchart' },
   { id: 'benimseme', name: 'Benimseme akışları', desc: 'Her araç için lisans, olgunluk, itiraz, platform ve katmana göre koşullu dallanan benimseme; araştırmalar için kanıt okuma, platformlar için uyumluluk izleme.', diagram: 'flowchart' },
   { id: 'konu-karar', name: 'Araştırma konusu kararları', desc: 'R01–R28: ana soru, alt sorular, kanıt, aday araçlar, açık doğrulama ve beklenen çıktı.', diagram: 'flowchart' },
   { id: 'altin-hat', name: 'Altın küme hatları', desc: 'Her altın kümede çekirdek adaylardan tek ana seçime, tamamlayıcılara ve kabul testine.', diagram: 'flowchart' },
@@ -32,6 +36,8 @@ export const FAMILY_DEFS: Omit<WorkflowFamily, 'count'>[] = [
 
 export function generateAll(input: GenInput, edges: { a: string; b: string; w: number; c: number }[] = []): { families: WorkflowFamily[]; workflows: Workflow[] } {
   const workflows: Workflow[] = [
+    ...kaizenFamily(input),
+    ...apiFamily(input),
     ...adoptionFamily(input),
     ...topicFamily(input),
     ...goldenFamily(input),

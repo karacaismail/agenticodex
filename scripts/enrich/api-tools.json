@@ -1,0 +1,290 @@
+{
+  "postman": {
+    "desc": "HTTP, GraphQL, gRPC ve WebSocket isteklerini inceleyen, koleksiyon ve betiklerle API testleri oluşturan platform.",
+    "summary": "Ekipçe API keşfi, istek zincirleri ve kimlik doğrulama testleri. CI için koleksiyonları Postman CLI ile çalıştır; kullanılan özellik ve planı doğrula. G12 kalite kümesi ve L11 test katmanına yerleştirme editoryal öneridir. Resmî kaynaklar 28 Eylül 2026 tarihinde incelendi; araçlar bu projede kurulup çalıştırılmadı.",
+    "license": "Ticari",
+    "maturity": "Bilinmiyor",
+    "vendor": "Postman",
+    "platform": "Framework bağımsız",
+    "effort": "Orta",
+    "stance": "Referans",
+    "rTopics": [
+      "R23",
+      "R26",
+      "R27",
+      "R28"
+    ],
+    "facts": [
+      {
+        "text": "HTTP, GraphQL, gRPC ve WebSocket isteklerini inceleyen, koleksiyon ve betiklerle API testleri oluşturan platform.",
+        "report": "https://www.postman.com/product/api-client/"
+      },
+      {
+        "text": "Ekipçe API keşfi, istek zincirleri ve kimlik doğrulama testleri. CI için koleksiyonları Postman CLI ile çalıştır; kullanılan özellik ve planı doğrula.",
+        "report": "Süreç yerleşimi · editoryal öneri"
+      }
+    ],
+    "risks": [
+      "Bulut paylaşımı, çalışma alanı yetkileri ve plan sınırları değerlendirilmelidir."
+    ],
+    "url": "https://www.postman.com/product/api-client/",
+    "version": "",
+    "provenance": {
+      "kind": "external",
+      "url": "https://www.postman.com/product/api-client/",
+      "checkedAt": "2026-09-28"
+    }
+  },
+  "hoppscotch": {
+    "desc": "Web, masaüstü ve CLI üzerinden API istekleri ve koleksiyon testleri hazırlayan ekosistem.",
+    "summary": "Tarayıcıdan API keşfi ve ekip koleksiyonları; kendi sunucunda barındırma seçeneği. CLI koleksiyonları ortam dosyalarıyla çalıştırır ve JUnit raporu üretebilir. G12 kalite kümesi ve L11 test katmanına yerleştirme editoryal öneridir. Resmî kaynaklar 28 Eylül 2026 tarihinde incelendi; araçlar bu projede kurulup çalıştırılmadı.",
+    "license": "Açık çekirdek/Pro",
+    "maturity": "Bilinmiyor",
+    "vendor": "Hoppscotch",
+    "platform": "Framework bağımsız",
+    "effort": "Orta",
+    "stance": "Referans",
+    "rTopics": [
+      "R23",
+      "R26",
+      "R27",
+      "R28"
+    ],
+    "facts": [
+      {
+        "text": "Web, masaüstü ve CLI üzerinden API istekleri ve koleksiyon testleri hazırlayan ekosistem.",
+        "report": "https://docs.hoppscotch.io/documentation/clients/cli/overview"
+      },
+      {
+        "text": "Tarayıcıdan API keşfi ve ekip koleksiyonları; kendi sunucunda barındırma seçeneği. CLI koleksiyonları ortam dosyalarıyla çalıştırır ve JUnit raporu üretebilir.",
+        "report": "Süreç yerleşimi · editoryal öneri"
+      }
+    ],
+    "risks": [
+      "Tarayıcı CORS kısıtları için desteklenen interceptor veya ajan gerekebilir; self-host kurulumu ve sürüm uyumu ayrıca doğrulanmalıdır."
+    ],
+    "url": "https://docs.hoppscotch.io/documentation/clients/cli/overview",
+    "version": "",
+    "provenance": {
+      "kind": "external",
+      "url": "https://docs.hoppscotch.io/documentation/clients/cli/overview",
+      "checkedAt": "2026-09-28"
+    }
+  },
+  "bruno": {
+    "desc": "Koleksiyonları dosyalarda tutan, Git ile incelemeye ve CLI testlerine uygun API istemcisi.",
+    "summary": "Koleksiyon değişikliklerini kod incelemesine dahil et; aynı testleri Bruno CLI ile CI içinde çalıştır. Yerel çalışma ve ekip deposu odaklı seçim. G12 kalite kümesi ve L11 test katmanına yerleştirme editoryal öneridir. Resmî kaynaklar 28 Eylül 2026 tarihinde incelendi; araçlar bu projede kurulup çalıştırılmadı.",
+    "license": "Açık çekirdek/Pro",
+    "maturity": "Bilinmiyor",
+    "vendor": "Bruno",
+    "platform": "Framework bağımsız",
+    "effort": "Orta",
+    "stance": "Referans",
+    "rTopics": [
+      "R23",
+      "R26",
+      "R27",
+      "R28"
+    ],
+    "facts": [
+      {
+        "text": "Koleksiyonları dosyalarda tutan, Git ile incelemeye ve CLI testlerine uygun API istemcisi.",
+        "report": "https://www.usebruno.com/product/cli"
+      },
+      {
+        "text": "Koleksiyon değişikliklerini kod incelemesine dahil et; aynı testleri Bruno CLI ile CI içinde çalıştır. Yerel çalışma ve ekip deposu odaklı seçim.",
+        "report": "Süreç yerleşimi · editoryal öneri"
+      }
+    ],
+    "risks": [
+      "İçe aktarma sonrasında script, ortam ve doğrulama ifadelerinin eşdeğerliği sınanmalı; ek özelliklerin plan koşulları incelenmelidir."
+    ],
+    "url": "https://www.usebruno.com/product/cli",
+    "version": "",
+    "provenance": {
+      "kind": "external",
+      "url": "https://www.usebruno.com/product/cli",
+      "checkedAt": "2026-09-28"
+    }
+  },
+  "insomnia": {
+    "desc": "REST, GraphQL, WebSocket, SSE ve gRPC için çok protokollü API istemcisi.",
+    "summary": "Protokol ve kimlik doğrulama hata ayıklaması; yerel, Git veya bulut saklama seçimi. Inso CLI ile API test ve lint adımlarını CI sürecine taşı. G12 kalite kümesi ve L11 test katmanına yerleştirme editoryal öneridir. Resmî kaynaklar 28 Eylül 2026 tarihinde incelendi; araçlar bu projede kurulup çalıştırılmadı.",
+    "license": "Açık çekirdek/Pro",
+    "maturity": "Bilinmiyor",
+    "vendor": "Kong",
+    "platform": "Framework bağımsız",
+    "effort": "Orta",
+    "stance": "Referans",
+    "rTopics": [
+      "R23",
+      "R26",
+      "R27",
+      "R28"
+    ],
+    "facts": [
+      {
+        "text": "REST, GraphQL, WebSocket, SSE ve gRPC için çok protokollü API istemcisi.",
+        "report": "https://github.com/Kong/insomnia"
+      },
+      {
+        "text": "Protokol ve kimlik doğrulama hata ayıklaması; yerel, Git veya bulut saklama seçimi. Inso CLI ile API test ve lint adımlarını CI sürecine taşı.",
+        "report": "Süreç yerleşimi · editoryal öneri"
+      }
+    ],
+    "risks": [
+      "Seçilen saklama modunu ve senkronizasyon politikasını doğrula; uygulama ile CLI sürümlerini birlikte sabitle."
+    ],
+    "url": "https://github.com/Kong/insomnia",
+    "version": "",
+    "provenance": {
+      "kind": "external",
+      "url": "https://github.com/Kong/insomnia",
+      "checkedAt": "2026-09-28"
+    }
+  },
+  "httpie": {
+    "desc": "Okunabilir HTTP istekleri ve yanıtlarıyla terminalden API keşfi ve hata ayıklaması sağlar.",
+    "summary": "Hatalı bir isteği küçük, paylaşılabilir komuta indirgemek ve HTTP başlıklarını incelemek için uygundur. Web ve masaüstü ürünleri ayrı değerlendirilmelidir. G12 kalite kümesi ve L11 test katmanına yerleştirme editoryal öneridir. Resmî kaynaklar 28 Eylül 2026 tarihinde incelendi; araçlar bu projede kurulup çalıştırılmadı.",
+    "license": "Bilinmiyor",
+    "maturity": "Bilinmiyor",
+    "vendor": "HTTPie",
+    "platform": "Framework bağımsız",
+    "effort": "Orta",
+    "stance": "Referans",
+    "rTopics": [
+      "R23",
+      "R26",
+      "R27",
+      "R28"
+    ],
+    "facts": [
+      {
+        "text": "Okunabilir HTTP istekleri ve yanıtlarıyla terminalden API keşfi ve hata ayıklaması sağlar.",
+        "report": "https://httpie.io/docs/cli"
+      },
+      {
+        "text": "Hatalı bir isteği küçük, paylaşılabilir komuta indirgemek ve HTTP başlıklarını incelemek için uygundur. Web ve masaüstü ürünleri ayrı değerlendirilmelidir.",
+        "report": "Süreç yerleşimi · editoryal öneri"
+      }
+    ],
+    "risks": [
+      "Bu kayıt terminal istemcisini esas alır. CLI ile web/masaüstü ürünlerinin lisans ve özellikleri aynı kabul edilmemelidir; kabuk geçmişindeki sırları maskele."
+    ],
+    "url": "https://httpie.io/docs/cli",
+    "version": "",
+    "provenance": {
+      "kind": "external",
+      "url": "https://httpie.io/docs/cli",
+      "checkedAt": "2026-09-28"
+    }
+  },
+  "thunder-client": {
+    "desc": "VS Code ve JetBrains içinde REST istekleri, yerel koleksiyonlar ve betiksiz testler sunan istemci.",
+    "summary": "Geliştirme sırasında editörden ayrılmadan endpoint kontrolü; koleksiyonları Git ile paylaşma ve yanıt doğrulama. G12 kalite kümesi ve L11 test katmanına yerleştirme editoryal öneridir. Resmî kaynaklar 28 Eylül 2026 tarihinde incelendi; araçlar bu projede kurulup çalıştırılmadı.",
+    "license": "Ticari",
+    "maturity": "Bilinmiyor",
+    "vendor": "Thunder Client",
+    "platform": "Framework bağımsız",
+    "effort": "Orta",
+    "stance": "Referans",
+    "rTopics": [
+      "R23",
+      "R26",
+      "R27",
+      "R28"
+    ],
+    "facts": [
+      {
+        "text": "VS Code ve JetBrains içinde REST istekleri, yerel koleksiyonlar ve betiksiz testler sunan istemci.",
+        "report": "https://www.thunderclient.com/"
+      },
+      {
+        "text": "Geliştirme sırasında editörden ayrılmadan endpoint kontrolü; koleksiyonları Git ile paylaşma ve yanıt doğrulama.",
+        "report": "Süreç yerleşimi · editoryal öneri"
+      }
+    ],
+    "risks": [
+      "IDE ve sürüme göre özellik kapsamı ile ücretli plan sınırlarını doğrula; CLI kullanımı için ayrıca lisans değerlendirmesi yap."
+    ],
+    "url": "https://www.thunderclient.com/",
+    "version": "",
+    "provenance": {
+      "kind": "external",
+      "url": "https://www.thunderclient.com/",
+      "checkedAt": "2026-09-28"
+    }
+  },
+  "hurl": {
+    "desc": "Düz metin dosyalarından HTTP istek zincirleri ve yanıt doğrulamaları çalıştıran CLI test aracı.",
+    "summary": "HTTP regresyonunu kod olarak sakla; durum kodu, başlık ve yanıt içeriğini doğrula. Yerel testleri CI kalite kapısına taşı. G12 kalite kümesi ve L11 test katmanına yerleştirme editoryal öneridir. Resmî kaynaklar 28 Eylül 2026 tarihinde incelendi; araçlar bu projede kurulup çalıştırılmadı.",
+    "license": "Apache-2.0",
+    "maturity": "Bilinmiyor",
+    "vendor": "Hurl contributors",
+    "platform": "Framework bağımsız",
+    "effort": "Orta",
+    "stance": "Referans",
+    "rTopics": [
+      "R23",
+      "R26",
+      "R27",
+      "R28"
+    ],
+    "facts": [
+      {
+        "text": "Düz metin dosyalarından HTTP istek zincirleri ve yanıt doğrulamaları çalıştıran CLI test aracı.",
+        "report": "https://hurl.dev/"
+      },
+      {
+        "text": "HTTP regresyonunu kod olarak sakla; durum kodu, başlık ve yanıt içeriğini doğrula. Yerel testleri CI kalite kapısına taşı.",
+        "report": "Süreç yerleşimi · editoryal öneri"
+      }
+    ],
+    "risks": [
+      "GUI ekip çalışma alanı yerine metin tabanlı test yaklaşımıdır. API yük testi ve tarayıcı davranışı için ayrı araç gerekir."
+    ],
+    "url": "https://hurl.dev/",
+    "version": "",
+    "provenance": {
+      "kind": "external",
+      "url": "https://hurl.dev/",
+      "checkedAt": "2026-09-28"
+    }
+  },
+  "curl": {
+    "desc": "Komut satırından veri aktarımı, HTTP başlık incelemesi ve tekrarlanabilir hata örnekleri sağlar.",
+    "summary": "Ağ ve API hatasını en küçük isteğe indirgeme; zaman aşımı ve TLS incelemesi. SSE akışını tamponlamadan inceleme ve bağlantı kopmasını yeniden üretme. G12 kalite kümesi ve L11 test katmanına yerleştirme editoryal öneridir. Resmî kaynaklar 28 Eylül 2026 tarihinde incelendi; araçlar bu projede kurulup çalıştırılmadı.",
+    "license": "Bilinmiyor",
+    "maturity": "Bilinmiyor",
+    "vendor": "curl contributors",
+    "platform": "Framework bağımsız",
+    "effort": "Orta",
+    "stance": "Referans",
+    "rTopics": [
+      "R23",
+      "R26",
+      "R27",
+      "R28"
+    ],
+    "facts": [
+      {
+        "text": "Komut satırından veri aktarımı, HTTP başlık incelemesi ve tekrarlanabilir hata örnekleri sağlar.",
+        "report": "https://curl.se/docs/"
+      },
+      {
+        "text": "Ağ ve API hatasını en küçük isteğe indirgeme; zaman aşımı ve TLS incelemesi. SSE akışını tamponlamadan inceleme ve bağlantı kopmasını yeniden üretme.",
+        "report": "Süreç yerleşimi · editoryal öneri"
+      }
+    ],
+    "risks": [
+      "Tek başına koleksiyon/assertion test sistemi değildir; regresyon için test koşucusu ekle. TLS doğrulamasını kapatmak kalıcı çözüm sayılmamalıdır."
+    ],
+    "url": "https://curl.se/docs/",
+    "version": "",
+    "provenance": {
+      "kind": "external",
+      "url": "https://curl.se/docs/",
+      "checkedAt": "2026-09-28"
+    }
+  }
+}

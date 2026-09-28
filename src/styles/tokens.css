@@ -1,0 +1,22 @@
+/* Atlas interaction tokens: research controls remain operable at narrow widths. */
+:root {
+  --atlas-field-border: #bdc3cf;
+  --atlas-radius-control: .625rem;
+  --atlas-option-hover: #f3efff;
+  --atlas-option-selected: #e2dbff;
+  --atlas-option-text: #3f26b3;
+  --atlas-control-hit: 2.75rem;
+  --atlas-focus-color: #5536e3;
+  --atlas-focus-width: 2px;
+  --atlas-focus-offset: 3px;
+}
+[data-mantine-color-scheme='dark'] {
+  --atlas-field-border: #555c6b;
+  --atlas-option-hover: #252336;
+  --atlas-option-selected: #332950;
+  --atlas-option-text: #e2dbff;
+  --atlas-focus-color: #c2b3ff;
+}
+@media (any-pointer: coarse) {
+  :root { --atlas-control-hit: 3rem; }
+}

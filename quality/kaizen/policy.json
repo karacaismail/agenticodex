@@ -1,0 +1,11 @@
+{
+  "version": "1-observe",
+  "mode": "observe",
+  "max_attempts": 3,
+  "repeat_without_new_evidence_limit": 2,
+  "automatic_repair": false,
+  "automatic_promotion": false,
+  "authoritative": false,
+  "checks": ["typecheck", "vitest", "python"],
+  "timeout_seconds_per_check": 180
+}

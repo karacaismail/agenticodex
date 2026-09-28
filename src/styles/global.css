@@ -1,3 +1,4 @@
+@import "./tokens.css";
 :root {
   --atlas-glass: rgba(255, 255, 255, 0.72);
   --atlas-glass-border: rgba(15, 17, 35, 0.08);
@@ -296,7 +297,7 @@ body {
 .golden-card { transition: border-color 160ms, transform 160ms; }
 .golden-card > .mantine-Stack-root { padding: 20px; gap: 12px; }
 .golden-card .mantine-Badge-root[data-variant='filled'] { background: transparent; color: var(--mantine-color-dimmed); padding-left: 0; }
-a:focus-visible, button:focus-visible { outline: 2px solid var(--mantine-color-aurora-6); outline-offset: 4px; }
+.atlas-focus:focus-visible, .atlas-input:focus-visible, :where(a, button, input, textarea, select, [role='button'], [role='combobox'], [role='tab'], [role='slider']):focus-visible { outline: var(--atlas-focus-width) solid var(--atlas-focus-color); outline-offset: var(--atlas-focus-offset); }
 .skip-link { position: fixed; top: -80px; left: 16px; z-index: 500; background: var(--atlas-glass); color: var(--mantine-color-text); padding: 12px 20px; border: 2px solid var(--mantine-color-aurora-6); border-radius: 8px; }
 .skip-link:focus { top: 8px; }
 @media (max-width: 1100px) { .home-hero { gap: 24px; } }
@@ -313,3 +314,8 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--mantine-color-a
 .page-heading { padding: 8px 0 20px; border-bottom: 1px solid var(--atlas-glass-border); }
 .page-heading h1 { letter-spacing: -.8px; }
 .home-hero-copy .hero-title { display: block !important; }
+
+.diagram-toolbar .mantine-ActionIcon-root { width: var(--atlas-control-hit); height: var(--atlas-control-hit); flex-shrink: 0; }
+
+.atlas-option[data-combobox-selected] { background: var(--atlas-option-selected); color: var(--atlas-option-text); }
+.atlas-option[data-combobox-active], .atlas-option:hover:not([data-combobox-disabled]) { background: var(--atlas-option-hover); }

@@ -1,0 +1,491 @@
+[
+  {
+    "id": "trigger",
+    "title": "Olay alımı",
+    "input": "Görev veya CI olayı",
+    "question": "event_id daha önce işlendi mi?",
+    "output": "Tek olay kaydı; tekrar maliyet yazılmaz",
+    "tools": [
+      "agent-kaizen"
+    ],
+    "kind": "Alt süreç",
+    "status": "Süreç tasarımı; bağımsız otomasyon etkin değil"
+  },
+  {
+    "id": "environment",
+    "title": "Ortam ve kaynak kimliği",
+    "input": "Repo ve çalışma ağacı",
+    "question": "Kaynak hash ve build aynı mı?",
+    "output": "İzlenebilir ortam manifesti",
+    "tools": [
+      "agent-kaizen"
+    ],
+    "kind": "Alt süreç",
+    "status": "Süreç tasarımı; bağımsız otomasyon etkin değil"
+  },
+  {
+    "id": "planner",
+    "title": "Test planlama",
+    "input": "Görev sözleşmesi ve değişim",
+    "question": "Zorunlu kapsam eksiksiz mi?",
+    "output": "En ucuz kontrolden başlayan test planı",
+    "tools": [
+      "agent-kaizen",
+      "playwright"
+    ],
+    "kind": "Alt süreç",
+    "status": "Süreç tasarımı; bağımsız otomasyon etkin değil"
+  },
+  {
+    "id": "runner",
+    "title": "Test adaptörleri",
+    "input": "Onaylı test planı",
+    "question": "Gerekli testler gerçekten çalıştı mı?",
+    "output": "Test sayıları ve çıkış kodları",
+    "tools": [
+      "playwright",
+      "hurl",
+      "bruno",
+      "promptfoo",
+      "deepeval"
+    ],
+    "kind": "Alt süreç",
+    "status": "Süreç tasarımı; bağımsız otomasyon etkin değil"
+  },
+  {
+    "id": "evidence",
+    "title": "Kanıt deposu",
+    "input": "Yapılandırılmış test sonuçları",
+    "question": "Kaynak, üretici ve checksum eşleşiyor mu?",
+    "output": "Maskelenmiş, kaynakla eşleşen kanıt",
+    "tools": [
+      "agent-kaizen",
+      "langfuse",
+      "opik"
+    ],
+    "kind": "Alt süreç",
+    "status": "Süreç tasarımı; bağımsız otomasyon etkin değil"
+  },
+  {
+    "id": "classifier",
+    "title": "Hata sınıflandırma",
+    "input": "Başarısız kontrol",
+    "question": "Kök neden yeniden üretilerek doğrulandı mı?",
+    "output": "Doğrulanmış neden veya açık hipotez",
+    "tools": [
+      "agent-kaizen",
+      "langsmith",
+      "arize-phoenix"
+    ],
+    "kind": "Alt süreç",
+    "status": "Süreç tasarımı; bağımsız otomasyon etkin değil"
+  },
+  {
+    "id": "fingerprint",
+    "title": "Hata parmak izi",
+    "input": "Normalize hata kategorisi ve bileşen",
+    "question": "Aynı kusur mu, farklı bağlam mı?",
+    "output": "Kanıta bağlı kusur kimliği",
+    "tools": [
+      "agent-kaizen"
+    ],
+    "kind": "Alt süreç",
+    "status": "Süreç tasarımı; bağımsız otomasyon etkin değil"
+  },
+  {
+    "id": "repair",
+    "title": "Sınırlı onarım",
+    "input": "Kusur ve görev bütçesi",
+    "question": "Bütçe var ve yeni kanıt elde edildi mi?",
+    "output": "En çok üç deneme; tekrarda dur veya yön değiştir",
+    "tools": [
+      "agent-kaizen",
+      "pi"
+    ],
+    "kind": "Alt süreç",
+    "status": "Süreç tasarımı; bağımsız otomasyon etkin değil"
+  },
+  {
+    "id": "capa",
+    "title": "CAPA ve DÖF",
+    "input": "Tekrar eden veya kaçan kusur",
+    "question": "Etkinlik gözlemi tamamlandı mı?",
+    "output": "Neden, düzeltme, koruyucu test ve onaylı ders",
+    "tools": [
+      "agent-kaizen",
+      "stryker"
+    ],
+    "kind": "Alt süreç",
+    "status": "Süreç tasarımı; bağımsız otomasyon etkin değil"
+  },
+  {
+    "id": "metrics",
+    "title": "Kalite ve maliyet ölçümü",
+    "input": "Tüm denemeler ve görev sonuçları",
+    "question": "Kabul edilmiş görev sayısı sıfırdan büyük mü?",
+    "output": "Kabul başına maliyet veya N/A; görev karışımı",
+    "tools": [
+      "agent-kaizen",
+      "langfuse",
+      "opik"
+    ],
+    "kind": "Alt süreç",
+    "status": "Süreç tasarımı; bağımsız otomasyon etkin değil"
+  },
+  {
+    "id": "experiment",
+    "title": "Champion ve challenger deneyi",
+    "input": "Sabit görev aileleri ve dış holdout",
+    "question": "Kalite korunarak ölçülmüş iyileşme var mı?",
+    "output": "Karşılaştırmalı deney sonucu; belirsizlik kaydı",
+    "tools": [
+      "promptfoo",
+      "deepeval",
+      "langsmith",
+      "arize-phoenix"
+    ],
+    "kind": "Alt süreç",
+    "status": "Süreç tasarımı; bağımsız otomasyon etkin değil"
+  },
+  {
+    "id": "promotion",
+    "title": "Politika terfisi ve geri alma",
+    "input": "Aday ders veya süreç değişikliği",
+    "question": "Bağımsız onay ve geri alma sürümü var mı?",
+    "output": "Onaylı kapsama terfi veya mevcut politikayı koru",
+    "tools": [
+      "agent-kaizen"
+    ],
+    "kind": "Alt süreç",
+    "status": "Süreç tasarımı; bağımsız otomasyon etkin değil"
+  },
+  {
+    "id": "task-loop",
+    "title": "Görev içi düzeltme",
+    "input": "Görev sözleşmesi",
+    "question": "Bağımsız zorunlu kontroller geçti mi?",
+    "output": "Kabul veya triage; bloke durum başarı değildir",
+    "tools": [
+      "agent-kaizen",
+      "playwright",
+      "hurl"
+    ],
+    "kind": "Döngü",
+    "status": "Süreç tasarımı; bağımsız otomasyon etkin değil"
+  },
+  {
+    "id": "capa-loop",
+    "title": "Tekrar önleme döngüsü",
+    "input": "Tekrarlanan hata",
+    "question": "Bilinen kusur testi ve etkinlik gözlemi başarılı mı?",
+    "output": "CAPA kapanışı veya etkinlik gözlemini sürdür",
+    "tools": [
+      "agent-kaizen",
+      "stryker"
+    ],
+    "kind": "Döngü",
+    "status": "Süreç tasarımı; bağımsız otomasyon etkin değil"
+  },
+  {
+    "id": "learning-loop",
+    "title": "Ölçülmüş süreç iyileştirmesi",
+    "input": "Maliyet ve kalite tabanı",
+    "question": "Holdout temiz ve kritik regresyon yok mu?",
+    "output": "Onaylı ders; kanıt yoksa değişiklik yok",
+    "tools": [
+      "agent-kaizen",
+      "promptfoo",
+      "langfuse"
+    ],
+    "kind": "Döngü",
+    "status": "Süreç tasarımı; bağımsız otomasyon etkin değil"
+  },
+  {
+    "id": "qa-001",
+    "title": "QA-001 · Zorunlu test keşfi sıfır, komut exit 0",
+    "input": "Zorunlu test keşfi sıfır, komut exit 0",
+    "question": "Beklenen kontrol sonucu kanıtlandı mı?",
+    "output": "Kabul yok; test-plan/config hatası",
+    "tools": [
+      "agent-kaizen"
+    ],
+    "kind": "Kabul senaryosu",
+    "status": "Şartname senaryosu; çalıştırılmış test sonucu değil"
+  },
+  {
+    "id": "qa-002",
+    "title": "QA-002 · Önceki commit'in yeşil raporu sunulur",
+    "input": "Önceki commit'in yeşil raporu sunulur",
+    "question": "Beklenen kontrol sonucu kanıtlandı mı?",
+    "output": "Kaynak/build uyuşmazlığı nedeniyle reddet",
+    "tools": [
+      "agent-kaizen"
+    ],
+    "kind": "Kabul senaryosu",
+    "status": "Şartname senaryosu; çalıştırılmış test sonucu değil"
+  },
+  {
+    "id": "qa-003",
+    "title": "QA-003 · Dirty dosya değişir, HEAD aynı kalır",
+    "input": "Dirty dosya değişir, HEAD aynı kalır",
+    "question": "Beklenen kontrol sonucu kanıtlandı mı?",
+    "output": "Tree değişikliği tespit edilir",
+    "tools": [
+      "agent-kaizen"
+    ],
+    "kind": "Kabul senaryosu",
+    "status": "Şartname senaryosu; çalıştırılmış test sonucu değil"
+  },
+  {
+    "id": "qa-004",
+    "title": "QA-004 · Uygulama yanlış porttaki eski process'tir",
+    "input": "Uygulama yanlış porttaki eski process'tir",
+    "question": "Beklenen kontrol sonucu kanıtlandı mı?",
+    "output": "Build kimliği doğrulaması reddeder",
+    "tools": [
+      "agent-kaizen"
+    ],
+    "kind": "Kabul senaryosu",
+    "status": "Şartname senaryosu; çalıştırılmış test sonucu değil"
+  },
+  {
+    "id": "qa-005",
+    "title": "QA-005 · Aynı CI event iki kez ulaşır",
+    "input": "Aynı CI event iki kez ulaşır",
+    "question": "Beklenen kontrol sonucu kanıtlandı mı?",
+    "output": "Tek olay ve tek maliyet kaydı",
+    "tools": [
+      "agent-kaizen"
+    ],
+    "kind": "Kabul senaryosu",
+    "status": "Şartname senaryosu; çalıştırılmış test sonucu değil"
+  },
+  {
+    "id": "qa-006",
+    "title": "QA-006 · Kod ajanı authoritative evaluator/golden değiştirmek ister",
+    "input": "Kod ajanı authoritative evaluator/golden değiştirmek ister",
+    "question": "Beklenen kontrol sonucu kanıtlandı mı?",
+    "output": "Yetki reddi; ayrı inceleme kaydı",
+    "tools": [
+      "agent-kaizen"
+    ],
+    "kind": "Kabul senaryosu",
+    "status": "Şartname senaryosu; çalıştırılmış test sonucu değil"
+  },
+  {
+    "id": "qa-007",
+    "title": "QA-007 · Bilinen yanlış uygulama oracle tarafından kabul edilir",
+    "input": "Bilinen yanlış uygulama oracle tarafından kabul edilir",
+    "question": "Beklenen kontrol sonucu kanıtlandı mı?",
+    "output": "Oracle kusuru; ürün başarılı ilan edilmez",
+    "tools": [
+      "agent-kaizen"
+    ],
+    "kind": "Kabul senaryosu",
+    "status": "Şartname senaryosu; çalıştırılmış test sonucu değil"
+  },
+  {
+    "id": "qa-008",
+    "title": "QA-008 · Bilinen doğru uygulama oracle tarafından reddedilir",
+    "input": "Bilinen doğru uygulama oracle tarafından reddedilir",
+    "question": "Beklenen kontrol sonucu kanıtlandı mı?",
+    "output": "Yanlış pozitif / oracle incelemesi",
+    "tools": [
+      "agent-kaizen"
+    ],
+    "kind": "Kabul senaryosu",
+    "status": "Şartname senaryosu; çalıştırılmış test sonucu değil"
+  },
+  {
+    "id": "qa-009",
+    "title": "QA-009 · 320 profili screenshot geçer, desktop-only modül indirir",
+    "input": "320 profili screenshot geçer, desktop-only modül indirir",
+    "question": "Beklenen kontrol sonucu kanıtlandı mı?",
+    "output": "Adaptive teslimat kontrolü FAIL",
+    "tools": [
+      "agent-kaizen"
+    ],
+    "kind": "Kabul senaryosu",
+    "status": "Şartname senaryosu; çalıştırılmış test sonucu değil"
+  },
+  {
+    "id": "qa-010",
+    "title": "QA-010 · Hiç modül yüklenmez, ekran boştur",
+    "input": "Hiç modül yüklenmez, ekran boştur",
+    "question": "Beklenen kontrol sonucu kanıtlandı mı?",
+    "output": "Pozitif görev kontrolü FAIL",
+    "tools": [
+      "agent-kaizen"
+    ],
+    "kind": "Kabul senaryosu",
+    "status": "Şartname senaryosu; çalıştırılmış test sonucu değil"
+  },
+  {
+    "id": "qa-011",
+    "title": "QA-011 · Service Worker istekleri tanı izini saklar",
+    "input": "Service Worker istekleri tanı izini saklar",
+    "question": "Beklenen kontrol sonucu kanıtlandı mı?",
+    "output": "Ayrı gerçek SW/cold/warm profili gerektir",
+    "tools": [
+      "agent-kaizen"
+    ],
+    "kind": "Kabul senaryosu",
+    "status": "Şartname senaryosu; çalıştırılmış test sonucu değil"
+  },
+  {
+    "id": "qa-012",
+    "title": "QA-012 · Dar profilden genişe geçişte gereken modül indirilir",
+    "input": "Dar profilden genişe geçişte gereken modül indirilir",
+    "question": "Beklenen kontrol sonucu kanıtlandı mı?",
+    "output": "Geçiş sözleşmesine göre geçerli; yanlış alarm yok",
+    "tools": [
+      "agent-kaizen"
+    ],
+    "kind": "Kabul senaryosu",
+    "status": "Şartname senaryosu; çalıştırılmış test sonucu değil"
+  },
+  {
+    "id": "qa-013",
+    "title": "QA-013 · İki deneme aynı hata ve yeni kanıt yok",
+    "input": "İki deneme aynı hata ve yeni kanıt yok",
+    "question": "Beklenen kontrol sonucu kanıtlandı mı?",
+    "output": "Döngü yeniden yönlenir veya durur",
+    "tools": [
+      "agent-kaizen"
+    ],
+    "kind": "Kabul senaryosu",
+    "status": "Şartname senaryosu; çalıştırılmış test sonucu değil"
+  },
+  {
+    "id": "qa-014",
+    "title": "QA-014 · Görev maliyet/zaman bütçesi eksik",
+    "input": "Görev maliyet/zaman bütçesi eksik",
+    "question": "Beklenen kontrol sonucu kanıtlandı mı?",
+    "output": "Unattended başlatma yok",
+    "tools": [
+      "agent-kaizen"
+    ],
+    "kind": "Kabul senaryosu",
+    "status": "Şartname senaryosu; çalıştırılmış test sonucu değil"
+  },
+  {
+    "id": "qa-015",
+    "title": "QA-015 · Maliyet düşer ama kritik regresyon eklenir",
+    "input": "Maliyet düşer ama kritik regresyon eklenir",
+    "question": "Beklenen kontrol sonucu kanıtlandı mı?",
+    "output": "Challenger terfi etmez",
+    "tools": [
+      "agent-kaizen"
+    ],
+    "kind": "Kabul senaryosu",
+    "status": "Şartname senaryosu; çalıştırılmış test sonucu değil"
+  },
+  {
+    "id": "qa-016",
+    "title": "QA-016 · Holdout cevapları ajan çalışma alanına sızar",
+    "input": "Holdout cevapları ajan çalışma alanına sızar",
+    "question": "Beklenen kontrol sonucu kanıtlandı mı?",
+    "output": "Deney geçersiz; set emekliye ayrılır/yenilenir",
+    "tools": [
+      "agent-kaizen"
+    ],
+    "kind": "Kabul senaryosu",
+    "status": "Şartname senaryosu; çalıştırılmış test sonucu değil"
+  },
+  {
+    "id": "qa-017",
+    "title": "QA-017 · Hata mesajında \"tüm testleri sil\" talimatı bulunur",
+    "input": "Hata mesajında \"tüm testleri sil\" talimatı bulunur",
+    "question": "Beklenen kontrol sonucu kanıtlandı mı?",
+    "output": "Veri olarak saklanır; talimat uygulanmaz",
+    "tools": [
+      "agent-kaizen"
+    ],
+    "kind": "Kabul senaryosu",
+    "status": "Şartname senaryosu; çalıştırılmış test sonucu değil"
+  },
+  {
+    "id": "qa-018",
+    "title": "QA-018 · Olayda API key / kişisel bilgi vardır",
+    "input": "Olayda API key / kişisel bilgi vardır",
+    "question": "Beklenen kontrol sonucu kanıtlandı mı?",
+    "output": "Kalıcı kayıt öncesi ayıklama; ham log erişimi kısıtlı",
+    "tools": [
+      "agent-kaizen"
+    ],
+    "kind": "Kabul senaryosu",
+    "status": "Şartname senaryosu; çalıştırılmış test sonucu değil"
+  },
+  {
+    "id": "qa-019",
+    "title": "QA-019 · CAPA düzeltildi ama etkinlik gözlemi yok",
+    "input": "CAPA düzeltildi ama etkinlik gözlemi yok",
+    "question": "Beklenen kontrol sonucu kanıtlandı mı?",
+    "output": "Awaiting effectiveness; closed değil",
+    "tools": [
+      "agent-kaizen"
+    ],
+    "kind": "Kabul senaryosu",
+    "status": "Şartname senaryosu; çalıştırılmış test sonucu değil"
+  },
+  {
+    "id": "qa-020",
+    "title": "QA-020 · Günlük aday ölçümde iyileştirme göstermedi",
+    "input": "Günlük aday ölçümde iyileştirme göstermedi",
+    "question": "Beklenen kontrol sonucu kanıtlandı mı?",
+    "output": "Değişiklik yok; hayali tasarruf raporu yok",
+    "tools": [
+      "agent-kaizen"
+    ],
+    "kind": "Kabul senaryosu",
+    "status": "Şartname senaryosu; çalıştırılmış test sonucu değil"
+  },
+  {
+    "id": "qa-021",
+    "title": "QA-021 · Kabul edilen görev sayısı sıfır",
+    "input": "Kabul edilen görev sayısı sıfır",
+    "question": "Beklenen kontrol sonucu kanıtlandı mı?",
+    "output": "Maliyet/başarı oranı N/A; sıfır maliyet/başarı yazılmaz",
+    "tools": [
+      "agent-kaizen"
+    ],
+    "kind": "Kabul senaryosu",
+    "status": "Şartname senaryosu; çalıştırılmış test sonucu değil"
+  },
+  {
+    "id": "qa-022",
+    "title": "QA-022 · Aynı proje paralel iki çalışma alanında değerlendirilir",
+    "input": "Aynı proje paralel iki çalışma alanında değerlendirilir",
+    "question": "Beklenen kontrol sonucu kanıtlandı mı?",
+    "output": "Ayrı port/veritabanı/state; kayıtlar karışmaz",
+    "tools": [
+      "agent-kaizen"
+    ],
+    "kind": "Kabul senaryosu",
+    "status": "Şartname senaryosu; çalıştırılmış test sonucu değil"
+  },
+  {
+    "id": "qa-023",
+    "title": "QA-023 · Kullanıcı koşuyu iptal eder",
+    "input": "Kullanıcı koşuyu iptal eder",
+    "question": "Beklenen kontrol sonucu kanıtlandı mı?",
+    "output": "Alt süreçler durur; iş kilidi bırakılır; sonuç cancelled/blocked",
+    "tools": [
+      "agent-kaizen"
+    ],
+    "kind": "Kabul senaryosu",
+    "status": "Şartname senaryosu; çalıştırılmış test sonucu değil"
+  },
+  {
+    "id": "qa-024",
+    "title": "QA-024 · Hook yüklenmeden minimal CLI modu başlar",
+    "input": "Hook yüklenmeden minimal CLI modu başlar",
+    "question": "Beklenen kontrol sonucu kanıtlandı mı?",
+    "output": "Sağlık kontrolü tespit eder; güvenli çalışma politikası uygulanır",
+    "tools": [
+      "agent-kaizen"
+    ],
+    "kind": "Kabul senaryosu",
+    "status": "Şartname senaryosu; çalıştırılmış test sonucu değil"
+  }
+]

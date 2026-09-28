@@ -6,3 +6,5 @@ playwright-report/
 .DS_Store
 scripts/__pycache__/
 scripts/tests/__pycache__/
+
+.kaizen/

@@ -4,6 +4,7 @@ const PORT = 4391;
 
 export default defineConfig({
   testDir: 'e2e',
+  testIgnore: 'catalog-visual.spec.ts',
   timeout: 90_000,
   expect: { timeout: 20_000 },
   fullyParallel: true,

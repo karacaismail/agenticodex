@@ -30,7 +30,9 @@ function configFor(scheme: 'light' | 'dark') {
     securityLevel: 'strict',
     theme: 'base',
     fontFamily: 'Inter, ui-sans-serif, system-ui, sans-serif',
-    flowchart: { curve: 'basis', htmlLabels: true, padding: 12, nodeSpacing: 36, rankSpacing: 44 },
+    // SVG labels avoid WebKit foreignObject measurement failures on narrow touch profiles.
+    htmlLabels: false,
+    flowchart: { curve: 'basis', padding: 12, nodeSpacing: 36, rankSpacing: 44 },
     sequence: { mirrorActors: false, showSequenceNumbers: true, actorMargin: 40 },
     gantt: { barHeight: 22, fontSize: 12 },
     themeVariables: dark
@@ -155,7 +157,7 @@ export function MermaidDiagram({ code, title, fileName = 'akis', minHeight = 320
   }, [code, scheme, rid]);
 
   const toolbar = (
-    <Group gap={4} wrap="nowrap">
+    <Group gap="xs" wrap="wrap" className="diagram-toolbar">
       <Badge variant="dot" color="teal" size="sm" title="Uygulamanın kullandığı sabit Mermaid sürümü">
         Mermaid {MERMAID_RUNTIME}
       </Badge>
@@ -197,7 +199,7 @@ export function MermaidDiagram({ code, title, fileName = 'akis', minHeight = 320
 
   return (
     <Stack gap="xs">
-      <Group justify="space-between" wrap="nowrap">
+      <Group justify="space-between" wrap="wrap">
         {title ? <Text fw={600} size="sm" truncate>{title}</Text> : <span />}
         {toolbar}
       </Group>

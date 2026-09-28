@@ -6,8 +6,8 @@ test.describe('çekirdek sayfalar', () => {
     const errors = watchErrors(page);
     await page.goto('/');
     await expect(page.getByRole('heading', { level: 1 })).toContainText('GenUI Atlas');
-    await expect(page.getByRole('link', { name: 'İş akışı', exact: true })).toContainText(/5\d\d/);
-    await expect(page.getByRole('link', { name: 'Varlık', exact: true })).toContainText('163');
+    await expect(page.getByRole('link', { name: 'İş akışı', exact: true })).toContainText(/[56]\d\d/);
+    await expect(page.getByRole('link', { name: 'Varlık', exact: true })).toContainText('179');
     await expect(page.getByText('12 altın küme: ürünün yapı taşları')).toBeVisible();
     expect(errors).toEqual([]);
   });
@@ -180,7 +180,7 @@ test.describe('azaltılmış hareket', () => {
     await page.goto('/');
     await expect(page.getByRole('heading', { level: 1 })).toHaveText('GenUI Atlas');
     await expect(page.locator('.hero-bg canvas')).toHaveCount(0);
-    await expect(page.getByRole('link', { name: 'Varlık', exact: true })).toContainText('163');
+    await expect(page.getByRole('link', { name: 'Varlık', exact: true })).toContainText('179');
     await expect(page.getByText('Araçlar, altın kümeler, dinamik gruplar ve iş akışları.', { exact: false })).toBeVisible();
     await ctx.close();
   });

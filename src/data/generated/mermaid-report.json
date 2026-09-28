@@ -1,9 +1,9 @@
 {
-  "checkedAt": "2026-09-28T14:28:44.393Z",
-  "durationMs": 6210,
-  "total": 577,
+  "checkedAt": "2026-09-28T16:34:08.418Z",
+  "durationMs": 6882,
+  "total": 646,
   "byType": {
-    "flowchart": 494,
+    "flowchart": 563,
     "state": 39,
     "sequence": 34,
     "gantt": 10
@@ -12,19 +12,19 @@
     "v10": {
       "label": "10.9",
       "exact": "10.9.5",
-      "ok": 577,
+      "ok": 646,
       "fail": 0
     },
     "v11": {
       "label": "11.17 (uygulama)",
       "exact": "11.17.2",
-      "ok": 577,
+      "ok": 646,
       "fail": 0
     },
     "v12": {
       "label": "12.0",
       "exact": "12.0.0",
-      "ok": 577,
+      "ok": 646,
       "fail": 0
     }
   },

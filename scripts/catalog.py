@@ -45,6 +45,24 @@ LAYERS = [
 
 # (id, ad, [regex takma adlar], tür, katman, altın küme, [etiketler])
 E = [
+    # Agent Kaizen ve değerlendirme araçları
+    ('langfuse', 'Langfuse', [r"\bLangfuse\b"], "Test Aracı", "L11", "G12", ['kaizen', 'kaizen-trace', 'kaizen-eval']),
+    ('langsmith', 'LangSmith', [r"\bLangSmith\b"], "Test Aracı", "L11", "G12", ['kaizen', 'kaizen-trace', 'kaizen-eval']),
+    ('arize-phoenix', 'Arize Phoenix', [r"\bArize Phoenix\b"], "Test Aracı", "L11", "G12", ['kaizen', 'kaizen-trace', 'kaizen-eval']),
+    ('promptfoo', 'Promptfoo', [r"\bPromptfoo\b"], "Test Aracı", "L11", "G12", ['kaizen', 'kaizen-eval', 'kaizen-security']),
+    ('deepeval', 'DeepEval', [r"\bDeepEval\b"], "Test Aracı", "L11", "G12", ['kaizen', 'kaizen-eval', 'kaizen-regression']),
+    ('opik', 'Opik', [r"\bOpik\b"], "Test Aracı", "L11", "G12", ['kaizen', 'kaizen-trace', 'kaizen-eval']),
+    ('stryker', 'Stryker Mutator', [r"\bStryker Mutator\b"], "Test Aracı", "L11", "G12", ['kaizen', 'kaizen-oracle', 'kaizen-regression']),
+    ('agent-kaizen', 'Agent Kaizen', [r"\bAgent Kaizen\b"], "Test Aracı", "L11", "G12", ['kaizen', 'kaizen-process', 'kaizen-regression']),
+    # API geliştirme ve doğrulama araçları
+    ('postman', 'Postman', [r"\bPostman\b"], "Test Aracı", "L11", "G12", ['api-client', 'api-collection', 'api-ci', 'api-auth', 'api-design']),
+    ('hoppscotch', 'Hoppscotch', [r"\bHoppscotch\b"], "Test Aracı", "L11", "G12", ['api-client', 'api-collection', 'api-ci', 'api-auth', 'api-self-host']),
+    ('bruno', 'Bruno', [r"\bBruno\b"], "Test Aracı", "L11", "G12", ['api-client', 'api-collection', 'api-ci', 'api-local', 'api-git', 'api-auth']),
+    ('insomnia', 'Insomnia', [r"\bInsomnia\b"], "Test Aracı", "L11", "G12", ['api-client', 'api-collection', 'api-ci', 'api-auth', 'api-local', 'api-git', 'api-stream']),
+    ('httpie', 'HTTPie', [r"\bHTTPie\b"], "Test Aracı", "L11", "G12", ['api-client', 'api-cli', 'api-local', 'api-debug']),
+    ('thunder-client', 'Thunder Client', [r"\bThunder Client\b"], "Test Aracı", "L11", "G12", ['api-client', 'api-collection', 'api-local', 'api-ide', 'api-git']),
+    ('hurl', 'Hurl', [r"\bHurl\b"], "Test Aracı", "L11", "G12", ['api-client', 'api-cli', 'api-local', 'api-ci', 'api-regression']),
+    ('curl', 'curl', [r"\bcurl\b"], "Test Aracı", "L11", "G12", ['api-client', 'api-cli', 'api-local', 'api-debug', 'api-stream']),
     # --- G01 Kabuk & temel
     ("mantine", "Mantine", [r"Mantine"], "Kütüphane", "L03", "G01", ["ui-kit", "form", "tablo", "tema"]),
     ("ant-design", "Ant Design", [r"Ant Design(?! X)", r"\bantd\b"], "Kütüphane", "L03", "G01", ["ui-kit", "form", "tablo", "kurumsal"]),

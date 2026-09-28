@@ -17,7 +17,9 @@
     "test": "vitest run && python3 -m unittest discover -s scripts/tests",
     "e2e": "vite build && playwright test --grep-invert @full",
     "e2e:full": "vite build && playwright test --grep @full",
-    "build:pages": "npm run validate:mermaid && npm run typecheck && vite build"
+    "build:pages": "npm run validate:mermaid && npm run typecheck && vite build",
+    "kaizen:observe": "python3 scripts/kaizen.py",
+    "e2e:catalog": "vite build && playwright test -c playwright.catalog.config.ts"
   },
   "dependencies": {
     "@gsap/react": "2.1.2",

@@ -5,6 +5,7 @@ const aurora: MantineColorsTuple = ['#f3efff', '#e2dbff', '#c2b3ff', '#a088fe', 
 
 export const theme = createTheme({
   primaryColor: 'aurora',
+  focusClassName: 'atlas-focus',
   // İki temada aynı gölge: Mantine autoContrast hesabı ile gerçek dolgu rengi tutarlı kalır.
   primaryShade: { light: 6, dark: 6 },
   colors: { aurora },
@@ -21,6 +22,19 @@ export const theme = createTheme({
   cursorType: 'pointer',
   defaultGradient: { from: 'aurora.6', to: 'teal.7', deg: 135 },
   components: {
+    Input: {
+      classNames: { input: 'atlas-input' },
+      styles: { wrapper: {
+        '--input-bg': 'var(--atlas-glass)',
+        '--input-bd': 'var(--atlas-field-border)',
+        '--input-bd-focus': 'var(--atlas-field-border)',
+        '--input-radius': 'var(--atlas-radius-control)',
+      } },
+    },
+    Combobox: {
+      classNames: { option: 'atlas-option' },
+      styles: { dropdown: { background: 'var(--atlas-glass)', borderColor: 'var(--atlas-field-border)', borderRadius: 'var(--atlas-radius-control)' } },
+    },
     Card: { defaultProps: { radius: 'lg', withBorder: true } },
     Paper: { defaultProps: { radius: 'lg' } },
     Badge: { defaultProps: { radius: 'sm', variant: 'light' } },

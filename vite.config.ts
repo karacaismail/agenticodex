@@ -9,18 +9,10 @@ export default defineConfig({
   resolve: { alias: { '@': fileURLToPath(new URL('./src', import.meta.url)) } },
   server: { port: 5173, strictPort: false },
   build: {
+    manifest: true,
     chunkSizeWarningLimit: 2500,
-    rollupOptions: {
-      output: {
-        manualChunks(id) {
-          if (id.includes('node_modules/mermaid') || id.includes('node_modules/@mermaid-js') || id.includes('node_modules/cytoscape') || id.includes('node_modules/khroma') || id.includes('node_modules/dagre')) return 'mermaid';
-          if (id.includes('node_modules/@mantine')) return 'mantine';
-          if (id.includes('node_modules/recharts') || id.includes('node_modules/d3-')) return 'charts';
-          if (id.includes('node_modules/gsap') || id.includes('node_modules/motion') || id.includes('node_modules/ogl') || id.includes('node_modules/framer-motion')) return 'fx';
-          return undefined;
-        },
-      },
-    },
+    // Automatic splitting preserves lazy diagram imports and avoids shared-helper capture.
+    rolldownOptions: { output: { codeSplitting: true } },
   },
   test: {
     environment: 'jsdom',

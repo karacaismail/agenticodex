@@ -18,6 +18,21 @@ export interface SmartCluster {
 const OPEN = ['MIT', 'Apache-2.0', 'BSD', 'ISC', 'MPL-2.0', 'Standart'];
 
 export const SMART_CLUSTERS: SmartCluster[] = [
+  { id: 'kaizen', name: 'Agent Kaizen kalite sistemi', theme: 'yetenek', color: 'teal', icon: 'test',
+    why: 'Üç kalite döngüsünün araç adayları ve proje içi süreç düzeni. Katalog üyeliği kurulu entegrasyon anlamına gelmez.', rule: cond('tags', 'any', ['kaizen']) },
+  { id: 'kaizen-evals', name: 'AI değerlendirme ve deneyler', theme: 'kanıt', color: 'blue', icon: 'flask',
+    why: 'Sabit veri kümeleriyle model, istem ve ajan sürümlerini değerlendirme adayları.', rule: cond('tags', 'any', ['kaizen-eval']) },
+  { id: 'kaizen-traces', name: 'Ajan izleri ve hata incelemesi', theme: 'kanıt', color: 'cyan', icon: 'trace',
+    why: 'Başarısız çalışmaları gözlenen izlerle incelemek için adaylar; kök neden doğrulanana kadar hipotez kalır.', rule: cond('tags', 'any', ['kaizen-trace']) },
+  { id: 'api-istemcileri', name: 'API istemcileri ve keşif', theme: 'yetenek', color: 'blue', icon: 'plug',
+    why: 'API isteği gönderme ve yanıt inceleme yeteneği. GUI, IDE ve CLI seçeneklerini aynı ihtiyaç üzerinden karşılaştır.',
+    rule: cond('tags', 'any', ['api-client']) },
+  { id: 'api-ci', name: 'API testlerini CI sürecine taşı', theme: 'yetenek', color: 'teal', icon: 'test',
+    why: 'Koleksiyon veya HTTP doğrulamalarını bir koşucuyla otomatik çalıştırabilen araçlar. Plan ve sürüm koşullarını araç detayında kontrol et.',
+    rule: cond('tags', 'any', ['api-ci']) },
+  { id: 'api-yerel', name: 'Yerel API çalışma araçları', theme: 'mimari', color: 'cyan', icon: 'code',
+    why: 'Yerel dosya veya yerel saklama seçeneği bulunan API araçları. Bu etiket tüm ağ trafiğinin kapalı olduğu garantisi değildir.',
+    rule: and(cond('tags', 'any', ['api-client']), cond('tags', 'any', ['api-local'])) },
   { id: 'hizli-kazanimlar', name: 'Hızlı kazanımlar', theme: 'karar', color: 'teal', icon: 'bolt',
     why: 'Düşük entegrasyon yükü, açık lisans ve Benimse/Dene halkası birlikte: ilk sprintte risk almadan eklenebilecek parçalar.',
     rule: and(cond('effort', 'eq', 'Düşük'), cond('license', 'in', OPEN), cond('ring', 'in', ['Benimse', 'Dene'])) },

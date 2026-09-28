@@ -1,0 +1,125 @@
+{
+  "scope": "Yerel denetleyici birim testleri; bağımsız kabul/gerçek cihaz sertifikasyonu değildir",
+  "cases": [
+    {
+      "id": "QA-001",
+      "status": "pass",
+      "scope": "test_zero_tests_cannot_pass: sıfır test sayısı kabul edilmez"
+    },
+    {
+      "id": "QA-002",
+      "status": "not_run",
+      "scope": "Tam şartname senaryosu için gerekli bağımsız altyapı veya adaptör uygulanmadı."
+    },
+    {
+      "id": "QA-003",
+      "status": "pass",
+      "scope": "test_dirty_source_and_secret_exclusion: dirty dosya hash değişimi algılanır"
+    },
+    {
+      "id": "QA-004",
+      "status": "not_run",
+      "scope": "Tam şartname senaryosu için gerekli bağımsız altyapı veya adaptör uygulanmadı."
+    },
+    {
+      "id": "QA-005",
+      "status": "pass",
+      "scope": "test_duplicate_and_conflicting_event: tek olay, çakışan kaynak reddi"
+    },
+    {
+      "id": "QA-006",
+      "status": "not_run",
+      "scope": "Tam şartname senaryosu için gerekli bağımsız altyapı veya adaptör uygulanmadı."
+    },
+    {
+      "id": "QA-007",
+      "status": "not_run",
+      "scope": "Tam şartname senaryosu için gerekli bağımsız altyapı veya adaptör uygulanmadı."
+    },
+    {
+      "id": "QA-008",
+      "status": "not_run",
+      "scope": "Tam şartname senaryosu için gerekli bağımsız altyapı veya adaptör uygulanmadı."
+    },
+    {
+      "id": "QA-009",
+      "status": "not_run",
+      "scope": "Tam şartname senaryosu için gerekli bağımsız altyapı veya adaptör uygulanmadı."
+    },
+    {
+      "id": "QA-010",
+      "status": "not_run",
+      "scope": "Tam şartname senaryosu için gerekli bağımsız altyapı veya adaptör uygulanmadı."
+    },
+    {
+      "id": "QA-011",
+      "status": "not_run",
+      "scope": "Tam şartname senaryosu için gerekli bağımsız altyapı veya adaptör uygulanmadı."
+    },
+    {
+      "id": "QA-012",
+      "status": "not_run",
+      "scope": "Tam şartname senaryosu için gerekli bağımsız altyapı veya adaptör uygulanmadı."
+    },
+    {
+      "id": "QA-013",
+      "status": "not_run",
+      "scope": "Tam şartname senaryosu için gerekli bağımsız altyapı veya adaptör uygulanmadı."
+    },
+    {
+      "id": "QA-014",
+      "status": "not_run",
+      "scope": "Tam şartname senaryosu için gerekli bağımsız altyapı veya adaptör uygulanmadı."
+    },
+    {
+      "id": "QA-015",
+      "status": "not_run",
+      "scope": "Tam şartname senaryosu için gerekli bağımsız altyapı veya adaptör uygulanmadı."
+    },
+    {
+      "id": "QA-016",
+      "status": "not_run",
+      "scope": "Tam şartname senaryosu için gerekli bağımsız altyapı veya adaptör uygulanmadı."
+    },
+    {
+      "id": "QA-017",
+      "status": "not_run",
+      "scope": "Tam şartname senaryosu için gerekli bağımsız altyapı veya adaptör uygulanmadı."
+    },
+    {
+      "id": "QA-018",
+      "status": "not_run",
+      "scope": "Tam şartname senaryosu için gerekli bağımsız altyapı veya adaptör uygulanmadı."
+    },
+    {
+      "id": "QA-019",
+      "status": "not_run",
+      "scope": "Tam şartname senaryosu için gerekli bağımsız altyapı veya adaptör uygulanmadı."
+    },
+    {
+      "id": "QA-020",
+      "status": "not_run",
+      "scope": "Tam şartname senaryosu için gerekli bağımsız altyapı veya adaptör uygulanmadı."
+    },
+    {
+      "id": "QA-021",
+      "status": "not_run",
+      "scope": "Tam şartname senaryosu için gerekli bağımsız altyapı veya adaptör uygulanmadı."
+    },
+    {
+      "id": "QA-022",
+      "status": "not_run",
+      "scope": "Tam şartname senaryosu için gerekli bağımsız altyapı veya adaptör uygulanmadı."
+    },
+    {
+      "id": "QA-023",
+      "status": "not_run",
+      "scope": "Tam şartname senaryosu için gerekli bağımsız altyapı veya adaptör uygulanmadı."
+    },
+    {
+      "id": "QA-024",
+      "status": "not_run",
+      "scope": "Tam şartname senaryosu için gerekli bağımsız altyapı veya adaptör uygulanmadı."
+    }
+  ]
+}

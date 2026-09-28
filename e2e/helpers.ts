@@ -12,7 +12,7 @@ export function watchErrors(page: Page): string[] {
 
 export async function expectDiagram(page: Page) {
   const host = page.locator('.mermaid-host').first();
-  await expect(host.locator('svg').first()).toBeVisible();
+  await expect(host.locator('.mermaid-canvas svg').first()).toBeVisible();
   await expect(page.getByText('Diyagram çizilemedi')).toHaveCount(0);
 }
 

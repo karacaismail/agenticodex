@@ -1,0 +1,214 @@
+{
+  "resources": [
+    {
+      "name": "/assets/rolldown-runtime-B0Z9INg1.js",
+      "transfer": 1201,
+      "decoded": 901
+    },
+    {
+      "name": "/assets/preload-helper-BZ1Pz5am.js",
+      "transfer": 988,
+      "decoded": 1218
+    },
+    {
+      "name": "/assets/Loader--UWIktvZ.js",
+      "transfer": 1139,
+      "decoded": 2132
+    },
+    {
+      "name": "/assets/chunk-OB3PAWPO-2bQklCZ-.js",
+      "transfer": 46688,
+      "decoded": 144738
+    },
+    {
+      "name": "/assets/index-DscD8pcI.css",
+      "transfer": 40630,
+      "decoded": 264760
+    },
+    {
+      "name": "/assets/data-CtWcqcs9.js",
+      "transfer": 73872,
+      "decoded": 310149
+    },
+    {
+      "name": "/assets/index-DXS58J-a.js",
+      "transfer": 130572,
+      "decoded": 414297
+    },
+    {
+      "name": "/css2",
+      "transfer": 300,
+      "decoded": 0
+    },
+    {
+      "name": "/favicon.svg",
+      "transfer": 850,
+      "decoded": 550
+    },
+    {
+      "name": "/assets/use-debounced-value-D4GX6Ynq.js",
+      "transfer": 1053,
+      "decoded": 753
+    },
+    {
+      "name": "/assets/create-event-handler-BFtKR396.js",
+      "transfer": 357,
+      "decoded": 57
+    },
+    {
+      "name": "/assets/CheckIcon-CYnYWPbK.js",
+      "transfer": 779,
+      "decoded": 479
+    },
+    {
+      "name": "/assets/ToolsPage-muk-WbUx.js",
+      "transfer": 3536,
+      "decoded": 8056
+    },
+    {
+      "name": "/assets/atoms-QRcSGfsF.js",
+      "transfer": 9913,
+      "decoded": 26521
+    },
+    {
+      "name": "/assets/atoms-4seJdqFk.css",
+      "transfer": 997,
+      "decoded": 1777
+    },
+    {
+      "name": "/assets/react-CDMBXsv6.js",
+      "transfer": 39386,
+      "decoded": 121193
+    },
+    {
+      "name": "/assets/Select-CS6qFCN5.js",
+      "transfer": 2163,
+      "decoded": 4299
+    },
+    {
+      "name": "/assets/get-option-by-label-DLFxpFUs.js",
+      "transfer": 10474,
+      "decoded": 31771
+    },
+    {
+      "name": "/assets/InputBase-BgOTamnZ.js",
+      "transfer": 874,
+      "decoded": 1351
+    },
+    {
+      "name": "/assets/MultiSelect-BNWObIH6.js",
+      "transfer": 5272,
+      "decoded": 13480
+    },
+    {
+      "name": "/assets/get-base-value-BuqEGh75.js",
+      "transfer": 385,
+      "decoded": 85
+    },
+    {
+      "name": "/assets/SimpleGrid-DTbWgrjd.js",
+      "transfer": 1375,
+      "decoded": 2766
+    },
+    {
+      "name": "/assets/Slider-RYEzvnyQ.js",
+      "transfer": 2022,
+      "decoded": 3988
+    },
+    {
+      "name": "/assets/Slider.module-JyOLlxio.js",
+      "transfer": 2650,
+      "decoded": 5695
+    },
+    {
+      "name": "/assets/TextInput-pzcJ-7zS.js",
+      "transfer": 628,
+      "decoded": 328
+    },
+    {
+      "name": "/assets/IconTable-BraI0GF7.js",
+      "transfer": 564,
+      "decoded": 264
+    },
+    {
+      "name": "/assets/IconX-I8jRdIn5.js",
+      "transfer": 456,
+      "decoded": 156
+    },
+    {
+      "name": "/assets/fieldOptions-D4HjgrAW.js",
+      "transfer": 1050,
+      "decoded": 750
+    },
+    {
+      "name": "/assets/Table-B2hXlnso.js",
+      "transfer": 2007,
+      "decoded": 4375
+    },
+    {
+      "name": "/favicon.svg",
+      "transfer": 850,
+      "decoded": 550
+    },
+    {
+      "name": "/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0I5nvwU.woff2",
+      "transfer": 48832,
+      "decoded": 48532
+    },
+    {
+      "name": "/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0I5nvwU.woff2",
+      "transfer": 0,
+      "decoded": 48532
+    },
+    {
+      "name": "/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa25L7W0I5nvwUgHU.woff2",
+      "transfer": 85224,
+      "decoded": 84924
+    },
+    {
+      "name": "/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa25L7W0I5nvwUgHU.woff2",
+      "transfer": 0,
+      "decoded": 84924
+    },
+    {
+      "name": "/s/plusjakartasans/v12/LDIoaomQNQcsA88c7O9yZ4KMCoOg4Ko20yyghfvaZ-E.woff2",
+      "transfer": 27536,
+      "decoded": 27236
+    },
+    {
+      "name": "/s/plusjakartasans/v12/LDIoaomQNQcsA88c7O9yZ4KMCoOg4Ko20yyghfvaZ-E.woff2",
+      "transfer": 0,
+      "decoded": 27236
+    },
+    {
+      "name": "/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0I5nvwU.woff2",
+      "transfer": 0,
+      "decoded": 48532
+    },
+    {
+      "name": "/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa25L7W0I5nvwUgHU.woff2",
+      "transfer": 0,
+      "decoded": 84924
+    },
+    {
+      "name": "/assets/workflows-nVdV-Xoz.js",
+      "transfer": 132861,
+      "decoded": 1525007
+    }
+  ],
+  "serviceWorkers": "blocked",
+  "profile": "catalog-firefox",
+  "browser": "155.0",
+  "os": "darwin",
+  "viewport": {
+    "width": 320,
+    "height": 568
+  },
+  "measurementWindow": "cold navigation until Bruno search result visible",
+  "observedTransferBytes": 677484,
+  "media": {
+    "coarse": false,
+    "hover": true,
+    "reducedMotion": true
+  }
+}
